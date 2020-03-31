@@ -1,9 +1,16 @@
 <template>
   <v-app-bar id="app-bar" absolute app color="transparent" flat height="75">
     <!-- ボタンの色が元に戻らん、後で直す -->
-    <v-btn class="mr-3" elevation="1" fab small @click="setDrawer(!drawer)">
+    <v-btn
+      class="mr-3"
+      elevation="0"
+      text
+      fab
+      small
+      @click="setDrawer(!drawer)"
+    >
       <v-icon v-if="value">mdi-view-quilt</v-icon>
-      <v-icon v-else>mdi-dots-vertical</v-icon>
+      <v-icon v-else>mdi-menu</v-icon>
     </v-btn>
 
     <v-toolbar-title
@@ -20,7 +27,7 @@
       style="max-width: 165px;"
     >
       <template v-if="$vuetify.breakpoint.mdAndUp" v-slot:append-outer>
-        <v-btn class="mt-n2" elevation="1" fab small>
+        <v-btn class="mt-n2" elevation="0" text fab small>
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
       </template>
@@ -124,7 +131,7 @@ export default {
 
   methods: {
     ...mapMutations({
-      setDrawer: "SET_DRAWER"
+      setDrawer: "setDrawer"
     })
   }
 };

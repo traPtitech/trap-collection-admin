@@ -74,14 +74,9 @@ export default {
   data: () => ({
     items: [
       {
-        icon: "mdi-format-list-bulleted-square",
+        icon: "mdi-apps",
         title: "DashBoard",
         to: "/"
-      },
-      {
-        icon: "mdi-apps",
-        title: "GameList",
-        to: "/gamelist"
       }
     ]
   }),
@@ -93,7 +88,7 @@ export default {
         return this.$store.state.drawer;
       },
       set(val) {
-        this.$store.commit("SET_DRAWER", val);
+        this.$store.commit("setDrawer", val);
       }
     },
     computedItems() {

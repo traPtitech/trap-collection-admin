@@ -26,12 +26,9 @@
 
 <script>
 import Themeable from "vuetify/lib/mixins/themeable";
-
 export default {
   name: "Item",
-
   mixins: [Themeable],
-
   props: {
     item: {
       type: Object,
@@ -48,17 +45,13 @@ export default {
       default: false
     }
   },
-
   computed: {
     computedText() {
       if (!this.item || !this.item.title) return "";
-
       let text = "";
-
       this.item.title.split(" ").forEach(val => {
         text += val.substring(0, 1);
       });
-
       return text;
     },
     href() {

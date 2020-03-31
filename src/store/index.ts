@@ -1,19 +1,45 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    barColor: 'rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)',
-    barImage: 'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg',
+    me: null,
     drawer: null,
+    barColor: 'rgba(0, 0, 0, .8), rgba(0, 0, 0, .8)',
+    barImage: null, // 背景画像の設定
   },
   mutations: {
-    SET_DRAWER(state, payload) {
+    setMe(state, me) {
+      state.me = me
+    },
+    setDrawer(state, payload) {
       state.drawer = payload
     },
   },
-  actions: {},
+  actions: {
+    whoAmI({ commit }) {
+      return new Promise(resolve => {
+        axios
+          .get('/api/user/me')
+          .then(async res => {
+            const data = res.data
+            const me = {
+              userId: data.userId,
+              userName: data.name,
+            }
+            commit('setMe', me)
+          })
+          .catch(() => {
+            commit('setMe', null)
+          })
+          .finally(() => {
+            resolve()
+          })
+      })
+    },
+  },
   modules: {}
 });
