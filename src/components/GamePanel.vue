@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="344" class="mx-auto">
+  <v-card max-width="344" class="mx-auto" :to="{ path: '/game' + game.id }">
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="headline">
@@ -12,7 +12,7 @@
     </v-list-item>
 
     <v-img
-      src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+      :src="{ path: baseURL + '/game/' + game.id + '/image' }"
       height="180"
       width="260"
     ></v-img>
@@ -27,6 +27,7 @@
 export default {
   name: "GamePanel",
   props: {
+    baseURL: String,
     game: {
       id: String,
       name: String,

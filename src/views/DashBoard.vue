@@ -1,17 +1,26 @@
 <template>
-  <v-container id="gamelist" fluid tag="section">
-    <div v-if="games !== null">
-      <v-for>
-        <v-row justify="start">
-          <div v-for="game in games" :key="game.id">
-            <v-col cols="auto">
-              <game-panel :game="game"></game-panel>
-            </v-col>
-          </div>
-        </v-row>
-      </v-for>
-    </div>
-    <div v-else>読み込み中...</div>
+  <v-container id="gamelist" fluid tag="section" min-height="100%">
+    <v-row justify="start">
+      <v-col cols="auto">
+        <v-card max-width="344" class="mx-auto" height="301" width="260" flat>
+          <v-container fill-height>
+            <v-row align="center" justify="center">
+              <v-btn class="mx-2" fab x-large to="/games/new">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </v-row>
+          </v-container>
+        </v-card>
+      </v-col>
+      <div v-for="game in games" :key="game.id">
+        <v-col cols="auto">
+          <game-panel
+            :game="game"
+            :baseURL="axios.default.baseURL"
+          ></game-panel>
+        </v-col>
+      </div>
+    </v-row>
   </v-container>
 </template>
 

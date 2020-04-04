@@ -14,6 +14,21 @@ const routes: RouteConfig[] = [
         name: 'Dashboard',
         path: '',
         component: () => import('@/views/DashBoard.vue'),
+      },
+      {
+        name: 'NewGame',
+        path: 'games/new',
+        component: () => import('@/views/pages/NewGame.vue'),
+      },
+      {
+        name: 'Versions',
+        path: 'versions',
+        component: () => import('@/views/pages/Versions.vue'),
+      },
+      {
+        name: 'NewVersion',
+        path: 'versions/new',
+        component: () => import('@/views/pages/NewVersion.vue'),
       }
     ]
   },

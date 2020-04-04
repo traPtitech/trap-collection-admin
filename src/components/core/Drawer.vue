@@ -45,7 +45,7 @@
         :item="{
           title: 'v1.0.0',
           icon: 'mdi-tag',
-          to: '/version'
+          to: '/versions'
         }"
       />
     </template>

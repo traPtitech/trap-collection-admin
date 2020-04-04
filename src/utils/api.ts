@@ -13,7 +13,7 @@ export async function redirect2AuthEndpoint() {
         codeChallengeMethod: string
     }
 
-    const data: OauthParams = (await axios.get('/oauth2/params')).data
+    const data: OauthParams = (await axios.post('/oauth/generate/code')).data
 
     const authorizationEndpointUrl = new URL(`${traQBaseURL}/oauth2/authorize`)
     authorizationEndpointUrl.search = new URLSearchParams({
@@ -54,4 +54,19 @@ interface Version {
 
 export async function getGames(all = false): Promise<Games> {
     return (await axios.get('/game', { params: { all } })).data
+}
+
+interface LauncherVersions {
+    launcherVersions: LauncherVersion[]
+}
+
+interface LauncherVersion {
+    id: string
+    name: string
+    games: string[]
+    createdAt: string
+}
+
+export async function getVersions(): Promise<LauncherVersions> {
+    return (await axios.get('/versions')).data
 }
