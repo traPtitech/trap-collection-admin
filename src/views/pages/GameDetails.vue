@@ -27,12 +27,10 @@
             </v-col>
             <v-col>
               <div class="mb-4 cover-container">
-                <img
+                <video
                   class="cover"
-                  :src="
-                    game.movie_url.length ? game.movie_url : '/img/no-movie.svg'
-                  "
-                />
+                  src="game.movie_url.length ? game.movie_url : '/img/no-movie.svg'"
+                ></video>
                 <EditMovie @reload="reload" />
               </div>
             </v-col>
@@ -58,14 +56,14 @@
 </template>
 
 <script>
-import Icon from './shared/Icon';
+import Icon from 'src/components/Icon';
 import axios from 'axios';
-import EditVersion from './shared/EditVersion';
-import EditDescription from './shared/Description';
-import EditImage from './shared/EditImage';
-import EditMovie from './shared/EditMovie';
+import EditVersion from 'src/components/EditVersion';
+import EditDescription from 'src/components/Description';
+import EditImage from 'src/components/EditImage';
+import EditMovie from 'src/components/EditMovie';
 export default {
-  name: 'GameDetailPage',
+  name: 'GameDetails',
   components: {
     Icon,
     EditVersion,
