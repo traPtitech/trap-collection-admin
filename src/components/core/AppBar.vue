@@ -1,6 +1,6 @@
 <template>
   <v-app-bar id="app-bar" absolute app color="transparent" flat height="75">
-    <!-- ボタンの色が元に戻らん、後で直す -->
+    <!-- drawer -->
     <v-btn
       class="mr-3"
       elevation="0"
@@ -12,14 +12,14 @@
       <v-icon v-if="value">mdi-view-quilt</v-icon>
       <v-icon v-else>mdi-menu</v-icon>
     </v-btn>
-
+    <!-- 開いているページ -->
     <v-toolbar-title
       class="hidden-sm-and-down font-weight-light"
       v-text="$route.name"
     />
 
     <v-spacer />
-
+    <!-- 検索欄 未実装 -->
     <v-text-field
       :label="未実装だよ"
       color="secondary"
@@ -34,7 +34,7 @@
     </v-text-field>
 
     <div class="mx-3" />
-
+    <!-- ホームボタン -->
     <v-btn class="ml-2" min-width="0" text to="/">
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
@@ -46,6 +46,7 @@
       origin="top right"
       transition="scale-transition"
     >
+      <!-- 通知 -->
       <template v-slot:activator="{ attrs, on }">
         <v-btn class="ml-2" min-width="0" text v-bind="attrs" v-on="on">
           <v-badge color="red" overlap bordered>
@@ -66,11 +67,17 @@
         </div>
       </v-list>
     </v-menu>
-
-    <!-- アイコンとってくる -->
-    <!-- <v-btn class="ml-2" min-width="0" text to="/pages/user">
-      <v-icon>mdi-account</v-icon>
-    </v-btn> -->
+    <!-- ユーザーアイコン -->
+    <v-btn class="ml-2" min-width="0" text>
+      <v-icon>
+        <v-avatar>
+          <img
+            :src="`https://q.trap.jp/api/1.0/public/icon/${$store.state.me.id}`"
+            style="width: 30px;"
+          />
+        </v-avatar>
+      </v-icon>
+    </v-btn>
   </v-app-bar>
 </template>
 

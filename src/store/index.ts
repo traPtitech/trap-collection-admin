@@ -27,8 +27,8 @@ export default new Vuex.Store({
           .then(async res => {
             const data = res.data
             const me = {
-              userId: data.userId,
-              userName: data.name,
+              id: data.userId,
+              name: data.name,
             }
             commit('setMe', me)
           })

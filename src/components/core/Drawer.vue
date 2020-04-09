@@ -20,7 +20,7 @@
     <v-list dense nav>
       <v-list-item>
         <v-list-item-avatar class="align-self-center" color="white" contain>
-          <v-img src="@/assets/traP_logo_icon.png" max-height="37.2" />
+          <v-img src="@/assets/game_icon.png" />
         </v-list-item-avatar>
 
         <v-list-item-content>
@@ -33,17 +33,16 @@
 
     <v-list expand nav>
       <div />
-      <template v-for="(item, i) in computedItems">
+      <template v-for="(item, i) in items">
         <item :key="`item-${i}`" :item="item" />
       </template>
       <div />
     </v-list>
 
-    <!-- とりあえず見た目だけ、Vutifyの左下みたいな感じでバージョン管理したい -->
     <template v-slot:append>
       <item
         :item="{
-          title: 'v1.0.0',
+          title: 'LauncherVersions',
           icon: 'mdi-tag',
           to: '/versions'
         }"
@@ -91,23 +90,10 @@ export default {
         this.$store.commit("setDrawer", val);
       }
     },
-    computedItems() {
-      return this.items.map(this.mapItem);
-    },
     profile() {
       return {
         avatar: true,
         title: "traPCollection"
-      };
-    }
-  },
-
-  methods: {
-    mapItem(item) {
-      return {
-        ...item,
-        children: item.children ? item.children.map(this.mapItem) : undefined,
-        title: item.title
       };
     }
   }

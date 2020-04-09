@@ -43,10 +43,10 @@ interface Game {
     id: string
     name: string
     createdAt: string
-    version: Version
+    version: GameVersion
 }
 
-interface Version {
+interface GameVersion {
     name: string
     description: string
     createdAt: string
