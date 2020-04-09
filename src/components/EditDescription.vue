@@ -1,33 +1,31 @@
 <template>
-  <nobr>
-    <v-btn x-small outlined fab dark color="primary" @click.stop="open">
+  <div>
+    <v-btn x-small outlined fab dark color="primary" @click.stop="toggle">
       <v-icon dark>mdi-plus</v-icon>
     </v-btn>
     <div class="text-center">
       <v-dialog light v-model="isOpenDescription" max-width="290">
-        <v-card width="290">
+        <v-card>
           <v-card-title class="headline">説明文を変更する</v-card-title>
           <v-card-actions>
-            <div>
-              <v-form ref="form">
-                <v-textarea
-                  outlined
-                  v-model="text"
-                  :rules="[() => !!text || 'This field is required']"
-                  label="説明文"
-                />
-              </v-form>
-            </div>
+            <v-form ref="form">
+              <v-textarea
+                outlined
+                v-model="text"
+                :rules="[() => !!text || '説明文を入力してください']"
+                placeholder="説明文"
+              />
+            </v-form>
           </v-card-actions>
-          <v-divider></v-divider>
+          </v-divider>
           <v-card-actions>
             <div class="flex-grow-1"></div>
-            <v-btn v-on:click="description()">変更を保存する</v-btn>
+            <v-btn @click="description()">更新</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     </div>
-  </nobr>
+  </div>
 </template>
 
 <script>
@@ -39,11 +37,11 @@ export default {
       text: null,
       error: '',
       isOpenDescription: false,
-      message: ''
+      message: '',
     };
   },
-  props: {
-    propItem: Object
+  mounted() {
+    this.text = this.propGame.version.description
   },
   methods: {
     async description() {
@@ -51,25 +49,26 @@ export default {
         alert('説明文を入力してください');
         return false;
       }
-      await axios
+      try {
+        await axios
         .post(`/api/games/info/${this.$route.params.id}/description`, {
-          text: this.text
-        })
-        .catch(e => {
-          alert(e);
-          this.error = e;
+          text: this.text,
         });
-      if (!this.error) {
         this.$parent.data.description.push({
           user: this.$store.state.me,
-          text: this.text
+          text: this.text,
         });
       }
+      catch (e) {
+        alert(e);
+        this.error = e;
+      }
+      this.isOpenDescription = !this.isOpenDescription;
+      this.$emit('reload')
+    },
+    toggle() {
       this.isOpenDescription = !this.isOpenDescription;
     },
-    open() {
-      this.isOpenDescription = !this.isOpenDescription;
-    }
-  }
+  },
 };
 </script>
