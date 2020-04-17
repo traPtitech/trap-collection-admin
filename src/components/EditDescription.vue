@@ -40,6 +40,9 @@ export default {
       message: '',
     };
   },
+  props: {
+    propGame: Object
+  },
   mounted() {
     this.text = this.propGame.version.description
   },
@@ -51,11 +54,7 @@ export default {
       }
       try {
         await axios
-        .post(`/api/games/info/${this.$route.params.id}/description`, {
-          text: this.text,
-        });
-        this.$parent.data.description.push({
-          user: this.$store.state.me,
+        .put(`/api/games/info/${this.$route.params.id}/description`, {
           text: this.text,
         });
       }

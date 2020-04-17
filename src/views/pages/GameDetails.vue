@@ -20,10 +20,11 @@
               <div class="mb-4 cover-container">
                 <div>ゲームイメージ</div>
                 <label class="input-item__label">
-                  <input type="file" @change="onimgFileChange" />
+                  <input type="file" @change="onImgFileChange" />
                 </label>
                 <v-img
-                  src="game.img_url.length ? game.img_url : '/img/no-image.svg'"
+                  v-if="!loading && img_url.length"
+                  :src="img_url"
                   height="180"
                   width="260"
                 ></v-img>
@@ -37,7 +38,7 @@
                 </label>
                 <video
                   class="cover"
-                  src="game.movie_url.length ? game.movie_url : '/img/no-movie.svg'"
+                  src="video_url.length ? video_url : '/img/no-movie.svg'"
                 ></video>
               </div>
             </v-col>
@@ -63,14 +64,13 @@
 </template>
 
 <script>
-import Icon from 'src/components/Icon';
-import axios from 'axios';
-import EditVersion from 'src/components/EditVersion';
-import EditDescription from 'src/components/Description';
-import EditImage from 'src/components/EditImage';
-import EditMovie from 'src/components/EditMovie';
+import Icon from "src/components/Icon"
+import axios from "axios"
+import EditVersion from "src/components/EditVersion"
+import EditDescription from "src/components/EditDescription"
+
 export default {
-  name: 'GameDetails',
+  name: "GameDetails",
   components: {
     Icon,
     EditVersion,
@@ -79,57 +79,79 @@ export default {
   data() {
     return {
       game: null,
-    };
+      img_url: "",
+      video_url: "",
+    }
   },
   created() {
     axios
-      .get('/api/games/' + this.$route.params.id)
+      .get(`/api/games/info/${this.$route.params.id}`)
       .then((res) => {
-        this.game = res.game;
+        this.game = res.game
       })
       .catch((e) => {
-        alert(e);
-      });
+        alert(e)
+      })
+    axios
+      .get(`/api/games/${this.$route.params.id}/image`)
+      .then((res) => {
+        this.img_url = res.img_url
+      })
+      .catch((e) => {
+        alert(e)
+      })
+    axios
+      .get(`/api/games/${this.$route.params.id}/video`)
+      .then((res) => {
+        this.video_url = res.video_url
+      })
+      .catch((e) => {
+        alert(e)
+      })
   },
   methods: {
     async reload() {
       const res = await axios
-        .get('/api/games/' + this.$route.params.id)
+        .get(`/api/games/info/${this.$route.params.id}`)
         .catch((e) => {
-          alert(e);
-        });
-      this.game = res.game;
+          alert(e)
+        })
+      this.game = res.game
     },
     onImgFileChange(e) {
-      const files = e.target.files || e.dataTransfer.files;
-      this.createImage(files[0]);
+      const files = e.target.files || e.dataTransfer.files
+      this.createImage(files[0])
     },
     async createImage(file) {
-      const form = new FormData();
-      form.enctype = 'multipart/form-data';
-      form.append('file', file);
-      const game = await axios.post('/api/files', form).catch((e) => alert(e));
+      const form = new FormData()
+      form.enctype = "multipart/form-data"
+      form.append("file", file)
+      const game = await axios
+        .post(`/api/games/${this.$route.params.id}/image`, form)
+        .catch((e) => alert(e))
       if (!game) {
-        this.setAlert('close', '画像の投稿に失敗しました');
+        this.setAlert("close", "画像の投稿に失敗しました")
       }
-      this.game.img_url = game.game.url;
+      this.img_url = game.url
     },
     onMovieFileChange(e) {
-      const files = e.target.files || e.dataTransfer.files;
-      this.createMovie(files[0]);
+      const files = e.target.files || e.dataTransfer.files
+      this.createMovie(files[0])
     },
     async createMovie(file) {
-      const form = new FormData();
-      form.enctype = 'multipart/form-data';
-      form.append('file', file);
-      const game = await axios.post('/api/files', form).catch((e) => alert(e));
+      const form = new FormData()
+      form.enctype = "multipart/form-data"
+      form.append("file", file)
+      const game = await axios
+        .post(`/api/games/${this.$route.params.id}/video`, form)
+        .catch((e) => alert(e))
       if (!game) {
-        this.setAlert('close', '画像の投稿に失敗しました');
+        this.setAlert("close", "画像の投稿に失敗しました")
       }
-      this.game.movie_url = game.game.url;
+      this.video_url = game.url
     },
   },
-};
+}
 </script>
 
 <style scoped>
