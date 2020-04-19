@@ -7,13 +7,13 @@
           <div class="mb-8">
             <h2>
               {{ game.version.name }}
-              <EditVersion @reload="reload" />
+              <EditVersion @reloadGame="reloadGame" />
             </h2>
           </div>
           <div class="mb-8">
             <div>ゲーム説明文</div>
             {{ game.version.description }}
-            <EditDescription :propGame="game" @reload="reload" />
+            <EditDescription :propGame="game" @reloadGame="reloadGame" />
           </div>
           <v-row>
             <v-col>
@@ -23,11 +23,11 @@
                   <input type="file" @change="onImgFileChange" />
                 </label>
                 <v-img
-                  v-if="!loading && img_url.length"
-                  :src="img_url"
+                  v-if="!loading && imgUrl.length"
+                  :src="imgUrl"
                   height="180"
                   width="260"
-                ></v-img>
+                />
               </div>
             </v-col>
             <v-col>
@@ -38,8 +38,8 @@
                 </label>
                 <video
                   class="cover"
-                  src="video_url.length ? video_url : '/img/no-movie.svg'"
-                ></video>
+                  src="videoUrl.length ? videoUrl : '/img/no-movie.svg'"
+                />
               </div>
             </v-col>
           </v-row>
@@ -64,94 +64,90 @@
 </template>
 
 <script>
-import Icon from "src/components/Icon"
-import axios from "axios"
-import EditVersion from "src/components/EditVersion"
-import EditDescription from "src/components/EditDescription"
+import Icon from "src/components/Icon";
+import axios from "axios";
+import EditVersion from "src/components/EditVersion";
+import EditDescription from "src/components/EditDescription";
 
 export default {
   name: "GameDetails",
   components: {
     Icon,
     EditVersion,
-    EditDescription,
+    EditDescription
   },
   data() {
     return {
       game: null,
-      img_url: "",
-      video_url: "",
-    }
+      imgUrl: "",
+      videoUrl: ""
+    };
   },
   created() {
     axios
       .get(`/api/games/info/${this.$route.params.id}`)
-      .then((res) => {
-        this.game = res.game
+      .then(res => {
+        this.game = res.game;
       })
-      .catch((e) => {
-        alert(e)
-      })
+      .catch(e => {
+        alert(e);
+      });
     axios
       .get(`/api/games/${this.$route.params.id}/image`)
-      .then((res) => {
-        this.img_url = res.img_url
+      .then(res => {
+        this.imgUrl = res.imgUrl;
       })
-      .catch((e) => {
-        alert(e)
-      })
+      .catch(e => {
+        alert(e);
+      });
     axios
       .get(`/api/games/${this.$route.params.id}/video`)
-      .then((res) => {
-        this.video_url = res.video_url
+      .then(res => {
+        this.videoUrl = res.videoUrl;
       })
-      .catch((e) => {
-        alert(e)
-      })
+      .catch(e => {
+        alert(e);
+      });
   },
   methods: {
-    async reload() {
+    async reloadGame() {
       const res = await axios
         .get(`/api/games/info/${this.$route.params.id}`)
-        .catch((e) => {
-          alert(e)
-        })
-      this.game = res.game
+        .catch(e => {
+          alert(e);
+        });
+      this.game = res.game;
     },
     onImgFileChange(e) {
-      const files = e.target.files || e.dataTransfer.files
-      this.createImage(files[0])
+      const files = e.target.files || e.dataTransfer.files;
+      this.createImage(files[0]);
     },
     async createImage(file) {
-      const form = new FormData()
-      form.enctype = "multipart/form-data"
-      form.append("file", file)
+      const form = new FormData();
+      form.enctype = "multipart/form-data";
+      form.append("file", file);
       const game = await axios
         .post(`/api/games/${this.$route.params.id}/image`, form)
-        .catch((e) => alert(e))
-      if (!game) {
-        this.setAlert("close", "画像の投稿に失敗しました")
-      }
-      this.img_url = game.url
+        .catch(e => alert(e));
+
+      this.imgUrl = game.url;
     },
     onMovieFileChange(e) {
-      const files = e.target.files || e.dataTransfer.files
-      this.createMovie(files[0])
+      const files = e.target.files || e.dataTransfer.files;
+      this.createMovie(files[0]);
     },
     async createMovie(file) {
-      const form = new FormData()
-      form.enctype = "multipart/form-data"
-      form.append("file", file)
+      const form = new FormData();
+      form.enctype = "multipart/form-data";
+      form.append("file", file);
       const game = await axios
         .post(`/api/games/${this.$route.params.id}/video`, form)
-        .catch((e) => alert(e))
-      if (!game) {
-        this.setAlert("close", "画像の投稿に失敗しました")
-      }
-      this.video_url = game.url
-    },
-  },
-}
+        .catch(e => alert(e));
+
+      this.videoUrl = game.url;
+    }
+  }
+};
 </script>
 
 <style scoped>

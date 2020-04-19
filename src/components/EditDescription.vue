@@ -17,10 +17,10 @@
               />
             </v-form>
           </v-card-actions>
-          </v-divider>
+          <v-divider />
           <v-card-actions>
             <div class="flex-grow-1"></div>
-            <v-btn @click="description()">更新</v-btn>
+            <v-btn @click="editDescription()">更新</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -29,45 +29,46 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'EditDescription',
+  name: "EditDescription",
   data() {
     return {
-      text: null,
-      error: '',
+      text: "",
+      error: "",
       isOpenDescription: false,
-      message: '',
+      message: ""
     };
   },
   props: {
     propGame: Object
   },
   mounted() {
-    this.text = this.propGame.version.description
+    this.text = this.propGame.version.description;
   },
   methods: {
-    async description() {
+    async editDescription() {
       if (this.text === null) {
-        alert('説明文を入力してください');
+        alert("説明文を入力してください");
         return false;
       }
       try {
-        await axios
-        .put(`/api/games/info/${this.$route.params.id}/description`, {
-          text: this.text,
-        });
-      }
-      catch (e) {
+        await axios.put(
+          `/api/games/info/${this.$route.params.id}/description`,
+          {
+            text: this.text
+          }
+        );
+      } catch (e) {
         alert(e);
         this.error = e;
       }
       this.isOpenDescription = !this.isOpenDescription;
-      this.$emit('reload')
+      this.$emit("reload");
     },
     toggle() {
       this.isOpenDescription = !this.isOpenDescription;
-    },
-  },
+    }
+  }
 };
 </script>
