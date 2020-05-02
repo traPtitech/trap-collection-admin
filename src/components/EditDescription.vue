@@ -44,17 +44,13 @@ export default {
     propGame: Object
   },
   mounted() {
-    this.text = this.propGame.version.description;
+    this.text = this.propGame.description;
   },
   methods: {
     async editDescription() {
-      if (this.text === null) {
-        alert("説明文を入力してください");
-        return false;
-      }
       try {
         await axios.put(
-          `/api/games/info/${this.$route.params.id}/description`,
+          `/api/games/${this.$route.params.id}/info/description`,
           {
             text: this.text
           }

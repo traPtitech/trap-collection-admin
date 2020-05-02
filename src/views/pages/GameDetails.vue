@@ -7,12 +7,12 @@
           <div class="mb-8">
             <h2>
               {{ game.version.name }}
-              <EditVersion @reloadGame="reloadGame" />
+              <AddVersion @reloadGame="reloadGame" />
             </h2>
           </div>
           <div class="mb-8">
             <div>ゲーム説明文</div>
-            {{ game.version.description }}
+            {{ game.description }}
             <EditDescription :propGame="game" @reloadGame="reloadGame" />
           </div>
           <v-row>
@@ -46,14 +46,13 @@
           <div class="mb-8">
             <div>
               <h2>Releases</h2>
-              <div v-if="game.logs.length">
-                <div v-for="log in reverseLogs" :key="log.id">
-                  <Icon :user="log.user" :size="25" />
-                  {{ createLogMessage(log) }}
+              <div v-if="logs.length">
+                <div v-for="log in logs" :key="log.id">
+                  {{ getVersions(log) }}
                 </div>
               </div>
               <div v-else>
-                まだリリースされていいません
+                まだリリースされていません
               </div>
             </div>
           </div>
@@ -64,28 +63,27 @@
 </template>
 
 <script>
-import Icon from "src/components/Icon";
 import axios from "axios";
-import EditVersion from "src/components/EditVersion";
+import AddVersion from "src/components/AddVersion";
 import EditDescription from "src/components/EditDescription";
 
 export default {
   name: "GameDetails",
   components: {
-    Icon,
-    EditVersion,
+    AddVersion,
     EditDescription
   },
   data() {
     return {
       game: null,
       imgUrl: "",
-      videoUrl: ""
+      videoUrl: "",
+      logs: ""
     };
   },
   created() {
     axios
-      .get(`/api/games/info/${this.$route.params.id}`)
+      .get(`/api/games/${this.$route.params.id}/info`)
       .then(res => {
         this.game = res.game;
       })
@@ -108,11 +106,19 @@ export default {
       .catch(e => {
         alert(e);
       });
+    axios
+      .get(`/api/games/version/${this.$route.params.id}`)
+      .then(res => {
+        this.logs = res.logs;
+      })
+      .catch(e => {
+        alert(e);
+      });
   },
   methods: {
     async reloadGame() {
       const res = await axios
-        .get(`/api/games/info/${this.$route.params.id}`)
+        .get(`/api/games/${this.$route.params.id}info/`)
         .catch(e => {
           alert(e);
         });
@@ -145,6 +151,12 @@ export default {
         .catch(e => alert(e));
 
       this.videoUrl = game.url;
+    },
+    getVersions(log) {
+      const versionName = log.name;
+      const versionDescription = log.description;
+      const createdTime = log.createdAt;
+      return `version${versionName}: ${versionDescription} - ${createdTime}`;
     }
   }
 };
