@@ -32,10 +32,8 @@
           <v-card-actions>
             <v-file-input
               v-model="gameFile"
-              chips
               show-size
               accept=".jar"
-              multiple
               label="ファイルを追加してください"
             ></v-file-input>
           </v-card-actions>
@@ -71,7 +69,6 @@ export default {
       versionDescription: "",
       gameFile: "",
       gameUrl: "",
-      error: "",
       isDialogOpen: false
     };
   },
@@ -85,7 +82,6 @@ export default {
         });
       } catch (e) {
         alert(e);
-        this.error = e;
       }
       try {
         await axios.post(`/api/games/asset/${this.$route.params.id}/url`, {
@@ -93,7 +89,6 @@ export default {
         });
       } catch (e) {
         alert(e);
-        this.error = e;
       }
       this.addFile(this.gameFile);
       this.isDialogOpen = !this.isDialogOpen;

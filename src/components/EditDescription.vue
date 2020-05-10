@@ -35,7 +35,6 @@ export default {
   data() {
     return {
       text: "",
-      error: "",
       isOpenDescription: false,
       message: ""
     };
@@ -57,10 +56,9 @@ export default {
         );
       } catch (e) {
         alert(e);
-        this.error = e;
       }
       this.isOpenDescription = !this.isOpenDescription;
-      this.$emit("reload");
+      this.$emit("reloadGame");
     },
     toggle() {
       this.isOpenDescription = !this.isOpenDescription;
