@@ -66,6 +66,10 @@
 import axios from "axios";
 import AddVersion from "src/components/AddVersion";
 import EditDescription from "src/components/EditDescription";
+import getGameInfo from "src/components/core/getGameInfo";
+import getImageURL from "src/components/core/getImageURL";
+import getVideoURL from "src/components/core/getVideoURL";
+import getGameLogs from "src/components/core/getGameLogs";
 
 export default {
   name: "GameDetails",
@@ -82,47 +86,20 @@ export default {
     };
   },
   created() {
-    axios
-      .get(`/api/games/${this.$route.params.id}/info`)
-      .then(res => {
-        this.game = res.game;
-      })
-      .catch(e => {
-        alert(e);
-      });
-    axios
-      .get(`/api/games/${this.$route.params.id}/image`)
-      .then(res => {
-        this.imgUrl = res.imgUrl;
-      })
-      .catch(e => {
-        alert(e);
-      });
-    axios
-      .get(`/api/games/${this.$route.params.id}/video`)
-      .then(res => {
-        this.videoUrl = res.videoUrl;
-      })
-      .catch(e => {
-        alert(e);
-      });
-    axios
-      .get(`/api/games/version/${this.$route.params.id}`)
-      .then(res => {
-        this.logs = res.logs;
-      })
-      .catch(e => {
-        alert(e);
-      });
+    try {
+      Promise.all([
+        getGameInfo(this.game, this.$route.params.id),
+        getImageURL(this.imgUrl, this.$route.params.id),
+        getVideoURL(this.videoUrl, this.$route.params.id),
+        getGameLogs(this.logs, this.$route.params.id)
+      ]);
+    } catch (e) {
+      alert(e);
+    }
   },
   methods: {
     async reloadGame() {
-      const res = await axios
-        .get(`/api/games/${this.$route.params.id}info/`)
-        .catch(e => {
-          alert(e);
-        });
-      this.game = res.game;
+      getGameInfo(this.game, this.$route.params.id);
     },
     onImgFileChange(e) {
       const files = e.target.files || e.dataTransfer.files;
