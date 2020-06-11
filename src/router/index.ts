@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import store from '../store'
-import { redirect2AuthEndpoint, getRequest2Callback } from "@/utils/api.ts"
+import { getRequest2Callback } from "@/utils/api.ts"
 
 Vue.use(VueRouter);
 
@@ -16,9 +15,9 @@ const routes: RouteConfig[] = [
         component: () => import('@/views/DashBoard.vue'),
       },
       {
-        name: 'NewGame',
+        name: 'AddGame',
         path: 'games/new',
-        component: () => import('@/views/pages/NewGame.vue'),
+        component: () => import('@/views/pages/AddGame.vue'),
       },
       {
         name: 'Versions',
@@ -26,9 +25,9 @@ const routes: RouteConfig[] = [
         component: () => import('@/views/pages/Versions.vue'),
       },
       {
-        name: 'NewVersion',
+        name: 'AddVersion',
         path: 'versions/new',
-        component: () => import('@/views/pages/NewVersion.vue'),
+        component: () => import('@/views/pages/AddVersion.vue'),
       }
     ]
   },

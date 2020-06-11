@@ -23,8 +23,8 @@
                   <input type="file" @change="onImgFileChange" />
                 </label>
                 <v-img
-                  v-if="!loading && imgUrl.length"
-                  :src="imgUrl"
+                  v-if="!loading && imgURL.length"
+                  :src="imgURL"
                   height="180"
                   width="260"
                 />
@@ -38,7 +38,7 @@
                 </label>
                 <video
                   class="cover"
-                  src="videoUrl.length ? videoUrl : '/img/no-movie.svg'"
+                  src="videoURL.length ? videoURL : '/img/no-movie.svg'"
                 />
               </div>
             </v-col>
@@ -66,10 +66,12 @@
 import axios from "axios";
 import AddVersion from "src/components/AddVersion";
 import EditDescription from "src/components/EditDescription";
-import getGameInfo from "src/components/core/getGameInfo";
-import getImageURL from "src/components/core/getImageURL";
-import getVideoURL from "src/components/core/getVideoURL";
-import getGameLogs from "src/components/core/getGameLogs";
+import {
+  getGameInfo,
+  getImageURL,
+  getVideoURL,
+  getGameLogs
+} from "src/utils/api";
 
 export default {
   name: "GameDetails",
@@ -80,26 +82,30 @@ export default {
   data() {
     return {
       game: null,
-      imgUrl: "",
-      videoUrl: "",
+      imgURL: "",
+      videoURL: "",
       logs: ""
     };
   },
   created() {
     try {
       Promise.all([
-        getGameInfo(this.game, this.$route.params.id),
-        getImageURL(this.imgUrl, this.$route.params.id),
-        getVideoURL(this.videoUrl, this.$route.params.id),
-        getGameLogs(this.logs, this.$route.params.id)
+        getGameInfo(this.$route.params.id).then(res => (this.game = res.game)),
+        getImageURL(this.$route.params.id).then(
+          res => (this.imgURL = res.imgURL)
+        ),
+        getVideoURL(this.$route.params.id).then(
+          res => (this.videoURL = res.videoURL)
+        ),
+        getGameLogs(this.$route.params.id).then(res => (this.logs = res.logs))
       ]);
     } catch (e) {
       alert(e);
     }
   },
   methods: {
-    async reloadGame() {
-      getGameInfo(this.game, this.$route.params.id);
+    reloadGame() {
+      getGameInfo(this.$route.params.id).then(res => (this.game = res.game));
     },
     onImgFileChange(e) {
       const files = e.target.files || e.dataTransfer.files;
@@ -109,11 +115,11 @@ export default {
       const form = new FormData();
       form.enctype = "multipart/form-data";
       form.append("file", file);
-      const game = await axios
+      const game = await axios // TODO: これも postImageみたいに切り出すので統一してほしい
         .post(`/api/games/${this.$route.params.id}/image`, form)
         .catch(e => alert(e));
 
-      this.imgUrl = game.url;
+      this.imgURL = game.URL;
     },
     onMovieFileChange(e) {
       const files = e.target.files || e.dataTransfer.files;
@@ -123,11 +129,11 @@ export default {
       const form = new FormData();
       form.enctype = "multipart/form-data";
       form.append("file", file);
-      const game = await axios
+      const game = await axios // TODO: これも postMovieみたいに切り出すので統一してほしい
         .post(`/api/games/${this.$route.params.id}/video`, form)
         .catch(e => alert(e));
 
-      this.videoUrl = game.url;
+      this.videoURL = game.URL;
     },
     getVersions(log) {
       const versionName = log.name;
