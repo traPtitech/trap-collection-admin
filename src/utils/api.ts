@@ -52,17 +52,7 @@ interface GameVersion {
 }
 
 export async function getGames(all = false): Promise<Array<Game>> {
-  try {
-    const res = await axios.get("/games", { params: { all } });
-    console.log(res);
-  } catch (e) {
-    console.log(e);
-  }
   return (await axios.get("/games", { params: { all } })).data;
-}
-
-interface LauncherVersions {
-  launcherVersions: LauncherVersion[];
 }
 
 interface LauncherVersion {
@@ -72,24 +62,28 @@ interface LauncherVersion {
   createdAt: string;
 }
 
-export async function getVersions(): Promise<LauncherVersions> {
+export async function getVersions(): Promise<Array<LauncherVersion>> {
   return (await axios.get("/versions")).data;
 }
 
-// TODO: any
+interface GameInfo {
+  id: string;
+  name: string;
+  createdAt: string;
+  version: GameLog;
+}
 
-export async function getGameInfo(id: string): Promise<any> {
+export async function getGameInfo(id: string): Promise<GameInfo> {
   return (await axios.get(`/api/games/${id}/info`)).data;
 }
 
-export async function getGameLogs(id: string): Promise<any> {
+interface GameLog {
+  id: number;
+  name: string;
+  description: string;
+  createdAt: string;
+}
+
+export async function getGameLogs(id: string): Promise<Array<GameLog>> {
   return (await axios.get(`/api/games/version/${id}`)).data;
-}
-
-export async function getImageURL(id: string): Promise<any> {
-  return (await axios.get(`/api/games/${id}/iamge`)).data;
-}
-
-export async function getVideoURL(id: string): Promise<any> {
-  return (await axios.get(`/api/games/${id}/video`)).data;
 }

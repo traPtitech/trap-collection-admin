@@ -66,12 +66,7 @@
 import axios from "axios";
 import AddVersion from "src/components/AddVersion";
 import EditDescription from "src/components/EditDescription";
-import {
-  getGameInfo,
-  getImageURL,
-  getVideoURL,
-  getGameLogs
-} from "src/utils/api";
+import { getGameInfo, getGameLogs } from "src/utils/api";
 
 export default {
   name: "GameDetails",
@@ -82,21 +77,15 @@ export default {
   data() {
     return {
       game: null,
-      imgURL: "",
-      videoURL: "",
-      logs: ""
+      imgURL: `${axios.defaults.baseURL}/games/${this.game.id}/image`,
+      videoURL: `${axios.defaults.baseURL}/games/${this.game.id}/video`,
+      logs: []
     };
   },
   created() {
     try {
       Promise.all([
         getGameInfo(this.$route.params.id).then(res => (this.game = res.game)),
-        getImageURL(this.$route.params.id).then(
-          res => (this.imgURL = res.imgURL)
-        ),
-        getVideoURL(this.$route.params.id).then(
-          res => (this.videoURL = res.videoURL)
-        ),
         getGameLogs(this.$route.params.id).then(res => (this.logs = res.logs))
       ]);
     } catch (e) {
@@ -115,7 +104,7 @@ export default {
       const form = new FormData();
       form.enctype = "multipart/form-data";
       form.append("file", file);
-      const game = await axios // TODO: これも postImageみたいに切り出すので統一してほしい
+      const game = await axios
         .post(`/api/games/${this.$route.params.id}/image`, form)
         .catch(e => alert(e));
 
@@ -129,7 +118,7 @@ export default {
       const form = new FormData();
       form.enctype = "multipart/form-data";
       form.append("file", file);
-      const game = await axios // TODO: これも postMovieみたいに切り出すので統一してほしい
+      const game = await axios
         .post(`/api/games/${this.$route.params.id}/video`, form)
         .catch(e => alert(e));
 

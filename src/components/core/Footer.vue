@@ -3,6 +3,7 @@
     <v-row>
       <v-col v-for="(link, i) in links" :key="i" class="container">
         <a
+          class="item"
           :href="link.href"
           rel="noopener"
           target="_blank"
@@ -37,7 +38,7 @@ export default {
   bottom: 0;
   min-width: 100%;
 }
-.container a {
+.container .item {
   color: #4d4d4d;
   font-size: 1rem;
   font-weight: 500;
