@@ -55,18 +55,17 @@ const router = new VueRouter({
 router.beforeEach(async (to, _, next) => {
   // ログイン済みかどうか調べる
   if (!store.state.me) {
-    await store.dispatch('whoAmI')
+    await store.dispatch("whoAmI");
   }
 
   // ログインできなかった場合(Sessionがなかった場合)
   if (!store.state.me) {
-    sessionStorage.setItem(`destination`, to.fullPath)
-    redirect2AuthEndpoint()
-  // ログインできた場合
+    sessionStorage.setItem(`destination`, to.fullPath);
+    redirect2AuthEndpoint();
+    // ログインできた場合
   } else {
-    next()
+    next();
   }
-
-})
+});
 
 export default router;

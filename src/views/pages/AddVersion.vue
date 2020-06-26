@@ -1,60 +1,29 @@
 <template>
-  <div>
-    <v-btn x-small outlined fab dark color="primary" @click.stop="toggle">
-      <v-icon dark>mdi-plus</v-icon>
-    </v-btn>
-    <div class="text-center">
-      <v-dialog light v-model="isDialogOpen" max-width="290">
-        <v-card>
-          <v-card-title class="headline">バージョンを追加する</v-card-title>
-          <v-card-actions>
-            <v-form ref="form">
-              <v-textarea
-                outlined
-                v-model="versionName"
-                :rules="[() => !!versionName || 'バージョンを入力してください']"
-                placeholder="バージョン名"
-              />
-            </v-form>
-          </v-card-actions>
-          <v-card-actions>
-            <v-form ref="form">
-              <v-textarea
-                outlined
-                v-model="versionDescription"
-                :rules="[
-                  () => !!versionDescription || '説明文を入力してください'
-                ]"
-                placeholder="バージョンの説明"
-              />
-            </v-form>
-          </v-card-actions>
-          <v-card-actions>
-            <v-file-input
-              v-model="gameFile"
-              show-size
-              accept=".jar"
-              label="ファイルを追加してください"
-            ></v-file-input>
-          </v-card-actions>
-          <v-card-actions>
-            <v-form ref="form">
-              <v-textarea
-                outlined
-                v-model="gameUrl"
-                :solo="solo"
-                :rules="[() => !!gameUrl || 'URLを入力してください']"
-                placeholder="バージョンのURL"
-              />
-            </v-form>
-          </v-card-actions>
-          <v-divider />
-          <v-card-actions>
-            <div class="flex-grow-1"></div>
-            <v-btn @click="createVersion()">更新</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+  <div class="container">
+    <h1>新規ランチャーバージョン作成</h1>
+    <div>
+      <v-form ref="form">
+        <v-textarea
+          outlined
+          v-model="versionName"
+          :rules="[() => !!versionName || 'バージョンを入力してください']"
+          placeholder="バージョン名"
+        />
+      </v-form>
+    </div>
+    <div>
+      <v-form ref="form">
+        <v-textarea
+          outlined
+          v-model="versionDescription"
+          :rules="[() => !!versionDescription || '説明文を入力してください']"
+          placeholder="バージョンの説明"
+        />
+      </v-form>
+    </div>
+    <v-divider />
+    <div class="button_wrapper">
+      <v-btn @click="createVersion()">更新</v-btn>
     </div>
   </div>
 </template>
@@ -68,8 +37,7 @@ export default {
       versionName: "",
       versionDescription: "",
       gameFile: "",
-      gameUrl: "",
-      isDialogOpen: false
+      gameUrl: ""
     };
   },
 
@@ -105,10 +73,17 @@ export default {
       await axios
         .post(`/api/games/asset/${this.$route.params.id}/file`, form)
         .catch(e => alert(e));
-    },
-    toggle() {
-      this.isDialogOpen = !this.isDialogOpen;
     }
   }
 };
 </script>
+<style scoped>
+.container {
+  margin: 16px;
+  max-width: 70%;
+}
+.button_wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+</style>
