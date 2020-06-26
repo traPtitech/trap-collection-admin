@@ -34,7 +34,6 @@ export default {
   },
   async mounted() {
     await this.mount();
-    console.log(this.game);
   },
   methods: {
     async mount() {
