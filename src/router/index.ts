@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import { getRequest2Callback } from "@/utils/api.ts";
+import { getRequest2Callback, redirect2AuthEndpoint } from "@/utils/api.ts";
+import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -51,21 +52,21 @@ const router = new VueRouter({
   routes
 });
 
-// router.beforeEach(async (to, _, next) => {
-//   // ログイン済みかどうか調べる
-//   if (!store.state.me) {
-//     await store.dispatch('whoAmI')
-//   }
+router.beforeEach(async (to, _, next) => {
+  // ログイン済みかどうか調べる
+  if (!store.state.me) {
+    await store.dispatch('whoAmI')
+  }
 
-//   // ログインできなかった場合(Sessionがなかった場合)
-//   if (!store.state.me) {
-//     sessionStorage.setItem(`destination`, to.fullPath)
-//     redirect2AuthEndpoint()
-//   // ログインできた場合
-//   } else {
-//     next()
-//   }
+  // ログインできなかった場合(Sessionがなかった場合)
+  if (!store.state.me) {
+    sessionStorage.setItem(`destination`, to.fullPath)
+    redirect2AuthEndpoint()
+  // ログインできた場合
+  } else {
+    next()
+  }
 
-// })
+})
 
 export default router;

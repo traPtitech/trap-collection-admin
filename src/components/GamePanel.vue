@@ -12,7 +12,7 @@
     </v-list-item>
 
     <v-img
-      :src="{ path: baseURL + '/game/' + game.id + '/image' }"
+      :src="`${baseURL}/game/${game.id}/image`"
       height="180"
       width="260"
     ></v-img>
@@ -24,10 +24,16 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "GamePanel",
+  data() {
+    return {
+      baseURL: axios.defaults.baseURL
+    };
+  },
   props: {
-    baseURL: String,
     game: {
       id: String,
       name: String,

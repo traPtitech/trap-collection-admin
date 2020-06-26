@@ -23,7 +23,7 @@ export default new Vuex.Store({
     whoAmI({ commit }) {
       return new Promise(resolve => {
         axios
-          .get("/api/user/me")
+          .get("/users/me")
           .then(async res => {
             const data = res.data;
             const me = {

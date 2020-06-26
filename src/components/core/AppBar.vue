@@ -21,7 +21,7 @@
     <v-spacer />
     <!-- 検索欄 未実装 -->
     <v-text-field
-      :label="未実装だよ"
+      :label="'未実装だよ'"
       color="secondary"
       hide-details
       style="max-width: 165px;"
@@ -71,10 +71,14 @@
     <v-btn class="ml-2" min-width="0" text>
       <v-icon>
         <v-avatar>
-          <img
-            :src="`https://q.trap.jp/api/1.0/public/icon/${$store.state.me.id}`"
-            style="width: 30px;"
-          />
+          <template v-if="!$store.state.me">
+            <img
+              :src="
+                `https://q.trap.jp/api/1.0/public/icon/${$store.state.me.id}`
+              "
+              style="width: 30px;"
+            />
+          </template>
         </v-avatar>
       </v-icon>
     </v-btn>

@@ -38,10 +38,6 @@ export async function getRequest2Callback(to: Route) {
   });
 }
 
-interface Games {
-  games: Game[];
-}
-
 interface Game {
   id: string;
   name: string;
@@ -55,7 +51,13 @@ interface GameVersion {
   createdAt: string;
 }
 
-export async function getGames(all = false): Promise<Games> {
+export async function getGames(all = false): Promise<Array<Game>> {
+  try {
+    const res = await axios.get("/games", { params: { all } });
+    console.log(res);
+  } catch (e) {
+    console.log(e);
+  }
   return (await axios.get("/games", { params: { all } })).data;
 }
 

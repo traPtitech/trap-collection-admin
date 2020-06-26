@@ -16,7 +16,7 @@
       <!-- ゲームリスト -->
       <div v-for="game in games" :key="game.id">
         <v-col cols="auto">
-          <game-panel :game="game" :baseURL="axios.default.baseURL" />
+          <game-panel :game="game" />
         </v-col>
       </div>
     </v-row>
@@ -24,20 +24,26 @@
 </template>
 
 <script>
-import { getGames } from "@/utils/api.ts";
+import { getGames } from "@/utils/api";
 
 export default {
   name: "GameList",
+  data() {
+    return {
+      games: []
+    };
+  },
   components: {
     GamePanel: () => import("@/components/GamePanel.vue")
   },
-  mounted() {
-    this.mount();
+  async mounted() {
+    await this.mount();
+    console.log(this.game);
   },
   methods: {
     async mount() {
       const all = true;
-      this.games = getGames(all).games;
+      this.games = await getGames(all);
     }
   }
 };
