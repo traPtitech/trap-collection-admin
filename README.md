@@ -1,29 +1,29 @@
-# trap-collection-admin
+# `traPCollection WebUI`
 
-## Project setup
-```
-npm install
-```
+- Vite 2.x
+  - Brotli Compression
+- Vue 3.x
+  - TypeScript
+- Windi CSS 3.x
 
-### Compiles and hot-reloads for development
-```
+Includes:
+
+- [Vue Router 4.x](https://github.com/vuejs/vue-router-next)
+- [Headless UI](https://headlessui.dev/vue/menu)
+- [Heroicons](https://github.com/tailwindlabs/heroicons#vue)
+
+First-party plugins needed for Windi CSS:
+
+- [[aspectRatio](windicss/plugin/aspect-ratio)](https://windicss.org/plugins/official/aspect-ratio.html)
+- [[forms](windicss/plugin/forms)](https://windicss.org/plugins/official/forms.html)
+- [[lineClamp](windicss/plugin/line-clamp)](https://windicss.org/plugins/official/line-clamp.html)
+- [[typography](windicss/plugin/typography)](https://windicss.org/plugins/official/typography.html)
+
+### Getting Started 🚀
+
+```sh
+npm i
+npm run dev
+npm run build
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

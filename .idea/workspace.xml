@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="21dcc609-f0df-471c-bbaa-6a661b0b8544" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1dlshd06zs35qysEX8WKEjhcOv9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="21dcc609-f0df-471c-bbaa-6a661b0b8544" name="Default Changelist" comment="" />
+      <created>1593011134618</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1593011134618</updated>
+      <workItem from="1593011137988" duration="2611000" />
+      <workItem from="1593070794944" duration="8096000" />
+      <workItem from="1593191758314" duration="1102000" />
+      <workItem from="1593590150135" duration="31000" />
+      <workItem from="1596713038123" duration="1199000" />
+    </task>
+    <task id="LOCAL-00001" summary="chores">
+      <created>1593094955622</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1593094955622</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chores" />
+    <option name="LAST_COMMIT_MESSAGE" value="chores" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="169" y="95" key="MergeDialog" timestamp="1593071830597">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="169" y="95" key="MergeDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1593071830597" />
+    <state x="479" y="285" key="MultipleFileMergeDialog" timestamp="1593071830640">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="479" y="285" key="MultipleFileMergeDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1593071830640" />
+    <state x="341" y="175" key="SettingsEditor" timestamp="1593590179941">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="341" y="175" key="SettingsEditor/0.23.1680.1027@0.23.1680.1027" timestamp="1593590179941" />
+    <state x="535" y="292" width="598" height="490" key="find.popup" timestamp="1596740622778">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="535" y="292" width="598" height="490" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1596740622778" />
+  </component>
+</project>

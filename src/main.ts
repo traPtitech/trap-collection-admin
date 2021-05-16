@@ -1,14 +1,16 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
-import vuetify from "./plugins/vuetify";
+import 'virtual:windi-devtools'
+import 'virtual:windi.css'
+import { createApp } from 'vue'
+import { createRouter, createWebHistory } from 'vue-router'
 
-Vue.config.productionTip = false;
+import App from './App.vue'
+import { routes } from './routes'
 
-new Vue({
-  router,
-  store,
-  vuetify,
-  render: h => h(App)
-}).$mount("#app");
+const app = createApp(App)
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+app.use(router).mount('#app')
