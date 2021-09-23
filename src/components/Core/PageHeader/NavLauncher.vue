@@ -1,11 +1,13 @@
 <template>
-  <Menu as="div" class="text-left inline-block relative">
+  <Menu as="div" display="inline-block" position="relative" text="left">
     <div>
       <MenuButton
         class="
-          font-medium
-          text-md text-white
+          rounded-md
+          font-md
+          text-white
           w-full
+          p-2
           py-2
           px-4
           inline-flex
@@ -13,7 +15,7 @@
           focus:outline-none
         "
       >
-        Game
+        Launcher
         <ChevronDownIcon
           aria-hidden="true"
           class="h-4 -mr-1 ml-2 text-gray-400 w-4"
@@ -37,12 +39,12 @@
           bg-true-gray-900
           shadow-sm
           mt-2
-          transform
-          origin-top-right
           shadow-light-900
           ring-1 ring-light-900 ring-opacity-10
           w-56
           absolute
+          transformorigin-top-right
+          focus:outline-none
         "
       >
         <div class="p-1">
