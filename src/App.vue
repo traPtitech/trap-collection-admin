@@ -1,5 +1,5 @@
 <template>
-  <main bg="true-gray-900">
+  <main class="bg-true-gray-900">
     <PageHeader />
     <div>
       <router-view />
