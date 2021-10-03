@@ -18,7 +18,7 @@ export default defineConfig({
   server: {
     open: true,
     proxy: {
-      '/api/*': {
+      '/api': {
         target: DEV_SERVER_PROXY_HOST,
         changeOrigin: true,
         agent: keepAliveAgent
