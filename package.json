@@ -14,6 +14,7 @@
     "postinstall": "npm run gen-api"
   },
   "dependencies": {
+    "pinia": "^2.0.0-rc.13",
     "vue": "^3.2.4",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"
