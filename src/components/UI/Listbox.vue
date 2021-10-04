@@ -16,10 +16,11 @@
           truncate
           relative
           sm:text-sm
+          hover:bg-true-gray-500
           focus:outline-none focus:ring-2
         "
       >
-        <span class="text-white truncate">{{ selectedPerson.name }}</span>
+        <span class="text-white truncate">{{ selectedPerson?.name }}</span>
         <span
           class="flex pr-2 inset-y-0 right-0 items-center pointer-none absolute"
         >
@@ -65,7 +66,7 @@
                 relative
                 select-none
               "
-              :class="active ?? 'bg-true-gray-500'"
+              :class="active && 'bg-true-gray-500'"
             >
               <span
                 class="text-white block truncate align-baseline"

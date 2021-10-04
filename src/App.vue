@@ -9,6 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import { default as PageHeader } from '/@/components/Core/PageHeader/PageHeader.vue'
-import { default as Sidebar } from '/@/components/Core/Sidebar/Sidebar.vue'
+import PageHeader from '/@/components/PageHeader/PageHeader.vue'
+import Sidebar from '/@/components/Sidebar/Sidebar.vue'
 </script>
