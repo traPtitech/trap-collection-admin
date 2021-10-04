@@ -1,9 +1,9 @@
 <template>
   <main class="bg-true-gray-900">
     <PageHeader />
-    <div>
-      <router-view />
+    <div class="flex">
       <Sidebar />
+      <router-view />
     </div>
   </main>
 </template>

@@ -1,7 +1,5 @@
 <template>
-  <header class="bg-white shadow">
-    <div class="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-      <h1 class="font-bold leading-tight text-3xl text-gray-900">Not Found</h1>
-    </div>
-  </header>
+  <div class="py-6 px-4 sm:px-6 lg:px-8">
+    <h1 class="font-bold text-white leading-tight text-3xl">Not Found</h1>
+  </div>
 </template>
