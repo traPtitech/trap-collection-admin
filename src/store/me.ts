@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-import { apis, User } from '/@/lib/apis'
+import { User } from '/@/lib/apis'
 
 export const useMeStore = defineStore('me', {
   state: () => ({
@@ -12,14 +12,8 @@ export const useMeStore = defineStore('me', {
     }
   },
   actions: {
-    async fetchMe() {
-      try {
-        const { data: me } = await apis.getMe()
-        this.me = me
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e)
-      }
+    setMe(me: User) {
+      this.me = me
     }
   }
 })

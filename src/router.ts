@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { apis } from './lib/apis'
 
 import { useMeStore } from './store/me'
 
 const routes: RouteRecordRaw[] = [
-  { path: '/', component: () => import('./pages/Top.vue') },
+  { path: '/', component: () => import('./pages/GameList.vue') },
   { path: '/:path(.*)', component: () => import('./pages/NotFound.vue') }
 ]
 
@@ -12,22 +13,21 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(async (_to, _from, next) => {
+router.beforeEach(async () => {
   const store = useMeStore()
 
   if (store.isLoggedIn) {
-    next()
     return
   }
 
-  await store.fetchMe()
+  try {
+    const { data: me } = await apis.getMe()
+    store.setMe(me)
+  } catch (e) {
+    return '/oauth2/generate/code'
+  }
 
-  // workaround
-  // if (store.isLoggedIn) {
-  //   next()
-  //   return
-  // }
-  // location.href = '/api/oauth2/generate/code'
+  return
 })
 
 export default router
