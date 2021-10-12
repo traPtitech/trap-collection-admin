@@ -3,7 +3,11 @@
     <PageHeader />
     <div class="flex">
       <Sidebar />
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <Suspense>
+          <component :is="Component" />
+        </Suspense>
+      </router-view>
     </div>
   </main>
 </template>

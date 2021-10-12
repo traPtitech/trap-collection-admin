@@ -1,17 +1,20 @@
+<script lang="ts" setup>
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import {
+  ChevronDownIcon,
+  ArchiveIcon,
+  DuplicateIcon,
+  LinkIcon,
+  PencilIcon,
+  TrashIcon
+} from '@heroicons/vue/solid'
+</script>
+
 <template>
   <Menu as="div" class="text-left inline-block relative">
     <div>
       <MenuButton
-        class="
-          font-medium
-          text-md text-white
-          w-full
-          py-2
-          px-4
-          inline-flex
-          items-center
-          focus:outline-none
-        "
+        class="font-medium text-md text-white w-full py-2 px-4 inline-flex items-center focus:outline-none"
       >
         Game
         <ChevronDownIcon
@@ -30,34 +33,12 @@
       leave-to-class="transform scale-95 opacity-0"
     >
       <MenuItems
-        class="
-          divide-y divide-dashed
-          rounded-md
-          divide-light-900 divide-opacity-10
-          bg-true-gray-900
-          shadow-sm
-          mt-2
-          transform
-          origin-top-right
-          shadow-light-900
-          ring-1 ring-light-900 ring-opacity-10
-          w-56
-          absolute
-        "
+        class="divide-y divide-dashed rounded-md divide-light-900 divide-opacity-10 bg-true-gray-900 shadow-sm mt-2 transform origin-top-right shadow-light-900 ring-1 ring-light-900 ring-opacity-10 w-56 absolute"
       >
         <div class="p-1">
           <MenuItem v-slot="{ active }">
             <button
-              class="
-                rounded-md
-                flex
-                font-sm
-                text-white
-                w-full
-                p-2
-                items-center
-                focus:outline-none focus:shadow-none
-              "
+              class="rounded-md flex font-sm text-white w-full p-2 items-center focus:outline-none focus:shadow-none"
               :class="[active && 'bg-teal-500']"
             >
               <PencilIcon
@@ -70,16 +51,7 @@
           </MenuItem>
           <MenuItem v-slot="{ active }">
             <button
-              class="
-                rounded-md
-                flex
-                font-sm
-                text-white
-                w-full
-                p-2
-                items-center
-                focus:outline-none focus:shadow-none
-              "
+              class="rounded-md flex font-sm text-white w-full p-2 items-center focus:outline-none focus:shadow-none"
               :class="[active && 'bg-teal-500']"
             >
               <DuplicateIcon
@@ -94,16 +66,7 @@
         <div class="p-1">
           <MenuItem v-slot="{ active }">
             <button
-              class="
-                rounded-md
-                flex
-                font-sm
-                text-white
-                w-full
-                p-2
-                items-center
-                focus:outline-none focus:shadow-none
-              "
+              class="rounded-md flex font-sm text-white w-full p-2 items-center focus:outline-none focus:shadow-none"
               :class="[active && 'bg-teal-500']"
             >
               <ArchiveIcon
@@ -116,16 +79,7 @@
           </MenuItem>
           <MenuItem v-slot="{ active }">
             <button
-              class="
-                rounded-md
-                flex
-                font-sm
-                text-white
-                w-full
-                p-2
-                items-center
-                focus:outline-none focus:shadow-none
-              "
+              class="rounded-md flex font-sm text-white w-full p-2 items-center focus:outline-none focus:shadow-none"
               :class="[active && 'bg-teal-500']"
             >
               <LinkIcon
@@ -141,16 +95,7 @@
         <div class="p-1">
           <MenuItem v-slot="{ active }">
             <button
-              class="
-                rounded-md
-                flex
-                font-sm
-                text-white
-                w-full
-                p-2
-                items-center
-                focus:outline-none focus:shadow-none
-              "
+              class="rounded-md flex font-sm text-white w-full p-2 items-center focus:outline-none focus:shadow-none"
               :class="[active && 'bg-teal-500']"
             >
               <TrashIcon
@@ -166,15 +111,3 @@
     </transition>
   </Menu>
 </template>
-
-<script lang="ts" setup>
-import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import {
-  ChevronDownIcon,
-  ArchiveIcon,
-  DuplicateIcon,
-  LinkIcon,
-  PencilIcon,
-  TrashIcon
-} from '@heroicons/vue/solid'
-</script>

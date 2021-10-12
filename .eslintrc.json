@@ -2,7 +2,8 @@
   "root": true,
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "vue/setup-compiler-macros": true
   },
   "parserOptions": {
     "parser": "@typescript-eslint/parser"
@@ -22,6 +23,7 @@
       {
         "alphabetical": true
       }
-    ]
+    ],
+    "vue/script-setup-uses-vars": "error"
   }
 }
