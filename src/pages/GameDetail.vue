@@ -24,6 +24,24 @@ const editGame = () => {
 }
 const isEditing = ref(false)
 
+// TODO: link to ref
+const uploadImage = (e: Event) => {
+  if (e.target instanceof HTMLInputElement) {
+    const file = e.target.files?.[0]
+    if (file && game.value?.id) {
+      apis.postImage(game.value?.id, file)
+      }
+    }
+  }
+const uploadVideo = (e: Event) => {
+if (e.target instanceof HTMLInputElement) {
+  const file = e.target.files?.[0]
+  if (file && game.value?.id) {
+    apis.postVideo(game.value?.id, file)
+    }
+  }
+}
+
 game.value = (await apis.getGame(props.id)).data
 </script>
 
@@ -55,5 +73,20 @@ game.value = (await apis.getGame(props.id)).data
       save
     </button>
     <button class="bg-red-700 text-white" @click="deleteGame">delete</button>
+    <div class="text-white">
+      Image: <input type="file" /><button
+        class="bg-teal-600"
+        @click="uploadImage($event)"
+      >
+        upload
+      </button>
+      <br />
+      Video: <input type="file" /><button
+        class="bg-teal-600"
+        @click="uploadVideo($event)"
+      >
+        upload
+      </button>
+    </div>
   </div>
 </template>
