@@ -23,8 +23,10 @@ const add = () => store.addGame(newGame)
         <GameItem :game="game[1]" />
       </router-link>
     </div>
-    <input v-model="newGame.name" placeholder="name" />
-    <input v-model="newGame.description" placeholder="description" />
-    <button class="bg-white" @click="add">add</button>
+    <form @submit.prevent="add">
+      <input v-model="newGame.name" placeholder="name" />
+      <input v-model="newGame.description" placeholder="description" />
+      <button class="bg-teal-600">add</button>
+    </form>
   </div>
 </template>
