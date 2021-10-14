@@ -23,8 +23,8 @@ const addNewVersion = () => {
   >
     <Listbox class="mx-auto mt-5" :items="store.versions" />
     <!-- temporary -->
-    <form @submit.prevent="addNewVersion" class="text=white">
-      <input placeholder="name" v-model="version.name" />
+    <form class="text=white" @submit.prevent="addNewVersion">
+      <input v-model="version.name" placeholder="name" />
       <button class="bg-teal-600">add</button>
     </form>
   </aside>
