@@ -12,11 +12,12 @@ type Item = {
   name: string
 }
 interface Props {
-  items: Item[]
+  items: Map<string, Item>
 }
 
 const props = defineProps<Props>()
-const selectedItem = ref(props.items[0] as Item)
+// TODO: improve typing
+const selectedItem = ref(Array.from(props.items.values())[0] as Item)
 </script>
 
 <template>
@@ -43,7 +44,7 @@ const selectedItem = ref(props.items[0] as Item)
         >
           <ListboxOption
             v-for="item in items"
-            :key="item.name"
+            :key="item[1].name"
             v-slot="{ active, selected }"
             as="template"
             :value="item"
@@ -55,7 +56,7 @@ const selectedItem = ref(props.items[0] as Item)
               <span
                 class="text-white block truncate align-baseline"
                 :class="[selected ? 'font-medium' : 'font-normal']"
-                >{{ item.name }}</span
+                >{{ item[1].name }}</span
               >
               <span
                 v-if="selected"
