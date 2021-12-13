@@ -16,7 +16,6 @@ export const useGamesStore = defineStore('games', {
     async initialize() {
       // TODO: argument order
       const { data } = await apis.getGames(true)
-      console.log(data)
       this.games = new Map<string, Game>(data.map(game => [game.id, game]))
       this.initialized = true
     },
