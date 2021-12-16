@@ -57,23 +57,32 @@ const addGameVersion= () => {
   }
 }
 
-// TODO: link to ref
-const uploadImage = (e: Event) => {
+// TODO: preview
+const newImage = ref()
+const updateImage= (e : Event) => {
   if (e.target instanceof HTMLInputElement) {
-    const file = e.target.files?.[0]
-    if (file && game.value?.id) {
-      apis.postImage(game.value?.id, file)
-      }
-    }
-  }
-const uploadVideo = (e: Event) => {
-  if (e.target instanceof HTMLInputElement) {
-    const file = e.target.files?.[0]
-    if (file && game.value?.id) {
-      apis.postVideo(game.value?.id, file)
-      }
+    newImage.value = e.target.files?.[0]
   }
 }
+const uploadImage = () => {
+    if (game.value?.id && newImage.value) {
+      apis.postImage(game.value.id, newImage.value)
+      }
+  }
+
+// TODO: preview
+const newVideo = ref()
+const updateVideo= (e : Event) => {
+  if (e.target instanceof HTMLInputElement) {
+    newVideo.value = e.target.files?.[0]
+  }
+}
+const uploadVideo = () => {
+    if (game.value?.id && newVideo.value) {
+      apis.postVideo(game.value.id, newVideo.value)
+    }
+  }
+
 
 // TODO: type
 let newGameURL: NewGameURL = {
@@ -136,14 +145,14 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
     </div>
     ---
     <div>
-      <form @submit.prevent="uploadImage($event)">
+      <form @submit.prevent="uploadImage()">
         <label for="image_input">image: </label>
-        <input id="image_input" type="file" />
+        <input id="image_input" type="file" @change="updateImage($event)" />
         <button class="bg-teal-600">upload</button>
       </form>
-      <form @submit.prevent="uploadVideo($event)">
-        <label for="video_input">video: </label
-        ><input id="vide_input" type="file" />
+      <form @submit.prevent="uploadVideo()">
+        <label for="video_input">video: </label>
+        <input id="vide_input" type="file" @change="updateVideo($event)" />
         <button class="bg-teal-600">upload</button>
       </form>
     </div>
@@ -154,7 +163,7 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
         <input
           v-model="newVersion.name"
           class="text-black"
-          pattern="^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$"
+          pattern="^v([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$"
           placeholder="semvar"
         />
         <input
@@ -173,10 +182,12 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
         <button class="bg-teal-600">upload</button>
       </form>
       <form @submit.prevent="setGameURL()">
+        <label for="url_input">url: </label>
         <input
+          id="url_input"
           v-model="newGameURL.url"
           class="text-black"
-          placeholder="description"
+          placeholder="game url"
         />
         <button class="bg-teal-600">upload</button>
       </form>

@@ -12,7 +12,7 @@ const props = defineProps<Props>()
 
 <template>
   <Card>
-    <img src="/games/{{game.id}}/image" />
+    <img :src="`/games/${game.id}/image`" />
     <h3>{{ game.name }}</h3>
   </Card>
 </template>

@@ -6,7 +6,7 @@ import {
   ListboxOptions
 } from '@headlessui/vue'
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 type Item = {
   name: string
@@ -16,8 +16,9 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-// TODO: improve typing
-const selectedItem = ref(Array.from(props.items.values())[0] as Item)
+
+const items = computed(() => Array.from(props.items.values()))
+const selectedItem = ref(items.value[0])
 </script>
 
 <template>
@@ -44,7 +45,7 @@ const selectedItem = ref(Array.from(props.items.values())[0] as Item)
         >
           <ListboxOption
             v-for="item in items"
-            :key="item[1].name"
+            :key="item.name"
             v-slot="{ active, selected }"
             as="template"
             :value="item"
@@ -56,7 +57,7 @@ const selectedItem = ref(Array.from(props.items.values())[0] as Item)
               <span
                 class="text-white block truncate align-baseline"
                 :class="[selected ? 'font-medium' : 'font-normal']"
-                >{{ item[1].name }}</span
+                >{{ item.name }}</span
               >
               <span
                 v-if="selected"
