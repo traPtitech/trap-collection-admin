@@ -10,6 +10,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import('./pages/GameDetail.vue'),
     props: true
   },
+  { path: '/launchers', component: () => import('./pages/LauncherList.vue') },
+  {
+    path: '/launchers/:id',
+    component: () => import('./pages/LauncherDetail.vue'),
+    props: true
+  },
   { path: '/:path(.*)', component: () => import('./pages/NotFound.vue') }
 ]
 

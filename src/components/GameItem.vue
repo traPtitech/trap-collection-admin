@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { defineProps } from '@vue/runtime-dom'
-
 import Card from '/@/components/UI/Card.vue'
 import { Game } from '/@/lib/apis'
 

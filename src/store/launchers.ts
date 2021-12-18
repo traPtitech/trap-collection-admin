@@ -2,9 +2,10 @@ import { defineStore } from 'pinia'
 
 import { apis, Version, NewVersion } from '/@/lib/apis'
 
-export const useLauncherStore = defineStore('launcher', {
+export const useLaunchersStore = defineStore('launchers', {
   state: () => ({
     versions: new Map<string, Version>(),
+    currentVersionId: undefined as string | undefined,
     initialized: false
   }),
   getters: {
@@ -17,6 +18,8 @@ export const useLauncherStore = defineStore('launcher', {
       // TODO: argument order
       const { data } = await apis.getVersions()
       this.versions = new Map<string, Version>(data.map(v => [v.id, v]))
+      // TODO: responce order
+      this.currentVersionId = data.reverse()[0]?.id
       this.initialized = true
     },
     async addVersion(version: NewVersion) {

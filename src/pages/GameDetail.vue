@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { defineProps, ref } from '@vue/runtime-dom'
+import { ref } from 'vue'
 
 import { apis, Game, Maintainer, Maintainers, GameVersion, NewGameVersion, NewGameURL } from '/@/lib/apis'
 import { useGamesStore } from '/@/store/games'
