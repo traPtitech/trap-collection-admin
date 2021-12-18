@@ -83,6 +83,17 @@ const uploadVideo = () => {
     }
   }
 
+const newFile = ref()
+const updateFile= (e : Event) => {
+  if (e.target instanceof HTMLInputElement) {
+    newFile.value = e.target.files?.[0]
+  }
+}
+const uploadFile = () => {
+  if (game.value?.id && newFile.value) {
+      apis.postFile(game.value.id, newFile.value)
+    }
+}
 
 // TODO: type
 let newGameURL: NewGameURL = {
@@ -93,14 +104,7 @@ const setGameURL = () => {
     apis.postURL(game.value.id, newGameURL)
   }
 }
-const uploadFile = (e: Event) => {
-  if (e.target instanceof HTMLInputElement) {
-    const file = e.target.files?.[0]
-    if (file && game.value?.id) {
-      apis.postFile(game.value?.id, file)
-      }
-  }
-}
+
 
 game.value = (await apis.getGame(props.id)).data
 newGameInfo.name = game.value.name
@@ -176,9 +180,9 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
     </div>
     ---
     <div>
-      <form @submit.prevent="uploadFile($event)">
+      <form @submit.prevent="uploadFile()">
         <label for="file_input">zip: </label>
-        <input id="file_input" type="file" />
+        <input id="file_input" type="file" @change="updateFile($event)"/>
         <button class="bg-teal-600">upload</button>
       </form>
       <form @submit.prevent="setGameURL()">
