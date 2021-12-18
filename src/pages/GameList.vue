@@ -24,7 +24,7 @@ const add = () => store.addGame(newGame)
     <Sidebar />
     <div class="h-min grid p-8 gap-8 grid-cols-5">
       <div v-for="game in games" :key="game.id">
-        <router-link :to="'/games/' + game.id">
+        <router-link :to="`/games/${game.id}`">
           <GameItem :game="game" />
         </router-link>
       </div>

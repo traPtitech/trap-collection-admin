@@ -117,8 +117,8 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
 <template>
   <div class="text-white p-8">
     <h1 class="text-4xl">{{ game?.name }}</h1>
-    <video class="border border-white">
-      <source :src="`/games/${id}/movie`" type="video/mp4" />
+    <video class="border border-white" controls>
+      <source :src="`/api/games/${id}/video`" type="video/mp4" />
     </video>
     <div v-if="!isEditing">
       <div v-for="(v, k) in game" :key="k">{{ k }}: {{ v }}</div>
@@ -182,7 +182,7 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
     <div>
       <form @submit.prevent="uploadFile()">
         <label for="file_input">zip: </label>
-        <input id="file_input" type="file" @change="updateFile($event)"/>
+        <input id="file_input" type="file" @change="updateFile($event)" />
         <button class="bg-teal-600">upload</button>
       </form>
       <form @submit.prevent="setGameURL()">
