@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 
-import { apis, VersionDetails, ProductKeyGen } from '/@/lib/apis'
+import { apis, VersionDetails, ProductKey, ProductKeyGen } from '/@/lib/apis'
 
 interface Props {
   id: string
@@ -10,7 +10,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const launcher = ref<VersionDetails>()
-const productKeys = ref()
+const productKeys = ref<ProductKey[]>()
 
 const params = reactive<ProductKeyGen>({
   num: 1,
@@ -18,7 +18,9 @@ const params = reactive<ProductKeyGen>({
 })
 const issueNewProductKey = async () => {
   const keys = (await apis.postKeyGenerate(params)).data
-  productKeys.value += keys
+  if (keys) {
+    productKeys.value = keys
+  }
 }
 
 launcher.value = (await apis.getVersion(props.id)).data
@@ -32,7 +34,7 @@ productKeys.value = (await apis.getProductKeys(props.id)).data
     </div>
     <div>
       <div v-for="(v, k) in productKeys" :key="k" class="text-white">
-        {{ k }}: {{ v }}
+        {{ k }}: {{ v.key }}
       </div>
       <form @submit.prevent="issueNewProductKey">
         <input v-model="params.num" min="1" placeholder="name" type="number" />
