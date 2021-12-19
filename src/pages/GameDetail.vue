@@ -149,12 +149,12 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
     </div>
     ---
     <div>
-      <form @submit.prevent="uploadImage()">
+      <form @submit.prevent="uploadImage">
         <label for="image_input">image: </label>
         <input id="image_input" type="file" @change="updateImage($event)" />
         <button class="bg-teal-600">upload</button>
       </form>
-      <form @submit.prevent="uploadVideo()">
+      <form @submit.prevent="uploadVideo">
         <label for="video_input">video: </label>
         <input id="vide_input" type="file" @change="updateVideo($event)" />
         <button class="bg-teal-600">upload</button>
@@ -163,7 +163,7 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
     ---
     <div>
       <div v-for="v in versions" :key="v.id">{{ v }}</div>
-      <form @submit.prevent="addGameVersion()">
+      <form @submit.prevent="addGameVersion">
         <input
           v-model="newVersion.name"
           class="text-black"
@@ -180,12 +180,12 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
     </div>
     ---
     <div>
-      <form @submit.prevent="uploadFile()">
+      <form @submit.prevent="uploadFile">
         <label for="file_input">zip: </label>
         <input id="file_input" type="file" @change="updateFile($event)" />
         <button class="bg-teal-600">upload</button>
       </form>
-      <form @submit.prevent="setGameURL()">
+      <form @submit.prevent="setGameURL">
         <label for="url_input">url: </label>
         <input
           id="url_input"

@@ -10,6 +10,7 @@ const store = useGamesStore()
 if (!store.initialized) {
   store.initialize()
 }
+// TODO: response order
 const games = computed(() => Array.from(store.games.values()).reverse())
 </script>
 

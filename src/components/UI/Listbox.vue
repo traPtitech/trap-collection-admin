@@ -18,6 +18,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
+// TDOO: selected state dose not initialized
 const items = computed(() => Array.from(props.items.values()).reverse())
 const beforeSelect = computed(() => items.value[0])
 const selectedItem = ref<Item>()
