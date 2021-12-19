@@ -10,7 +10,7 @@ export default defineConfig({
   theme: {
     extend: {
       gridTemplateColumns: {
-        list: 'repeat(auto-fill, minmax(8rem, 1fr))'
+        list: 'repeat(auto-fill, minmax(12rem, 1fr))'
       }
     }
   }

@@ -162,7 +162,9 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
     </div>
     ---
     <div>
-      <div v-for="v in versions" :key="v.id">{{ v }}</div>
+      <div v-for="v in versions" :key="v.id">
+        {{ v.name }}: {{ v.description }}
+      </div>
       <form @submit.prevent="addGameVersion">
         <input
           v-model="newVersion.name"

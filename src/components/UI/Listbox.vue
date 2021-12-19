@@ -21,10 +21,12 @@ const props = defineProps<Props>()
 // TDOO: selected state dose not initialized
 const items = computed(() => Array.from(props.items.values()).reverse())
 const beforeSelect = computed(() => items.value[0])
+// TODO: sync with currentLauncherVersion(in store)
 const selectedItem = ref<Item>()
 </script>
 
 <template>
+  <!-- TODO: investigate this error -->
   <Listbox v-model="selectedItem" class="w-64">
     <div margin="t-1" position="relative">
       <ListboxButton

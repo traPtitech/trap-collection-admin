@@ -44,12 +44,17 @@ const hideAddGameModal = () => {
       </MenuItem>
     </div>
     <div class="p-1">
-      <MenuItem>
-        <template v-slot:menu-item-contents>
-          <ViewListIcon aria-hidden="true" class="h-5 mr-2 text-teal-300 w-5" />
-          List
-        </template>
-      </MenuItem>
+      <router-link to="/">
+        <MenuItem>
+          <template v-slot:menu-item-contents>
+            <ViewListIcon
+              aria-hidden="true"
+              class="h-5 mr-2 text-teal-300 w-5"
+            />
+            List
+          </template>
+        </MenuItem></router-link
+      >
     </div>
   </Menu>
   <Modal v-click-outside="hideAddGameModal" :show="show">

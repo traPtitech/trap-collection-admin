@@ -11,7 +11,10 @@ const props = defineProps<Props>()
 <template>
   <Card>
     <div class="w-40">
-      <img class="w-full" :src="`/api/games/${game.id}/image`" />
+      <img
+        class="object-contain object-center h-32 w-full"
+        :src="`/api/games/${game.id}/image`"
+      />
       <h3>{{ game.name }}</h3>
     </div>
   </Card>

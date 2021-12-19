@@ -8,6 +8,7 @@ if (!store.initialized) {
   store.initialize()
 }
 
+// TODO: jump to new game's detail page
 const newGame = reactive({
   name: '',
   description: ''

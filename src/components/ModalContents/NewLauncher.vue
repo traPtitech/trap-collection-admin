@@ -7,7 +7,7 @@ const store = useLaunchersStore()
 if (!store.initialized) {
   store.initialize()
 }
-
+// TODO: switch currentLauncherVersion(in store) to newLauncherVersion
 const newVersion = reactive({
   name: ''
 })

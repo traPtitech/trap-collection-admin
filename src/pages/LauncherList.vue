@@ -9,7 +9,8 @@ const store = useLaunchersStore()
 if (!store.initialized) {
   store.initialize()
 }
-const versions = computed(() => Array.from(store.versions.values()))
+// TODO: response order
+const versions = computed(() => Array.from(store.versions.values()).reverse())
 </script>
 
 <template>
