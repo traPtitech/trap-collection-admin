@@ -10,7 +10,9 @@ const props = defineProps<Props>()
 
 <template>
   <Card>
-    <img :src="`/api/games/${game.id}/image`" />
-    <h3>{{ game.name }}</h3>
+    <div class="w-40">
+      <img class="w-full" :src="`/api/games/${game.id}/image`" />
+      <h3>{{ game.name }}</h3>
+    </div>
   </Card>
 </template>

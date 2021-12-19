@@ -2,15 +2,30 @@
 import { ChevronDownIcon, PlusIcon, ViewListIcon } from '@heroicons/vue/solid'
 import { ref } from 'vue'
 
+import NewLauncher from '/@/components/ModalContents/NewLauncher.vue'
 import Menu from '/@/components/UI/Menu/Menu.vue'
 import MenuItem from '/@/components/UI/Menu/MenuItem.vue'
 import Modal from '/@/components/UI/Modal.vue'
 
+// TODO: provided by Modal Component
 const show = ref(false)
+let flag = false
+const toggleAddLauncherModal = () => {
+  show.value = !show.value
+}
+const hideAddLauncherModal = () => {
+  // to prevent the modal from closing triggered by the first click event
+  if (flag) {
+    show.value = false
+    flag = false
+  } else if (show.value) {
+    flag = true
+  }
+}
 </script>
 
 <template>
-  <Menu as="div" display="inline-block" position="relative">
+  <Menu as="div" class="inline-block relative">
     <template v-slot:menu-button-content>
       Launcher
       <ChevronDownIcon
@@ -19,9 +34,9 @@ const show = ref(false)
       />
     </template>
     <div class="p-1">
-      <MenuItem>
+      <MenuItem @click="toggleAddLauncherModal()">
         <template v-slot:menu-item-contents>
-          <div class="flex items-center justify-center" @click="show = !show">
+          <div class="flex items-center justify-center">
             <PlusIcon aria-hidden="true" class="h-5 mr-2 text-teal-300 w-5" />
             Add
           </div>
@@ -29,20 +44,20 @@ const show = ref(false)
       </MenuItem>
     </div>
     <div class="p-1">
-      <MenuItem>
-        <template v-slot:menu-item-contents>
-          <router-link class="flex items-center" to="/launchers">
+      <router-link class="flex items-center" to="/launchers">
+        <MenuItem>
+          <template v-slot:menu-item-contents>
             <ViewListIcon
               aria-hidden="true"
               class="h-5 mr-2 text-teal-300 w-5"
             />
             List
-          </router-link>
-        </template>
-      </MenuItem>
+          </template>
+        </MenuItem>
+      </router-link>
     </div>
   </Menu>
-  <Modal :show="show">
-    <div class="text-light-50">AAAAAAAA</div>
+  <Modal v-click-outside="hideAddLauncherModal" :show="show">
+    <NewLauncher />
   </Modal>
 </template>

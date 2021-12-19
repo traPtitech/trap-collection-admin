@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { reactive, computed } from 'vue'
+import { computed } from 'vue'
 
 import { useGamesStore } from '/@/store/games'
 
@@ -11,28 +11,17 @@ if (!store.initialized) {
   store.initialize()
 }
 const games = computed(() => Array.from(store.games.values()).reverse())
-
-const newGame = reactive({
-  name: '',
-  description: ''
-})
-const add = () => store.addGame(newGame)
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex h-full">
     <Sidebar />
-    <div class="h-min grid p-8 gap-8 grid-cols-5">
-      <div v-for="game in games" :key="game.id">
+    <div class="h-min w-full grid grid-cols-list p-8 gap-8">
+      <template v-for="game in games" :key="game.id">
         <router-link :to="`/games/${game.id}`">
           <GameItem :game="game" />
         </router-link>
-      </div>
-      <form @submit.prevent="add">
-        <input v-model="newGame.name" placeholder="name" />
-        <input v-model="newGame.description" placeholder="description" />
-        <button class="bg-teal-600">add</button>
-      </form>
+      </template>
     </div>
   </div>
 </template>

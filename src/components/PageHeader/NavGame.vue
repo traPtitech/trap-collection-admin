@@ -1,8 +1,27 @@
 <script lang="ts" setup>
 import { ChevronDownIcon, PlusIcon, ViewListIcon } from '@heroicons/vue/solid'
+import { ref } from 'vue'
 
+import NewGame from '/@/components/ModalContents/NewGame.vue'
 import Menu from '/@/components/UI/Menu/Menu.vue'
 import MenuItem from '/@/components/UI/Menu/MenuItem.vue'
+import Modal from '/@/components/UI/Modal.vue'
+
+// TODO: provided by Modal Component
+const show = ref(false)
+let flag = false
+const toggleAddGameModal = () => {
+  show.value = !show.value
+}
+const hideAddGameModal = () => {
+  // to prevent the modal from closing triggered by the first click event
+  if (flag) {
+    show.value = false
+    flag = false
+  } else if (show.value) {
+    flag = true
+  }
+}
 </script>
 
 <template>
@@ -15,10 +34,12 @@ import MenuItem from '/@/components/UI/Menu/MenuItem.vue'
       />
     </template>
     <div class="p-1">
-      <MenuItem>
+      <MenuItem @click="toggleAddGameModal()">
         <template v-slot:menu-item-contents>
-          <PlusIcon aria-hidden="true" class="h-5 mr-2 text-teal-300 w-5" />
-          Add
+          <div class="flex items-center justify-center">
+            <PlusIcon aria-hidden="true" class="h-5 mr-2 text-teal-300 w-5" />
+            Add
+          </div>
         </template>
       </MenuItem>
     </div>
@@ -31,4 +52,7 @@ import MenuItem from '/@/components/UI/Menu/MenuItem.vue'
       </MenuItem>
     </div>
   </Menu>
+  <Modal v-click-outside="hideAddGameModal" :show="show">
+    <NewGame />
+  </Modal>
 </template>

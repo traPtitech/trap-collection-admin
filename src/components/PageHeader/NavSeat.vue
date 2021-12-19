@@ -6,7 +6,7 @@ import MenuItem from '/@/components/UI/Menu/MenuItem.vue'
 </script>
 
 <template>
-  <Menu as="div" display="inline-block" position="relative">
+  <Menu as="div" class="inline-block relative">
     <template v-slot:menu-button-content>
       Seat
       <ChevronDownIcon

@@ -10,8 +10,8 @@ if (!store.initialized) {
 
 <template>
   <aside
-    class="flex flex-col min-h-screen border-r-1 border-opacity-10 border-light-900 w-72"
+    class="h-full border-r-1 border-opacity-10 border-light-900 py-4 px-2 w-72"
   >
-    <Listbox class="mx-auto mt-5" :items="store.versions" />
+    <Listbox :items="store.versions" />
   </aside>
 </template>

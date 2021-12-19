@@ -14,7 +14,10 @@ const props = defineProps<Props>()
     leave-from-class="opacity-100"
     leave-to-class="opacity-0"
   >
-    <div v-show="show" class="rounded inset-0 absolute">
+    <div
+      v-show="show"
+      class="rounded transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute"
+    >
       <slot></slot>
     </div>
   </transition>

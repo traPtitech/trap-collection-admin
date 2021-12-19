@@ -1,3 +1,4 @@
+<!-- TODO: refactor -->
 <script lang="ts" setup>
 import {
   Listbox,
@@ -17,17 +18,20 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const items = computed(() => Array.from(props.items.values()))
-const selectedItem = ref(items.value[0])
+const items = computed(() => Array.from(props.items.values()).reverse())
+const beforeSelect = computed(() => items.value[0])
+const selectedItem = ref<Item>()
 </script>
 
 <template>
   <Listbox v-model="selectedItem" class="w-64">
     <div margin="t-1" position="relative">
       <ListboxButton
-        class="rounded-lg cursor-default bg-true-gray-600 shadow-md text-left w-full py-2 pr-10 pl-3 ring-true-gray-900 ring-opacity-5 truncate relative sm:text-sm hover:bg-true-gray-500 focus:outline-none focus:ring-2"
+        class="rounded-lg cursor-default bg-true-gray-600 shadow-md text-left w-full min-h-10 py-2 pr-10 pl-3 ring-true-gray-900 ring-opacity-5 truncate relative sm:text-sm hover:bg-true-gray-500 focus:outline-none focus:ring-2"
       >
-        <span class="text-white truncate">{{ selectedItem?.name }}</span>
+        <span class="text-white truncate">{{
+          selectedItem?.name ?? beforeSelect?.name
+        }}</span>
         <span
           class="flex pr-2 inset-y-0 right-0 items-center pointer-none absolute"
         >
