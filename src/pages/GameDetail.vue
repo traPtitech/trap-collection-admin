@@ -30,9 +30,10 @@ const editGame = () => {
 }
 const isEditing = ref(false)
 
-const newMaintainers = ref<string[]>()
+// TODO: type
+const newMaintainer = ref('')
 const addMaintainers = () => {
-  if (game.value && newMaintainers.value) {
+  if (game.value) {
     // TODO: argument order
       const session = document.cookie
         .split('; ')
@@ -40,7 +41,7 @@ const addMaintainers = () => {
         ?.split('=')[1]
     // TODO: type
     const m: Maintainers = {
-      maintainers: newMaintainers.value,
+      maintainers: [newMaintainer.value],
     }
     apis.postMaintainer(game.value.id, session, m)
   }
@@ -84,7 +85,9 @@ const uploadVideo = () => {
   }
 
 const newFile = ref()
-let entryPoint = ''
+const entryPoint = ref('')
+// TODO: enum
+const fileType = ref('')
 const updateFile= (e : Event) => {
   if (e.target instanceof HTMLInputElement) {
     newFile.value = e.target.files?.[0]
@@ -92,7 +95,7 @@ const updateFile= (e : Event) => {
 }
 const uploadFile = () => {
   if (game.value?.id && newFile.value) {
-      apis.postFile(game.value.id, entryPoint, newFile.value)
+      apis.postFile(game.value.id, entryPoint.value, newFile.value, fileType.value)
     }
 }
 
@@ -144,7 +147,7 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
         <div v-for="v in maintainers" :key="v.id">{{ v.name }}</div>
       </div>
       <form @submit.prevent="addMaintainers">
-        <input class="text-black" placeholder="id" :v-model="newMaintainers" />
+        <input v-model="newMaintainer" class="text-black" placeholder="id" />
         <button class="bg-teal-600">add</button>
       </form>
     </div>
@@ -194,8 +197,17 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
           class="text-black"
           placeholder="entrypoint"
         />
+        <br />
+        <label for="filetype_input">filetype: </label>
+        <input
+          id="filetype_input"
+          v-model="fileType"
+          class="text-black"
+          placeholder="fuletype"
+        />
         <button class="bg-teal-600">upload</button>
       </form>
+      ---
       <form @submit.prevent="setGameURL">
         <label for="url_input">url: </label>
         <input
