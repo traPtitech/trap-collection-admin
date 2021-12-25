@@ -191,6 +191,7 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
         <input
           id="entrypoint_input"
           v-model="entryPoint"
+          class="text-black"
           placeholder="entrypoint"
         />
         <button class="bg-teal-600">upload</button>
