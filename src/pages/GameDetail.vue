@@ -84,6 +84,7 @@ const uploadVideo = () => {
   }
 
 const newFile = ref()
+let entryPoint = ''
 const updateFile= (e : Event) => {
   if (e.target instanceof HTMLInputElement) {
     newFile.value = e.target.files?.[0]
@@ -91,7 +92,7 @@ const updateFile= (e : Event) => {
 }
 const uploadFile = () => {
   if (game.value?.id && newFile.value) {
-      apis.postFile(game.value.id, newFile.value)
+      apis.postFile(game.value.id, entryPoint, newFile.value)
     }
 }
 
@@ -185,6 +186,13 @@ versions.value = (await apis.getGameVersion(game.value.id)).data
       <form @submit.prevent="uploadFile">
         <label for="file_input">zip: </label>
         <input id="file_input" type="file" @change="updateFile($event)" />
+        <br />
+        <label for="entrypoint_input">entrypoint: </label>
+        <input
+          id="entrypoint_input"
+          v-model="entryPoint"
+          placeholder="entrypoint"
+        />
         <button class="bg-teal-600">upload</button>
       </form>
       <form @submit.prevent="setGameURL">

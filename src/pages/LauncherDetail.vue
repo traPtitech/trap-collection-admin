@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 
-import { apis, VersionDetails, ProductKey, ProductKeyGen, GameIDs } from '/@/lib/apis'
+import { apis, VersionDetails, ProductKey, ProductKeyGen } from '/@/lib/apis'
 
 interface Props {
   id: string
