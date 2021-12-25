@@ -21,7 +21,7 @@ jobs:
           cache: npm
       - run: npm ci
       # TODO: npm run build
-      - run: vite build
+      - run: npx vite build
       - name: Archive artifact
         run: tar -zcvf ./dist.tar.gz ./dist
       - uses: softprops/action-gh-release@v1
