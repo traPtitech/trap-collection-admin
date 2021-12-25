@@ -8,7 +8,7 @@ on:
       - '**'
 
 env:
-  IMAGE_NAME: trap-collection-ui
+  IMAGE_NAME: trap-collection-admin
 
 jobs:
   make-dist:
