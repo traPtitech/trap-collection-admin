@@ -2,7 +2,9 @@ FROM node:16-alpine as builder
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci --unsafe-perm
+RUN apk add --update --no-cache openjdk8-jre-base
+COPY ./scripts ./scripts
+RUN npm ci
 COPY . .
 # RUN npm run build
 RUN vite build
