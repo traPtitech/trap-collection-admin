@@ -3,7 +3,7 @@
     "jsx": "preserve",
     "strict": true,
     "target": "esnext",
-    "module": "CommonJS",
+    "module": "commonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
@@ -23,5 +23,5 @@
       "/@/*": ["src/*"]
     }
   },
-  "exclude": ["./dist/**/*"]
+  "exclude": ["./dist/**/*", "**/*.stories.ts"]
 }
