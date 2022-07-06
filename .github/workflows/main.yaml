@@ -9,14 +9,22 @@ jobs:
     env:
       CI: true
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v1
+          node-version: 18
+      - uses: actions/cache@v3
         with:
           path: node_modules
-          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+      - uses: actions/cache@v3
+        with:
+          path: src/lib/apis/generated
+          key: ${{ runner.os }}-apis_generated-${{ hashFiles('https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/swagger/openapi.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-apis_generated-
       - run: npm ci
   build:
     name: Client Build
@@ -26,16 +34,22 @@ jobs:
       CI: true
       NODE_ENV: production
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v1
+          node-version: 18
+      - uses: actions/cache@v3
         with:
           path: node_modules
-          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            node_modules-
+            ${{ runner.os }}-node_modules-
+      - uses: actions/cache@v3
+        with:
+          path: src/lib/apis/generated
+          key: ${{ runner.os }}-apis_generated-${{ hashFiles('https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/swagger/openapi.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-apis_generated-
       - run: npm run build
   lint:
     name: Client Lint
@@ -45,14 +59,20 @@ jobs:
       CI: true
       NODE_ENV: production
     steps:
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v1
+          node-version: 18
+      - uses: actions/cache@v3
         with:
           path: node_modules
-          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            node_modules-
+            ${{ runner.os }}-node_modules-
+      - uses: actions/cache@v3
+        with:
+          path: src/lib/apis/generated
+          key: ${{ runner.os }}-apis_generated-${{ hashFiles('https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/swagger/openapi.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-apis_generated-
       - run: npm run lint

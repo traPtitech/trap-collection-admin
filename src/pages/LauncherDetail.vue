@@ -35,7 +35,7 @@ const addGames = () => {
 // TODO: id dose not exist in type ProductKey
 const revokeProductKey = async (keyId: string) => {
   await apis.deleteProductKey(keyId)
-  productKeys.value = productKeys.value?.filter(k => k.id !== keyId)
+  productKeys.value = productKeys.value?.filter(k => k.key !== keyId)
 }
 
 launcher.value = (await apis.getVersion(props.id)).data
@@ -56,7 +56,7 @@ productKeys.value = (await apis.getProductKeys(props.id)).data
     <div>
       <div v-for="(v, k) in productKeys" :key="k">
         {{ k }}: {{ v.key }}
-        <button class="bg-red-700" @click="revokeProductKey(v.id)">
+        <button class="bg-red-700" @click="revokeProductKey(v.key)">
           revoke
         </button>
       </div>

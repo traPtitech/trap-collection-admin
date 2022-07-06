@@ -5,7 +5,7 @@ import { Version } from '/@/lib/apis'
 interface Props {
   version: Version
 }
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 
 <template>
