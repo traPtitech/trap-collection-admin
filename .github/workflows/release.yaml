@@ -1,8 +1,8 @@
 name: release
 
-on: 
+on:
   push:
-    tags: 
+    tags:
       - v*.*.*
     branches-ignore:
       - '**'
@@ -14,10 +14,10 @@ jobs:
   make-dist:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           cache: npm
       - run: npm ci
       # TODO: npm run build
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo IMAGE_TAG=$(echo ${GITHUB_REF:11}) >> $GITHUB_ENV
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1

@@ -36,7 +36,7 @@ router.beforeEach(async to => {
       const { data } = await apis.getMe()
       store.setMe(data)
     } catch (e) {
-      console.error(e)
+      // console.error(e)
     }
   }
 

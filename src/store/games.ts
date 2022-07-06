@@ -32,7 +32,10 @@ export const useGamesStore = defineStore('games', {
     },
     async updateGame(gameId: string, name: string, description: string) {
       const { data } = await apis.putGame(gameId, { name, description })
-      this.games.set(gameId, Object.assign(this.games.get(gameId), data))
+      const prevGame = this.games.get(gameId)
+      if (prevGame) {
+        this.games.set(gameId, Object.assign(prevGame, data))
+      }
     },
     async deleteGame(gameId: string) {
       await apis.deleteGames(gameId)

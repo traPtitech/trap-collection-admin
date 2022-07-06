@@ -20,7 +20,7 @@ const deleteGame = () => {
     router.push('/')
 }
 
-let newGameInfo = {
+const newGameInfo = {
   name: '',
   description: '',
 }
@@ -48,7 +48,7 @@ const addMaintainers = () => {
 }
 
 // TODO: type
-let newVersion: NewGameVersion = {
+const newVersion: NewGameVersion = {
   name: '',
   description: ''
 }
@@ -100,7 +100,7 @@ const uploadFile = () => {
 }
 
 // TODO: type
-let newGameURL: NewGameURL = {
+const newGameURL: NewGameURL = {
   url: ''
 }
 const setGameURL = () => {

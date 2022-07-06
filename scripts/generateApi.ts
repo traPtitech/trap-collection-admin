@@ -3,7 +3,7 @@ import { mkdir } from 'fs/promises'
 import { resolve } from 'path'
 import { promisify } from 'util'
 
-import addApis from './addApis.mjs'
+import addApis from './addApis'
 
 const execPromise = promisify(exec)
 
@@ -28,7 +28,6 @@ const generateCmd = [
   '--generate-alias-as-model',
   '--reserved-words-mappings private=private'
 ]
-
 ;(async () => {
   const __dirname = resolve()
   await mkdir(resolve(__dirname, '../', GENERATED_DIR), {
