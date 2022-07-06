@@ -2,7 +2,7 @@
 interface Props {
   show: boolean
 }
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 
 <template>

@@ -5,7 +5,7 @@ import { Game } from '/@/lib/apis'
 interface Props {
   game: Game
 }
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 
 <template>
