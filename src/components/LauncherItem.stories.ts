@@ -1,5 +1,3 @@
-import { Meta, StoryFn } from '@storybook/vue3'
-
 import LauncherItem from './LauncherItem.vue'
 
 type Props = InstanceType<typeof LauncherItem>['$props']
@@ -7,9 +5,9 @@ type Props = InstanceType<typeof LauncherItem>['$props']
 export default {
   title: 'LauncherItem',
   component: LauncherItem
-} as Meta<Props>
+}
 
-const Template: StoryFn<Props> = args => ({
+const Template = (args: unknown) => ({
   components: { LauncherItem },
   setup() {
     return { args }
@@ -24,4 +22,4 @@ Primary.args = {
     id: '12345',
     createdAt: '2020-01-01'
   }
-}
+} as Props
