@@ -2,18 +2,22 @@
 import 'vfonts/FiraCode.css'
 import 'vfonts/Lato.css'
 
-import Header from '/@/components/UI/Header.vue'
+import Sidebar from './components/UI/Sidebar.vue'
+import PageHeader from '/@/components/UI/PageHeader.vue'
 </script>
 
 <template>
   <main class="flex flex-col h-screen">
-    <Header />
-    <router-view v-slot="{ Component }">
+    <PageHeader />
+    <div class="flex-1 flex-row">
+      <Sidebar />
       <div class="flex-1">
-        <Suspense>
-          <component :is="Component" />
-        </Suspense>
+        <router-view v-slot="{ Component }">
+          <Suspense>
+            <component :is="Component" />
+          </Suspense>
+        </router-view>
       </div>
-    </router-view>
+    </div>
   </main>
 </template>
