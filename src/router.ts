@@ -4,10 +4,10 @@ import { apis } from './lib/apis'
 import { useMeStore } from './store/me'
 
 const routes: RouteRecordRaw[] = [
-  { path: '/games', component: () => import('./pages/Game/List.vue') },
+  { path: '/games', component: () => import('./pages/Games/List.vue') },
   {
     path: '/games/:id',
-    component: () => import('./pages/Game/Detail.vue'),
+    component: () => import('./pages/Games/Info.vue'),
     props: true
   },
   // { path: '/launchers', component: () => import('./pages/LauncherList.vue') },

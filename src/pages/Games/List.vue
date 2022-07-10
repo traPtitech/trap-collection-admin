@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 import { useGamesStore } from '/@/store/games'
 
-import GameItem from '/@/components/Game/ListItem.vue'
+import GameItem from '/@/components/Games/ListItem.vue'
 import Sidebar from '/@/components/UI/Sidebar.vue'
 
 const store = useGamesStore()
