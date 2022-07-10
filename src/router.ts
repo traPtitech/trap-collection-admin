@@ -4,18 +4,18 @@ import { apis } from './lib/apis'
 import { useMeStore } from './store/me'
 
 const routes: RouteRecordRaw[] = [
-  { path: '/', component: () => import('./pages/GameList.vue') },
+  { path: '/games', component: () => import('./pages/Game/List.vue') },
   {
     path: '/games/:id',
-    component: () => import('./pages/GameDetail.vue'),
+    component: () => import('./pages/Game/Detail.vue'),
     props: true
   },
-  { path: '/launchers', component: () => import('./pages/LauncherList.vue') },
-  {
-    path: '/launchers/:id',
-    component: () => import('./pages/LauncherDetail.vue'),
-    props: true
-  },
+  // { path: '/launchers', component: () => import('./pages/LauncherList.vue') },
+  // {
+  //   path: '/launchers/:id',
+  //   component: () => import('./pages/LauncherDetail.vue'),
+  //   props: true
+  // },
   { path: '/:path(.*)', component: () => import('./pages/NotFound.vue') }
 ]
 

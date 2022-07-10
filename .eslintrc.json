@@ -15,10 +15,10 @@
     "@vue/prettier"
   ],
   "rules": {
-    "no-console": "warn",
-    "no-debugger": "warn",
+    "no-console": "error",
+    "no-debugger": "error",
     "vue/attributes-order": [
-      "warn",
+      "error",
       {
         "alphabetical": true
       }

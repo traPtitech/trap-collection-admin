@@ -1,12 +1,15 @@
 <script lang="ts" setup>
-import PageHeader from '/@/components/PageHeader/PageHeader.vue'
+import 'vfonts/FiraCode.css'
+import 'vfonts/Lato.css'
+
+import Header from '/@/components/UI/Header.vue'
 </script>
 
 <template>
-  <main class="flex flex-col h-screen bg-true-gray-900">
-    <PageHeader />
+  <main class="flex flex-col h-screen">
+    <Header />
     <router-view v-slot="{ Component }">
-      <div class="bg-true-gray-900 flex-1">
+      <div class="flex-1">
         <Suspense>
           <component :is="Component" />
         </Suspense>
