@@ -6,6 +6,10 @@ import { paths } from './utils/paths'
 
 export const routes: RouteRecordRaw[] = [
   {
+    path: paths.index,
+    component: () => import('./pages/Index.vue')
+  },
+  {
     path: paths.games.index,
     component: () => import('/@/pages/Games/Index.vue')
   },

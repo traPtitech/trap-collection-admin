@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import AppsRound from '@vicons/material/AppsRound'
 import GamePadRound from '@vicons/material/GamepadRound'
+import InboxRound from '@vicons/material/InboxRound'
 import { MenuOption } from 'naive-ui'
 import { NMenu } from 'naive-ui'
 import { h } from 'vue'
@@ -31,7 +31,7 @@ const makeMenuOption = (
 
 const menuOptions: MenuOption[] = [
   makeMenuOption(GamePadRound, 'ゲーム一覧', paths.games.index),
-  makeMenuOption(AppsRound, 'エディション一覧', paths.editions.index)
+  makeMenuOption(InboxRound, 'エディション一覧', paths.editions.index)
 ]
 
 const router = useRouter()
