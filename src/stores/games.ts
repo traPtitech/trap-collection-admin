@@ -21,13 +21,13 @@ export const useGamesStore = defineStore('games', () => {
 
   // Game を削除する
   const deleteGames = async (gameId: string) => {
-    await withAuth(apis.deleteGames)(gameId)
+    await withAuth(apis.deleteGame)(gameId)
     await refetch()
   }
 
   // Game を更新する
   const patchGame = async (gameId: string, game: PatchGame) => {
-    await withAuth(apis.putGame)(gameId, game)
+    await withAuth(apis.patchGame)(gameId, game)
     await refetch()
   }
 
