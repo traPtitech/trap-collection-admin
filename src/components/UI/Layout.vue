@@ -1,17 +1,19 @@
 <script lang="ts" setup>
 import PageHeader from './PageHeader.vue'
+import Separator from './Separator.vue'
 import Sidebar from './Sidebar.vue'
 </script>
 <template>
-  <n-layout>
-    <n-layout-header>
-      <page-header />
-    </n-layout-header>
-    <n-layout-sider p="4">
-      <sidebar />
-    </n-layout-sider>
-    <n-layout-content content-style="padding: 24px;">
-      <slot></slot>
-    </n-layout-content>
-  </n-layout>
+  <div class="flex flex-col h-full w-full">
+    <PageHeader />
+    <Separator />
+    <div class="flex-grow flex flex-row w-full">
+      <div class="h-full"></div>
+      <Sidebar />
+      <Separator direction="vertical" />
+      <Suspense>
+        <slot />
+      </Suspense>
+    </div>
+  </div>
 </template>

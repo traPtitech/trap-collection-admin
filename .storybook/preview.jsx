@@ -1,6 +1,6 @@
 import vueRouter from 'storybook-vue3-router'
 import 'vfonts/FiraCode.css'
-import 'vfonts/Roboto.css'
+import 'vfonts/Lato.css'
 import 'virtual:windi.css'
 
 import { routes } from '/@/router'

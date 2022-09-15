@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-import { withAuth } from '../utils/withAuth'
 import { apis, User } from '/@/lib/apis'
+import { withAuth } from '/@/utils/withAuth'
 
 export const useMeStore = defineStore('me', () => {
   const me = ref<User | undefined>(undefined)

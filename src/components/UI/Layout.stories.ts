@@ -15,5 +15,5 @@ const Template = (args: unknown) => ({
   template: '<Layout v-bind="args" />'
 })
 
-export const Primary = Template.bind({})
-Primary.args = {} as Props
+export const Primary: { args: Props } = Template.bind({})
+Primary.args = {}
