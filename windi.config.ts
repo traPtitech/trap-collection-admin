@@ -1,4 +1,5 @@
-import { defineConfig } from 'vite-plugin-windicss'
+import colors from 'windicss/colors'
+import { defineConfig } from 'windicss/helpers'
 import aspectRatio from 'windicss/plugin/aspect-ratio'
 import forms from 'windicss/plugin/forms'
 import lineClamp from 'windicss/plugin/line-clamp'
@@ -9,8 +10,18 @@ export default defineConfig({
   plugins: [aspectRatio, forms, lineClamp, typography()],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['v-sans', 'system-ui'],
+        mono: ['v-mono', 'monospace']
+      },
       gridTemplateColumns: {
         list: 'repeat(auto-fill, minmax(12rem, 1fr))'
+      },
+      colors: {
+        primary: colors.teal,
+        secondary: colors.fuchsia,
+        error: colors.red,
+        neutral: colors.slate
       }
     }
   }
