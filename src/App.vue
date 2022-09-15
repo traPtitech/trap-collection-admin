@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import 'vfonts/FiraCode.css'
-import 'vfonts/Lato.css'
+import 'vfonts/Roboto.css'
 
 import Sidebar from './components/UI/Sidebar.vue'
 import PageHeader from '/@/components/UI/PageHeader.vue'
 </script>
 
 <template>
-  <main class="flex flex-col h-screen">
+  <main class="flex flex-col h-screen text-neutral-900">
     <PageHeader />
     <div class="flex-1 flex-row">
       <Sidebar />
