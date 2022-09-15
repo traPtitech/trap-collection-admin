@@ -9,6 +9,6 @@ const props = defineProps<{
 </script>
 <template>
   <div class="flex-1">
-    <n-button>ボタン</n-button>
+    <n-button>ボタン1</n-button>
   </div>
 </template>
