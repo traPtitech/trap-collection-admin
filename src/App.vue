@@ -1,7 +1,4 @@
 <script lang="ts" setup>
-import 'vfonts/FiraCode.css'
-import 'vfonts/Roboto.css'
-
 import Sidebar from './components/UI/Sidebar.vue'
 import PageHeader from '/@/components/UI/PageHeader.vue'
 </script>

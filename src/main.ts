@@ -1,4 +1,6 @@
 import { createPinia } from 'pinia'
+import 'vfonts/FiraCode.css'
+import 'vfonts/Roboto.css'
 import 'virtual:windi-devtools'
 import 'virtual:windi.css'
 import { createApp } from 'vue'
@@ -9,17 +11,9 @@ import router from './router'
 const app = createApp(App)
 
 app.use(createPinia()).use(router)
-app.directive('click-outside', {
-  beforeMount(el, binding) {
-    el.clickOutsideEvent = function (e: Event) {
-      if (!(el === e.target || el.contains(e.target))) {
-        binding.value(e, el)
-      }
-    }
-    document.body.addEventListener('click', el.clickOutsideEvent)
-  },
-  unmounted(el) {
-    document.body.removeEventListener('click', el.clickOutsideEvent)
-  }
-})
+
+const meta = document.createElement('meta')
+meta.name = 'naive-ui-style'
+document.head.appendChild(meta)
+
 app.mount('#app')

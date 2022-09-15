@@ -5,12 +5,12 @@ import { withAuth } from '../utils/withAuth'
 import { apis, GameInfo, NewGame, PatchGame } from '/@/lib/apis'
 
 export const useGamesStore = defineStore('games', () => {
-  const game = ref<Map<string, GameInfo> | undefined>(undefined)
+  const games = ref<Map<string, GameInfo> | undefined>(undefined)
 
   // Game を取得する
   const refetch = async () => {
     const res = await withAuth(apis.getGames)()
-    game.value = new Map<string, GameInfo>(res?.data.games.map(v => [v.id, v]))
+    games.value = new Map<string, GameInfo>(res?.data.games.map(v => [v.id, v]))
   }
 
   // Game を作成する
@@ -31,5 +31,5 @@ export const useGamesStore = defineStore('games', () => {
     await refetch()
   }
 
-  return { game, refetch, postGame, deleteGames, patchGame }
+  return { games, refetch, postGame, deleteGames, patchGame }
 })

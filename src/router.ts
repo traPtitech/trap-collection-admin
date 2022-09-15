@@ -2,11 +2,12 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 import { apis } from './lib/apis'
 import { useMeStore } from './stores/me'
+import { paths } from './utils/paths'
 
 export const routes: RouteRecordRaw[] = [
-  { path: '/games', component: () => import('./pages/Games/List.vue') },
+  { path: paths.games, component: () => import('./pages/Games/List.vue') },
   {
-    path: '/games/:id',
+    path: paths.game(':id'),
     component: () => import('./pages/Games/Info.vue'),
     props: true
   },

@@ -1,4 +1,6 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import Layout from '/@/components/UI/Layout.vue'
+</script>
 <template>
-  <div></div>
+  <layout>content</layout>
 </template>

@@ -5,12 +5,12 @@ import { withAuth } from '../utils/withAuth'
 import { apis, Edition, NewEdition, PatchEdition } from '/@/lib/apis'
 
 export const useEditionsStore = defineStore('Editions', () => {
-  const Edition = ref<Map<string, Edition> | undefined>(undefined)
+  const editions = ref<Map<string, Edition> | undefined>(undefined)
 
   // Edition を取得する
   const refetch = async () => {
     const res = await withAuth(apis.getEditions)()
-    Edition.value = new Map<string, Edition>(res?.data.map(v => [v.id, v]))
+    editions.value = new Map<string, Edition>(res?.data.map(v => [v.id, v]))
   }
 
   // Edition を作成する
@@ -31,5 +31,5 @@ export const useEditionsStore = defineStore('Editions', () => {
     await refetch()
   }
 
-  return { Edition, refetch, postEdition, deleteEditions, patchEdition }
+  return { editions, refetch, postEdition, deleteEditions, patchEdition }
 })
