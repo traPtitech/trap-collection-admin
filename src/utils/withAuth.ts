@@ -1,5 +1,4 @@
 import { AxiosError } from 'axios'
-import { useRouter } from 'vue-router'
 
 import { apis } from '../lib/apis'
 import { paths } from './paths'

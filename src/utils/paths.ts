@@ -12,7 +12,3 @@ export const paths = {
   logout: '/logout',
   callback: '/callback'
 }
-
-export const isDecent = (ancestor: string, descendant: string) => {
-  return descendant.startsWith(ancestor)
-}

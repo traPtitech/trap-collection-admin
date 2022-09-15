@@ -6,6 +6,7 @@ import lineClamp from 'windicss/plugin/line-clamp'
 import typography from 'windicss/plugin/typography'
 
 export default defineConfig({
+  important: true,
   darkMode: 'media',
   plugins: [aspectRatio, forms, lineClamp, typography()],
   theme: {
@@ -16,12 +17,6 @@ export default defineConfig({
       },
       gridTemplateColumns: {
         list: 'repeat(auto-fill, minmax(12rem, 1fr))'
-      },
-      colors: {
-        primary: colors.teal,
-        secondary: colors.fuchsia,
-        error: colors.red,
-        neutral: colors.slate
       }
     }
   }

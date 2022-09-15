@@ -34,22 +34,23 @@ const router = createRouter({
 router.beforeEach(async to => {
   const meStore = useMeStore()
 
+  // サーバー側から callback?code=??? にリダイレクトされる
+  // code をサーバーに投げて認証する
   if (to.path === paths.callback) {
-    // サーバー側から callback?code=??? にリダイレクトされる
-    // code をサーバーに投げて認証する
     if (typeof to.query['code'] === 'string') {
       await apis.getCallback(to.query['code'])
     }
 
-    return { path: paths.index }
+    const redirect = sessionStorage.getItem('redirect')
+    sessionStorage.removeItem('redirect')
+    return { path: redirect ?? paths.index }
   }
 
   // ログアウトの処理
   if (to.path === paths.logout) {
     await apis.postLogout()
-
-    const meStore = useMeStore()
-    meStore.refetch()
+    window.location.href = paths.oauthEntrypointPath
+    return
   }
 
   // Me の情報が無かったなら refetch する

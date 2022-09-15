@@ -1,19 +1,24 @@
 <script lang="ts" setup>
+import { NLayout } from 'naive-ui'
+import { NLayoutContent } from 'naive-ui'
+import { NLayoutHeader } from 'naive-ui'
+import { NLayoutSider } from 'naive-ui'
+
 import PageHeader from './PageHeader.vue'
-import Separator from './Separator.vue'
 import Sidebar from './Sidebar.vue'
 </script>
 <template>
-  <div class="flex flex-col h-full w-full">
-    <PageHeader />
-    <Separator />
-    <div class="flex-grow flex flex-row w-full">
-      <div class="h-full"></div>
-      <Sidebar />
-      <Separator direction="vertical" />
-      <Suspense>
+  <n-layout position="absolute">
+    <n-layout-header bordered class="h-16">
+      <PageHeader />
+    </n-layout-header>
+    <n-layout class="top-16" has-sider position="absolute">
+      <n-layout-sider bordered>
+        <Sidebar />
+      </n-layout-sider>
+      <n-layout-content bordered>
         <slot />
-      </Suspense>
-    </div>
-  </div>
+      </n-layout-content>
+    </n-layout>
+  </n-layout>
 </template>
