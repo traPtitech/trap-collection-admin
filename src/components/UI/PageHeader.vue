@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Github from '@vicons/fa/Github'
 import DarkModeRound from '@vicons/material/DarkModeRound'
 import GamePadRound from '@vicons/material/GamepadRound'
 import LightModeRound from '@vicons/material/LightModeRound'
@@ -61,6 +62,7 @@ const userDropdownOptions: Ref<DropdownOption[]> = computed(() => [
           :checked="themeStore.theme === 'dark'"
           circle
           quaternary
+          size="large"
           @click="
             themeStore.setTheme(themeStore.theme === 'dark' ? 'light' : 'dark')
           "
@@ -73,9 +75,20 @@ const userDropdownOptions: Ref<DropdownOption[]> = computed(() => [
             />
           </template>
         </NButton>
+        <a
+          href="https://github.com/traPtitech/trap-collection-admin"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <NButton circle quaternary size="large">
+            <template #icon>
+              <NIcon :component="Github" />
+            </template>
+          </NButton>
+        </a>
         <NDropdown :options="userDropdownOptions" trigger="hover">
           <NAvatar
-            class="block hover:cursor-pointer"
+            class="block ml-5 hover:cursor-pointer"
             size="medium"
             :src="meStore.me?.name && getIconSrc(meStore.me.name)"
           />
