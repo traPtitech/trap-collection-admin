@@ -1,34 +1,39 @@
 <script lang="ts" setup>
 import { NConfigProvider, darkTheme, lightTheme } from 'naive-ui'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
+import { useThemeStore } from './stores/theme'
 import Layout from '/@/components/UI/Layout.vue'
 
-const theme = ref<'dark' | 'light'>('light')
+const themeStore = useThemeStore()
 
 const originalTheme = computed(() =>
-  theme.value === 'dark' ? darkTheme : lightTheme
+  themeStore.theme === 'dark' ? darkTheme : lightTheme
 )
 
 const lightThemeOverrides = {
   common: {
-    primaryColor: '#005BAC'
+    primaryColor: '#005BAC',
+    primaryColorHover: '#2673B8',
+    primaryColorPressed: '#003667'
   }
 }
 
 const darkThemeOverrides = {
   common: {
-    primaryColor: '#62B4FF'
+    primaryColor: '#428FD5',
+    primaryColorHover: '#5AA7E1',
+    primaryColorPressed: '#2A6AA1'
   }
 }
 
 const overrideTheme = computed(() =>
-  theme.value === 'dark' ? darkThemeOverrides : lightThemeOverrides
+  themeStore.theme === 'dark' ? darkThemeOverrides : lightThemeOverrides
 )
 </script>
 
 <template>
-  <n-config-provider :theme="originalTheme" :theme-overrides="overrideTheme">
+  <NConfigProvider :theme="originalTheme" :theme-overrides="overrideTheme">
     <main class="h-screen w-screen text-cool-gray-800 relative">
       <Layout>
         <router-view v-slot="{ Component }">
@@ -36,5 +41,5 @@ const overrideTheme = computed(() =>
         </router-view>
       </Layout>
     </main>
-  </n-config-provider>
+  </NConfigProvider>
 </template>

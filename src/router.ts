@@ -10,22 +10,20 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('./pages/Index.vue')
   },
   {
-    path: paths.games.index,
+    path: paths.games.index(),
     component: () => import('/@/pages/Games/Index.vue')
   },
   {
     path: paths.games.detail(':id'),
-    component: () => import('/@/pages/Games/Detail.vue'),
-    props: true
+    component: () => import('/@/pages/Games/Detail.vue')
   },
   {
-    path: paths.editions.index,
+    path: paths.editions.index(),
     component: () => import('/@/pages/Editions/Index.vue')
   },
   {
     path: paths.editions.detail(':id'),
-    component: () => import('/@/pages/Editions/Detail.vue'),
-    props: true
+    component: () => import('/@/pages/Editions/Detail.vue')
   },
   { path: '/:path(.*)', component: () => import('./pages/NotFound.vue') }
 ]
@@ -47,7 +45,9 @@ router.beforeEach(async to => {
 
     const redirect = sessionStorage.getItem('redirect')
     sessionStorage.removeItem('redirect')
-    return { path: redirect ?? paths.index }
+
+    redirect && (window.location.href = redirect)
+    return { path: paths.index }
   }
 
   // ログアウトの処理

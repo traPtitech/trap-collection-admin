@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import GamePadRound from '@vicons/material/GamepadRound'
 import InboxRound from '@vicons/material/InboxRound'
-import { MenuOption } from 'naive-ui'
-import { NMenu } from 'naive-ui'
+import { MenuOption, NMenu } from 'naive-ui'
 import { h } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 
@@ -30,8 +29,8 @@ const makeMenuOption = (
 })
 
 const menuOptions: MenuOption[] = [
-  makeMenuOption(GamePadRound, 'ゲーム一覧', paths.games.index),
-  makeMenuOption(InboxRound, 'エディション一覧', paths.editions.index)
+  makeMenuOption(GamePadRound, 'ゲーム一覧', paths.games.index()),
+  makeMenuOption(InboxRound, 'エディション一覧', paths.editions.index())
 ]
 
 const router = useRouter()
@@ -40,6 +39,7 @@ const router = useRouter()
   <aside>
     <NMenu
       class="w-full"
+      :indent="48"
       :options="menuOptions"
       :value="getPathRoot(router.currentRoute.value.path)"
     />

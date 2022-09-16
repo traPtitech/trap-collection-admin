@@ -10,12 +10,12 @@ const router = useRouter()
   <div class="h-full flex items-center justify-center">
     <NResult
       :description="`ページ ${router.currentRoute.value.path} は見つかりませんでした`"
-      status="404"
+      status="warning"
       title="404 Not Found"
     >
       <template #footer>
         <router-link :to="paths.index">
-          <n-button>トップページへ</n-button>
+          <NButton>トップページへ</NButton>
         </router-link>
       </template>
     </NResult>

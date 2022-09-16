@@ -1,6 +1,6 @@
 import { createPinia } from 'pinia'
 import 'vfonts/FiraCode.css'
-import 'vfonts/Lato.css'
+import 'vfonts/Inter.css'
 import 'virtual:windi-devtools'
 import 'virtual:windi.css'
 import { createApp } from 'vue'

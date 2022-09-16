@@ -8,17 +8,17 @@ import PageHeader from './PageHeader.vue'
 import Sidebar from './Sidebar.vue'
 </script>
 <template>
-  <n-layout position="absolute">
-    <n-layout-header bordered class="h-16">
+  <NLayout position="absolute">
+    <NLayoutHeader bordered class="h-16">
       <PageHeader />
-    </n-layout-header>
-    <n-layout class="top-16" has-sider position="absolute">
-      <n-layout-sider bordered>
+    </NLayoutHeader>
+    <NLayout class="top-16" hasSider position="absolute">
+      <NLayoutSider bordered>
         <Sidebar />
-      </n-layout-sider>
-      <n-layout-content bordered>
+      </NLayoutSider>
+      <NLayoutContent bordered>
         <slot />
-      </n-layout-content>
-    </n-layout>
-  </n-layout>
+      </NLayoutContent>
+    </NLayout>
+  </NLayout>
 </template>
