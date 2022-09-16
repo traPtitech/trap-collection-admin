@@ -65,11 +65,11 @@ const handleDropDownSelect = (key: string | number) => {
 }
 </script>
 <template>
-  <header class="w-full h-full px-10">
+  <header class="w-full h-full px-[2rem]">
     <NSpace align="center" class="w-full h-full" justify="space-between">
-      <router-link :to="paths.index">
-        <Logo class="text-xl" />
-      </router-link>
+      <RouterLink :to="paths.index">
+        <Logo class="text-2xl" />
+      </RouterLink>
       <NSpace align="center" size="large">
         <NButton
           :checked="themeStore.theme === 'dark'"
@@ -95,7 +95,7 @@ const handleDropDownSelect = (key: string | number) => {
         >
           <NButton circle quaternary size="large">
             <template #icon>
-              <NIcon :component="Github" />
+              <NIcon><Github /></NIcon>
             </template>
           </NButton>
         </a>
@@ -105,7 +105,7 @@ const handleDropDownSelect = (key: string | number) => {
           @select="handleDropDownSelect"
         >
           <NAvatar
-            class="block ml-3 hover:cursor-pointer"
+            class="block mx-[1rem] hover:cursor-pointer"
             size="medium"
             :src="meStore.me?.name && getIconSrc(meStore.me.name)"
           />

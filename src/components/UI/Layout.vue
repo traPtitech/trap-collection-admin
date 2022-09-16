@@ -9,11 +9,16 @@ import Sidebar from './Sidebar.vue'
 </script>
 <template>
   <NLayout position="absolute">
-    <NLayoutHeader bordered class="h-16">
+    <NLayoutHeader bordered class="h-[4rem]">
       <PageHeader />
     </NLayoutHeader>
-    <NLayout class="top-16" hasSider position="absolute">
-      <NLayoutSider bordered>
+    <NLayout class="top-[4rem]" hasSider position="absolute">
+      <NLayoutSider
+        bordered
+        collapse-mode="width"
+        :collapsed-width="64"
+        show-trigger="arrow-circle"
+      >
         <Sidebar />
       </NLayoutSider>
       <NLayoutContent bordered>

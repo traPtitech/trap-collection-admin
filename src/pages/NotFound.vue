@@ -14,9 +14,9 @@ const router = useRouter()
       title="404 Not Found"
     >
       <template #footer>
-        <router-link :to="paths.index">
+        <RouterLink :to="paths.index">
           <NButton>トップページへ</NButton>
-        </router-link>
+        </RouterLink>
       </template>
     </NResult>
   </div>

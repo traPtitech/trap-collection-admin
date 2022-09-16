@@ -38,7 +38,7 @@ const router = useRouter()
 <template>
   <aside>
     <NMenu
-      class="w-full"
+      :collapsed-width="64"
       :indent="48"
       :options="menuOptions"
       :value="getPathRoot(router.currentRoute.value.path)"

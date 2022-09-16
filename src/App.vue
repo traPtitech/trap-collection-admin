@@ -40,7 +40,7 @@ const overrideTheme = computed(() =>
 <template>
   <NConfigProvider :theme="originalTheme" :theme-overrides="overrideTheme">
     <NNotificationProvider>
-      <main class="h-screen w-screen text-cool-gray-800 relative">
+      <main class="h-screen w-screen text-cool-gray-800">
         <Layout>
           <router-view v-slot="{ Component }">
             <component :is="Component" />
