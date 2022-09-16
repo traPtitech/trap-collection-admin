@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import Github from '@vicons/fa/Github'
 import DarkModeRound from '@vicons/material/DarkModeRound'
-import GamePadRound from '@vicons/material/GamepadRound'
 import LightModeRound from '@vicons/material/LightModeRound'
 import LogOutRound from '@vicons/material/LogOutRound'
+import VideogameAssetRound from '@vicons/material/VideogameAssetRound'
 import {
   NButton,
   NSpace,
@@ -26,17 +26,19 @@ const themeStore = useThemeStore()
 const meStore = useMeStore()
 
 const makeDropdownOption = (
+  key: string,
   icon: Component,
-  to: string,
-  label: string
+  label: string,
+  to?: string
 ): DropdownOption => ({
-  label: () => h(RouterLink, { to }, { default: () => label }),
-  key: to,
+  label: to ? () => h(RouterLink, { to }, { default: () => label }) : label,
+  key: key,
   icon: () =>
     h(NIcon, null, {
       default: () => h(icon)
     })
 })
+
 const userDropdownOptions: Ref<DropdownOption[]> = computed(() => [
   {
     label: meStore.me?.name,
@@ -44,12 +46,23 @@ const userDropdownOptions: Ref<DropdownOption[]> = computed(() => [
     disabled: true
   },
   makeDropdownOption(
-    GamePadRound,
-    paths.games.index(false),
-    '管理しているゲーム'
+    'yourGames',
+    VideogameAssetRound,
+    '管理しているゲーム',
+    paths.games.index(false)
   ),
-  makeDropdownOption(LogOutRound, paths.logout, 'ログアウト')
+  {
+    type: 'divider',
+    key: 'd'
+  },
+  makeDropdownOption('logout', LogOutRound, 'ログアウト')
 ])
+
+const handleDropDownSelect = (key: string | number) => {
+  if (key === 'logout') {
+    meStore.logout()
+  }
+}
 </script>
 <template>
   <header class="w-full h-full px-10">
@@ -86,9 +99,13 @@ const userDropdownOptions: Ref<DropdownOption[]> = computed(() => [
             </template>
           </NButton>
         </a>
-        <NDropdown :options="userDropdownOptions" trigger="hover">
+        <NDropdown
+          :options="userDropdownOptions"
+          trigger="hover"
+          @select="handleDropDownSelect"
+        >
           <NAvatar
-            class="block ml-5 hover:cursor-pointer"
+            class="block ml-3 hover:cursor-pointer"
             size="medium"
             :src="meStore.me?.name && getIconSrc(meStore.me.name)"
           />

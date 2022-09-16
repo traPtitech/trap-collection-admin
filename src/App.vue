@@ -1,5 +1,10 @@
 <script lang="ts" setup>
-import { NConfigProvider, darkTheme, lightTheme } from 'naive-ui'
+import {
+  NConfigProvider,
+  darkTheme,
+  lightTheme,
+  NNotificationProvider
+} from 'naive-ui'
 import { computed } from 'vue'
 
 import { useThemeStore } from './stores/theme'
@@ -34,12 +39,14 @@ const overrideTheme = computed(() =>
 
 <template>
   <NConfigProvider :theme="originalTheme" :theme-overrides="overrideTheme">
-    <main class="h-screen w-screen text-cool-gray-800 relative">
-      <Layout>
-        <router-view v-slot="{ Component }">
-          <component :is="Component" />
-        </router-view>
-      </Layout>
-    </main>
+    <NNotificationProvider>
+      <main class="h-screen w-screen text-cool-gray-800 relative">
+        <Layout>
+          <router-view v-slot="{ Component }">
+            <component :is="Component" />
+          </router-view>
+        </Layout>
+      </main>
+    </NNotificationProvider>
   </NConfigProvider>
 </template>

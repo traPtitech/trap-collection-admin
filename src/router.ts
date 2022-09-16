@@ -50,13 +50,6 @@ router.beforeEach(async to => {
     return { path: paths.index }
   }
 
-  // ログアウトの処理
-  if (to.path === paths.logout) {
-    await apis.postLogout()
-    window.location.href = paths.oauthEntrypointPath
-    return
-  }
-
   // Me の情報が無かったなら refetch する
   if (meStore.me === undefined) {
     await meStore.refetch()

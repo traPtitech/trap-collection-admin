@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import GamePadRound from '@vicons/material/GamepadRound'
 import InboxRound from '@vicons/material/InboxRound'
+import VideogameAssetRound from '@vicons/material/VideogameAssetRound'
 import { NCard } from 'naive-ui'
 
 import Logo from '../components/UI/Logo.vue'
@@ -13,7 +13,7 @@ import { paths } from '../utils/paths'
       <router-link :to="paths.games.index()">
         <NCard hoverable>
           <div class="flex gap-2">
-            <GamePadRound class="w-6 h-6" />
+            <VideogameAssetRound class="w-6 h-6" />
             <div class="flex flex-col gap-4">
               <div class="text-xl font-semibold">ゲーム一覧</div>
               <div>
