@@ -23,15 +23,19 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-
       - name: Cache generated api
+        id: cache-apis
         uses: actions/cache@v3
         with:
           path: src/lib/apis/generated
-          key: ${{ runner.os }}-apis_generated-${{ hashFiles('https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/openapi/v2.yaml') }}
+          key: ${{ runner.os }}-apis-${{ hashFiles('https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/openapi/v2.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-apis_generated-
+            ${{ runner.os }}-apis-
       - name: Install npm packages
         if: steps.cache-npm.outputs.cache-hit != 'true'
         run: npm ci
+      - name: Generate api
+        if: steps.cache-apis.outputs.cache-hit != 'true'
+        run: npm run gen-api
   build:
     name: Client Build
     runs-on: ubuntu-latest
@@ -54,12 +58,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-
       - name: Cache generated api
+        id: cache-apis
         uses: actions/cache@v3
         with:
           path: src/lib/apis/generated
-          key: ${{ runner.os }}-apis_generated-${{ hashFiles('https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/openapi/v2.yaml') }}
+          key: ${{ runner.os }}-apis-${{ hashFiles('https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/openapi/v2.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-apis_generated-
+            ${{ runner.os }}-apis-
       - name: build
         run: npm run build
   lint:
@@ -74,16 +79,20 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - uses: actions/cache@v3
+      - name: Cache node modules
+        id: cache-npm
+        uses: actions/cache@v3
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-
-      - uses: actions/cache@v3
+      - name: Cache generated api
+        id: cache-apis
+        uses: actions/cache@v3
         with:
           path: src/lib/apis/generated
-          key: ${{ runner.os }}-apis_generated-${{ hashFiles('https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/openapi/v2.yaml') }}
+          key: ${{ runner.os }}-apis-${{ hashFiles('https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/openapi/v2.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-apis_generated-
+            ${{ runner.os }}-apis-
       - run: npm run lint
