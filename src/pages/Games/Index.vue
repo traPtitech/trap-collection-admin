@@ -1,16 +1,7 @@
 <script lang="ts" setup>
 import ArrowBackRound from '@vicons/material/ArrowBackRound'
 import VideogameAssetRound from '@vicons/material/VideogameAssetRound'
-import {
-  NButtonGroup,
-  NButton,
-  NIcon,
-  NSpace,
-  NRow,
-  NAvatar,
-  NCheckbox,
-  NPageHeader
-} from 'naive-ui'
+import { NIcon, NSpace, NAvatar, NCheckbox, NPageHeader } from 'naive-ui'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
