@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import PermDeviceInformationFilled  from '@vicons/material/PermDeviceInformationFilled'
-import { NIcon, NTable } from 'naive-ui'
+import InfoRound from '@vicons/material/InfoRound'
+import { NIcon, NTable, NButton } from 'naive-ui'
 
 import { GameInfo } from '/@/lib/apis'
 
@@ -21,7 +21,16 @@ const props = defineProps<{
     </thead>
     <tbody>
       <tr v-for="game in props.games" :key="game.id">
-        <th><NIcon :component="PermDeviceInformationFilled" size="24" /></th>
+        <th>
+          <NButton tertiary>
+            <template #icon>
+              <NIcon>
+                <InfoRound />
+              </NIcon>
+            </template>
+            詳細
+          </NButton>
+        </th>
         <th>{{ game.id }}</th>
         <th>{{ game.name }}</th>
         <th>{{ game.createdAt }}</th>
