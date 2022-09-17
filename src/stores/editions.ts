@@ -22,7 +22,7 @@ export const useEditionsStore = defineStore('Editions', () => {
 
   // データがないなら Edition を取得する
   const getEditions = async () => {
-    if (getEditionsApi.data.value === undefined) {
+    if (editions.value === undefined) {
       await refetch()
     }
   }

@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 import { apis } from './lib/apis'
+import { useEditionsStore } from './stores/editions'
+import { useGamesStore } from './stores/games'
 import { useMeStore } from './stores/me'
 import { paths } from './utils/paths'
 
@@ -34,8 +36,6 @@ const router = createRouter({
 })
 
 router.beforeEach(async to => {
-  const meStore = useMeStore()
-
   // サーバー側から callback?code=??? にリダイレクトされる
   // code をサーバーに投げて認証する
   if (to.path === paths.callback) {
@@ -50,10 +50,14 @@ router.beforeEach(async to => {
     return { path: paths.index }
   }
 
-  // Me の情報が無かったなら refetch する
-  if (meStore.me === undefined) {
-    await meStore.refetch()
-  }
+  const meStore = useMeStore()
+  await meStore.getMe()
+
+  const gameStore = useGamesStore()
+  await gameStore.getGames()
+
+  const editionStore = useEditionsStore()
+  await editionStore.getEditions()
 })
 
 export default router

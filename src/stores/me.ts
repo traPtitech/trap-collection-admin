@@ -18,11 +18,18 @@ export const useMeStore = defineStore('me', () => {
     }
   }
 
+  // Me がないなら Me を取得する
+  const getMe = async () => {
+    if (me.value === undefined) {
+      await refetch()
+    }
+  }
+
   const logout = async () => {
     await apis.postLogout()
     window.location.href = paths.oauthEntrypointPath
     return
   }
 
-  return { me, refetch, logout }
+  return { me, refetch, getMe, logout }
 })

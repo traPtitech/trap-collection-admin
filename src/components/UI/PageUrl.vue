@@ -6,7 +6,7 @@ import { paths } from '/@/utils/paths'
 
 const props = defineProps<{
   root: 'games' | 'editions'
-  id?: string
+  name?: string
 }>()
 
 const getRootText = (root: string) => {
@@ -23,14 +23,13 @@ const getRootText = (root: string) => {
     <NBreadcrumbItem>
       <RouterLink :to="paths.index">ホーム</RouterLink></NBreadcrumbItem
     >
-
-    <NBreadcrumbItem
-      ><RouterLink :to="paths[props.root].index">{{
-        getRootText(props.root)
-      }}</RouterLink></NBreadcrumbItem
-    >
-    <NBreadcrumbItem v-if="props.id">
-      {{ props.id }}
+    <NBreadcrumbItem>
+      <RouterLink :to="paths[props.root].index">
+        {{ getRootText(props.root) }}
+      </RouterLink>
+    </NBreadcrumbItem>
+    <NBreadcrumbItem v-if="props.name">
+      {{ props.name }}
     </NBreadcrumbItem>
   </NBreadcrumb>
 </template>
