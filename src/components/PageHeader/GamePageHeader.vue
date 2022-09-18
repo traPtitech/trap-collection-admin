@@ -62,7 +62,7 @@ const props = defineProps<{
           編集
         </NButton>
       </template>
-      <NList :bordered="false">
+      <NList :show-divider="false">
         <NListItem v-for="owner in props.game.owners" :key="owner">
           <NSpace align="center">
             <NAvatar
@@ -88,7 +88,7 @@ const props = defineProps<{
           編集
         </NButton>
       </template>
-      <NList :bordered="false">
+      <NList :show-divider="false">
         <NListItem
           v-for="maintainer in props.game.maintainers"
           :key="maintainer"
