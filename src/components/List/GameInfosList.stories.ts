@@ -1,18 +1,18 @@
-import Game from './Game.vue'
+import GameInfosList from './GameInfosList.vue'
 
-type Props = InstanceType<typeof Game>['$props']
+type Props = InstanceType<typeof GameInfosList>['$props']
 
 export default {
-  title: 'Game',
-  component: Game
+  title: 'GameInfosList',
+  component: GameInfosList
 }
 
 const Template = (args: unknown) => ({
-  components: { Game },
+  components: { GameInfosList },
   setup() {
     return { args }
   },
-  template: '<Game v-bind="args" />'
+  template: '<GameInfosList v-bind="args" />'
 })
 
 export const Primary = Template.bind({})
