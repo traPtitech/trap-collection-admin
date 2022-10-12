@@ -1,6 +1,6 @@
 import { createPinia } from 'pinia'
 import 'vfonts/FiraCode.css'
-import 'vfonts/Roboto.css'
+import 'vfonts/Inter.css'
 import 'virtual:windi-devtools'
 import 'virtual:windi.css'
 import { createApp } from 'vue'
@@ -10,7 +10,10 @@ import router from './router'
 
 const app = createApp(App)
 
-app.use(createPinia()).use(router)
+const pinia = createPinia()
+
+app.use(pinia)
+app.use(router)
 
 const meta = document.createElement('meta')
 meta.name = 'naive-ui-style'

@@ -1,7 +1,23 @@
+<script lang="ts" setup>
+import { NResult, NButton } from 'naive-ui'
+import { useRouter } from 'vue-router'
+
+import { paths } from '../utils/paths'
+
+const router = useRouter()
+</script>
 <template>
-  <div class="py-6 px-4 sm:px-6 lg:px-8">
-    <h1 class="font-bold text-white leading-tight text-3xl">
-      Not Found ( /{{ $route.params['path'] }} )
-    </h1>
+  <div class="h-full flex items-center justify-center">
+    <NResult
+      :description="`ページ ${router.currentRoute.value.path} は見つかりませんでした`"
+      status="warning"
+      title="404 Not Found"
+    >
+      <template #footer>
+        <RouterLink :to="paths.index">
+          <NButton>トップページへ</NButton>
+        </RouterLink>
+      </template>
+    </NResult>
   </div>
 </template>

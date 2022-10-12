@@ -1,20 +1,52 @@
 <script lang="ts" setup>
-import Sidebar from './components/UI/Sidebar.vue'
-import PageHeader from '/@/components/UI/PageHeader.vue'
+import {
+  NConfigProvider,
+  darkTheme,
+  lightTheme,
+  NNotificationProvider
+} from 'naive-ui'
+import { computed } from 'vue'
+
+import { useThemeStore } from './stores/theme'
+import Layout from '/@/components/UI/Layout.vue'
+
+const themeStore = useThemeStore()
+
+const originalTheme = computed(() =>
+  themeStore.theme === 'dark' ? darkTheme : lightTheme
+)
+
+const lightThemeOverrides = {
+  common: {
+    primaryColor: '#005BAC',
+    primaryColorHover: '#2673B8',
+    primaryColorPressed: '#003667'
+  }
+}
+
+const darkThemeOverrides = {
+  common: {
+    primaryColor: '#428FD5',
+    primaryColorHover: '#5AA7E1',
+    primaryColorPressed: '#2A6AA1'
+  }
+}
+
+const overrideTheme = computed(() =>
+  themeStore.theme === 'dark' ? darkThemeOverrides : lightThemeOverrides
+)
 </script>
 
 <template>
-  <main class="flex flex-col h-screen text-neutral-900">
-    <PageHeader />
-    <div class="flex-1 flex-row">
-      <Sidebar />
-      <div class="flex-1">
-        <router-view v-slot="{ Component }">
-          <Suspense>
+  <NConfigProvider :theme="originalTheme" :theme-overrides="overrideTheme">
+    <NNotificationProvider>
+      <main class="h-screen w-screen text-cool-gray-800">
+        <Layout>
+          <router-view v-slot="{ Component }">
             <component :is="Component" />
-          </Suspense>
-        </router-view>
-      </div>
-    </div>
-  </main>
+          </router-view>
+        </Layout>
+      </main>
+    </NNotificationProvider>
+  </NConfigProvider>
 </template>

@@ -1,6 +1,6 @@
 import vueRouter from 'storybook-vue3-router'
 import 'vfonts/FiraCode.css'
-import 'vfonts/Roboto.css'
+import 'vfonts/Inter.css'
 import 'virtual:windi.css'
 
 import { routes } from '/@/router'
@@ -19,6 +19,6 @@ export const decorators = [
   vueRouter(routes),
   Story => ({
     components: { Story },
-    template: '<div class="text-neutral-900"><story /></div>'
+    template: '<div class="text-cool-gray-800"><story /></div>'
   })
 ]

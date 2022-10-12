@@ -1,17 +1,35 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-import { withAuth } from '../utils/withAuth'
+import { useApi } from '../hooks/useApi'
+import { paths } from '../utils/paths'
 import { apis, User } from '/@/lib/apis'
 
 export const useMeStore = defineStore('me', () => {
-  const me = ref<User | undefined>(undefined)
+  const me = ref<User>()
+
+  const getMeApi = useApi(apis.getMe)
 
   // Me を取得する
   const refetch = async () => {
-    const res = await withAuth(apis.getMe)()
-    me.value = res?.data
+    const res = await getMeApi.refetch()
+    if (res?.type === 'success') {
+      me.value = res.data
+    }
   }
 
-  return { me, refetch }
+  // Me がないなら Me を取得する
+  const getMe = async () => {
+    if (me.value === undefined) {
+      await refetch()
+    }
+  }
+
+  const logout = async () => {
+    await apis.postLogout()
+    window.location.href = paths.oauthEntrypointPath
+    return
+  }
+
+  return { me, refetch, getMe, logout }
 })
