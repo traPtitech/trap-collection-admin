@@ -1,4 +1,4 @@
-import FileList from './FileList.vue'
+import FileList from './GameFileList.vue'
 
 type Props = InstanceType<typeof FileList>['$props']
 

@@ -21,7 +21,8 @@ export default defineConfig({
       '/api': {
         target: DEV_SERVER_PROXY_HOST,
         changeOrigin: true,
-        agent: keepAliveAgent
+        agent: keepAliveAgent,
+        rewrite: path => path.replace(/^\/api/, '')
       }
     }
   }

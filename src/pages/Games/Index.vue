@@ -5,13 +5,21 @@ import { NIcon, NSpace, NAvatar, NCheckbox, NPageHeader } from 'naive-ui'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
+import GameInfoList from '/@/components/List/GameInfoList.vue'
 import PageUrl from '/@/components/UI/PageUrl.vue'
+import { useGamesStore } from '/@/stores/games'
 import { paths } from '/@/utils/paths'
 
 const router = useRouter()
+const gamesStore = useGamesStore()
 
 const isAll = computed(() => {
   return router.currentRoute.value.query['all'] !== 'false'
+})
+
+const games = computed(() => {
+  const values = gamesStore.games?.values()
+  return values ? [...values] : undefined
 })
 </script>
 <template>
@@ -47,5 +55,6 @@ const isAll = computed(() => {
       "
       >管理していないゲームも表示する</NCheckbox
     >
+    <GameInfoList :games="games" />
   </NSpace>
 </template>

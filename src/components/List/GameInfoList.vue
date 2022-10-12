@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import InfoRound from '@vicons/material/InfoRound'
-import { NIcon, NButton, NDataTable } from 'naive-ui'
-import { TableColumns } from 'naive-ui/es/data-table/src/interface'
+import { NIcon, NButton, NDataTable, DataTableColumns } from 'naive-ui'
 import { h } from 'vue'
 
 import { GameInfo } from '/@/lib/apis'
@@ -10,7 +9,7 @@ const props = defineProps<{
   games?: GameInfo[]
 }>()
 
-const columns: TableColumns<GameInfo> = [
+const columns: DataTableColumns<GameInfo> = [
   {
     title: '',
     key: 'info',
