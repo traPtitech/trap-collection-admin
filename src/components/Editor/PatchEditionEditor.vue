@@ -2,20 +2,20 @@
 import { NInput, NSpace, NForm, FormInst, NFormItem } from 'naive-ui'
 import { Ref, ref } from 'vue'
 
-import { PatchGame } from '/@/lib/apis'
+import { PatchEdition } from '/@/lib/apis'
 
 const formRef = ref<FormInst | null>(null)
 
 const props = defineProps<{
-  defaultValue?: PatchGame
-  onSubmit: (value: PatchGame) => void
+  defaultValue?: PatchEdition
+  onSubmit: (value: PatchEdition) => void
   onCancel: () => void
 }>()
 
-const formValue: Ref<PatchGame> = ref(
+const formValue: Ref<PatchEdition> = ref(
   props.defaultValue ?? {
     name: '',
-    description: ''
+    questionnaire: ''
   }
 )
 
@@ -25,9 +25,8 @@ const rules = {
     message: '名前を入力してください',
     trigger: 'blur'
   },
-  description: {
-    required: true,
-    message: '説明を入力してください',
+  questionnaire: {
+    required: false,
     trigger: 'blur'
   }
 }
@@ -38,8 +37,8 @@ const rules = {
     <NFormItem label="名前" name="name">
       <NInput :value="formValue.name" />
     </NFormItem>
-    <NFormItem label="説明" name="description">
-      <NInput :value="formValue.description" />
+    <NFormItem label="anke-to の URL" name="questionnaire">
+      <NInput :value="formValue.questionnaire" />
     </NFormItem>
     <NSpace>
       <NButton type="primary" @click="props.onSubmit">作成</NButton>

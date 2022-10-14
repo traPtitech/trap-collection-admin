@@ -16,9 +16,7 @@ const props = defineProps<{
 const formValue: Ref<NewGame> = ref(
   props.defaultValue ?? {
     name: '',
-    description: '',
-    maintainers: [],
-    owners: []
+    description: ''
   }
 )
 
@@ -49,23 +47,23 @@ const rules = {
 <template>
   <NForm ref="formRef" :model="formValue" :rules="rules">
     <NFormItem label="名前" name="name">
-      <NInput v-model:value="formValue.name" />
+      <NInput :value="formValue.name" />
     </NFormItem>
     <NFormItem label="説明" name="description">
-      <NInput v-model:value="formValue.description" />
+      <NInput :value="formValue.description" />
     </NFormItem>
     <NFormItem label="管理者" name="maintainers">
       <NSelect
-        v-model:value="formValue.maintainers"
         multiple
         :options="userSelectOptions"
+        :value="formValue.maintainers"
       />
     </NFormItem>
     <NFormItem label="所有者" name="owners">
       <NSelect
-        v-model:value="formValue.owners"
         multiple
         :options="userSelectOptions"
+        :value="formValue.owners"
       />
     </NFormItem>
     <NSpace>
