@@ -24,7 +24,7 @@ const games = computed(() => {
 </script>
 <template>
   <NSpace class="py-10 px-12 gap-10" vertical>
-    <NPageHeader @back="() => {}">
+    <NPageHeader>
       <template #title>ゲーム一覧</template>
       <template #header>
         <PageUrl root="games" />
@@ -43,17 +43,17 @@ const games = computed(() => {
       </template>
     </NPageHeader>
     <NCheckbox
-      :checked="isAll"
+      :checked="!isAll"
       @update-checked="
         v => {
           router.push({
             query: {
-              all: v
+              all: v ? 'false' : 'true'
             }
           })
         }
       "
-      >管理していないゲームも表示する</NCheckbox
+      >管理しているゲームのみ表示する</NCheckbox
     >
     <GameInfoList :games="games" />
   </NSpace>
