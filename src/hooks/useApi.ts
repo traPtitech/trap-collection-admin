@@ -44,13 +44,13 @@ export const useApi = <P extends unknown[], T>(
       }
       // 500 番台ならエラーを表示する
       if (status !== undefined && status >= 500) {
-        const notification = useNotification()
-        notification.error({
-          content: 'Request faild',
-          meta: (e as AxiosError).message,
-          duration: 2500,
-          keepAliveOnHover: true
-        })
+        // const notification = useNotification()
+        // notification.error({
+        //   content: 'Request faild',
+        //   meta: (e as AxiosError).message,
+        //   duration: 2500,
+        //   keepAliveOnHover: true
+        // })
       }
       const newDataState: DataState<T> = {
         type: 'error',

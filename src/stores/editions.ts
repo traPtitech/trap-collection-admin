@@ -46,7 +46,7 @@ export const useEditionsStore = defineStore('Editions', () => {
   }
 
   return {
-    editions: getEditionsApi.data,
+    editions,
     refetch,
     getEditions,
     postEdition,

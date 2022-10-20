@@ -6,6 +6,7 @@ import { apis, GameInfo, NewGame, PatchGame } from '/@/lib/apis'
 
 export const useGamesStore = defineStore('games', () => {
   const games = ref<Map<string, GameInfo>>()
+  const allGames = ref<Map<string, GameInfo>>()
 
   const getGamesApi = useApi(apis.getGames)
   const postGameApi = useApi(apis.postGame)
@@ -14,9 +15,13 @@ export const useGamesStore = defineStore('games', () => {
 
   // Game を取得する
   const refetch = async () => {
-    const res = await getGamesApi.refetch()
+    const res = await getGamesApi.refetch(false)
     if (res?.type === 'success') {
       games.value = new Map(res.data.games.map(g => [g.id, g]))
+    }
+    const allRes = await getGamesApi.refetch(true)
+    if (allRes?.type === 'success') {
+      allGames.value = new Map(allRes.data.games.map(g => [g.id, g]))
     }
   }
 
@@ -47,6 +52,7 @@ export const useGamesStore = defineStore('games', () => {
 
   return {
     games,
+    allGames,
     refetch,
     getGames,
     postGame,
