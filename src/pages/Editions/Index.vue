@@ -2,19 +2,9 @@
 import ArrowBackRound from '@vicons/material/ArrowBackRound'
 import VideogameAssetRound from '@vicons/material/VideogameAssetRound'
 import { NIcon, NSpace, NAvatar, NPageHeader } from 'naive-ui'
-import { computed } from 'vue'
 
-import GameInfoList from '/@/components/List/GameInfoList.vue'
 import PageUrl from '/@/components/UI/PageUrl.vue'
-import { useEditionsStore } from '/@/stores/editions'
 import { paths } from '/@/utils/paths'
-
-const editionsStore = useEditionsStore()
-
-const editions = computed(() => {
-  const values = editionsStore.editions?.values()
-  return values ? [...values] : undefined
-})
 </script>
 <template>
   <NSpace class="py-10 px-12 gap-10" vertical>
@@ -36,6 +26,5 @@ const editions = computed(() => {
         </RouterLink>
       </template>
     </NPageHeader>
-    <GameInfoList :editions="editions" />
   </NSpace>
 </template>
