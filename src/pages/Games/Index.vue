@@ -18,7 +18,9 @@ const isAll = computed(() => {
 })
 
 const games = computed(() => {
-  const values = gamesStore.games?.values()
+  const values = isAll.value
+    ? gamesStore.allGames?.values()
+    : gamesStore.games?.values()
   return values ? [...values] : undefined
 })
 </script>
