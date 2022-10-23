@@ -26,7 +26,7 @@ const props = defineProps<{
       <PageUrl
         :first="props.game && { name: props.game.name, id: props.game.id }"
         root="games"
-        section="videos"
+        section="files"
       />
     </template>
     <template #extra>

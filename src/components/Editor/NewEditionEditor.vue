@@ -22,7 +22,8 @@ const props = defineProps<{
 
 const formValue: Ref<NewEdition> = ref(
   props.defaultValue ?? {
-    name: ''
+    name: '',
+    gameVersions: []
   }
 )
 

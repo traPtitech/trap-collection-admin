@@ -7,7 +7,7 @@ import NewGameFileEditor from '/@/components/Editor/NewGameFileEditor.vue'
 import GameFileList from '/@/components/List/GameFileList.vue'
 import GameFilePageHeader from '/@/components/PageHeader/GameFilePageHeader.vue'
 import { useApi } from '/@/hooks/useApi'
-import { apis, GameFileType } from '/@/lib/apis'
+import { apis } from '/@/lib/apis'
 import { useGamesStore } from '/@/stores/games'
 
 const router = useRouter()
@@ -25,11 +25,7 @@ const isUploadFileModalOpen = ref(false)
 const handleCancelFile = () => {
   isUploadFileModalOpen.value = false
 }
-const handleUploadFile = (
-  type: GameFileType,
-  entryPoint: string,
-  content: File
-) => {
+const handleUploadFile = (type: string, entryPoint: string, content: File) => {
   ;(async () => {
     await postGameFile.refetch(String(gameId.value), type, entryPoint, content)
     isUploadFileModalOpen.value = false
@@ -59,8 +55,7 @@ const handleUploadFile = (
       :onAddFile="() => (isUploadFileModalOpen = true)"
     />
     <GameFileList
-      :gameId="String(gameId)"
-      :videos="
+      :files="
         getGameFiles.data.value?.type === 'success'
           ? getGameFiles.data.value.data
           : undefined

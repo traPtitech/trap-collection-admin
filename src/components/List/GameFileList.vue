@@ -50,16 +50,6 @@ const columns: DataTableColumns<GameFile> = [
                 size: 'small'
               },
               { icon: () => h(DownloadRound), default: () => 'ダウンロード' }
-            ),
-            h(
-              NButton,
-              {
-                strong: true,
-                tertiary: true,
-                size: 'small',
-                type: 'error'
-              },
-              { icon: () => h(DeleteRound), default: () => '削除' }
             )
           ]
         }

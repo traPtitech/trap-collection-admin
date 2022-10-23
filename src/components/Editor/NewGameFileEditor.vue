@@ -12,31 +12,34 @@ import {
 import { reactive, ref } from 'vue'
 
 import UploadFileEditor from './UploadFileEditor.vue'
-import { GameFileType } from '/@/lib/apis'
 
 const formRef = ref<FormInst | null>(null)
 
 const props = defineProps<{
-  onSubmit?: (type: GameFileType, entryPoint: string, content: File) => void
+  onSubmit?: (
+    type: 'win32' | 'darwin' | 'jar',
+    entryPoint: string,
+    content: File
+  ) => void
   onCancel?: () => void
 }>()
 
-const typeValue = ref(GameFileType.Win32)
+const typeValue = ref<'win32' | 'darwin' | 'jar'>('win32')
 const entryPointValue = ref('')
 const contentValue = ref<File | null>(null)
 
 const typeOptions = [
   {
     label: 'Windows',
-    value: GameFileType.Win32
+    value: 'win32'
   },
   {
     label: 'macOS',
-    value: GameFileType.Darwin
+    value: 'darwin'
   },
   {
     label: 'Java',
-    value: GameFileType.Jar
+    value: 'jar'
   }
 ]
 
