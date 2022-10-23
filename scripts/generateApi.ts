@@ -8,8 +8,7 @@ import addApis from './addApis'
 const execPromise = promisify(exec)
 
 const SWAGGER_PATH =
-  // 'https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/openapi/v2.yaml'
-  './scripts/swagger.yaml'
+  'https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/openapi/v2.yaml'
 const GENERATED_DIR = 'src/lib/apis/generated'
 
 // eslint-disable-next-line no-undef
