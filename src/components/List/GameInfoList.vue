@@ -22,7 +22,7 @@ const columns: DataTableColumns<GameInfo> = [
         NButton,
         {
           tertiary: true,
-          onClick: () => router.push(paths.games.detail(raw.id))
+          onClick: () => router.push(paths.games.detail(raw.id)?.index)
         },
         {
           icon: () =>

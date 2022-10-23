@@ -1,18 +1,18 @@
-import GameTimeline from './GameTimeline.vue'
+import GameVersionTimeline from './GameVersionTimeline.vue'
 
-type Props = InstanceType<typeof GameTimeline>['$props']
+type Props = InstanceType<typeof GameVersionTimeline>['$props']
 
 export default {
-  title: 'GameTimeline',
-  component: GameTimeline
+  title: 'GameVersionTimeline',
+  component: GameVersionTimeline
 }
 
 const Template = (args: unknown) => ({
-  components: { GameTimeline },
+  components: { GameVersionTimeline },
   setup() {
     return { args }
   },
-  template: '<GameTimeline v-bind="args" />'
+  template: '<GameVersionTimeline v-bind="args" />'
 })
 
 export const Primary: { args: Props } = Template.bind({})

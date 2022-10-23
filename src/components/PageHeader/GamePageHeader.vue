@@ -27,18 +27,18 @@ const props = defineProps<{
 <template>
   <NPageHeader @back="() => {}">
     <template #title>{{ props.game?.name }}</template>
-    <template #subtitle>
-      {{ props.game?.id }}
-    </template>
-    <template #header>
-      <PageUrl :name="props.game?.name" root="games" />
-    </template>
     <template #back>
       <RouterLink class="flex" :to="paths.games.index()">
         <NIcon>
           <ArrowBackRound />
         </NIcon>
       </RouterLink>
+    </template>
+    <template #header>
+      <PageUrl
+        :first="props.game && { name: props.game.name, id: props.game.id }"
+        root="games"
+      />
     </template>
     <template #extra>
       <NButton @click="props.onEditGame">

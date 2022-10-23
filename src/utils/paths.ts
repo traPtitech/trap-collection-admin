@@ -15,11 +15,19 @@ export const paths = {
       }
       return `/games${query.toString() ? '?' + query.toString() : ''}`
     },
-    detail: (id: string) => `/games/${id}`
+    detail: (id: string) => ({
+      index: `/games/${id}`,
+      versions: `/games/${id}/versions`,
+      images: `/games/${id}/images`,
+      videos: `/games/${id}/videos`,
+      files: `/games/${id}/files`
+    })
   },
   editions: {
     index: () => `/editions`,
-    detail: (id: string) => `/editions/${id}`
+    detail: (id: string) => ({
+      index: `/editions/${id}`
+    })
   },
   logout: '/logout',
   callback: '/callback'

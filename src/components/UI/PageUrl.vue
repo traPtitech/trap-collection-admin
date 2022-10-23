@@ -6,7 +6,11 @@ import { paths } from '/@/utils/paths'
 
 const props = defineProps<{
   root: 'games' | 'editions'
-  name?: string
+  first?: {
+    name: string
+    id: string
+  }
+  section?: 'versions' | 'images'
 }>()
 
 const getRootText = (root: string) => {
@@ -15,6 +19,15 @@ const getRootText = (root: string) => {
       return 'ゲーム一覧'
     case 'editions':
       return 'エディション一覧'
+  }
+}
+
+const getSectionTest = (section: string) => {
+  switch (section) {
+    case 'versions':
+      return 'バージョン一覧'
+    case 'images':
+      return '画像一覧'
   }
 }
 </script>
@@ -28,8 +41,13 @@ const getRootText = (root: string) => {
         {{ getRootText(props.root) }}
       </RouterLink>
     </NBreadcrumbItem>
-    <NBreadcrumbItem v-if="props.name">
-      {{ props.name }}
+    <NBreadcrumbItem v-if="props.first">
+      <RouterLink :to="paths[props.root].detail(props.first.id).index">
+        {{ props.first.name }}
+      </RouterLink>
+    </NBreadcrumbItem>
+    <NBreadcrumbItem v-if="props.section">
+      {{ getSectionTest(props.section) }}
     </NBreadcrumbItem>
   </NBreadcrumb>
 </template>

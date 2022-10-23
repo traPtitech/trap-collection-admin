@@ -26,7 +26,7 @@ const games = computed(() => {
 </script>
 <template>
   <NSpace class="py-10 px-12 gap-10" vertical>
-    <NPageHeader>
+    <NPageHeader @back="() => {}">
       <template #title>ゲーム一覧</template>
       <template #header>
         <PageUrl root="games" />

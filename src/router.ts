@@ -17,15 +17,23 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('/@/pages/Games/Index.vue')
   },
   {
-    path: paths.games.detail(':id'),
-    component: () => import('/@/pages/Games/Detail.vue')
+    path: paths.games.detail(':id').index,
+    component: () => import('/@/pages/Games/Detail/Index.vue')
+  },
+  {
+    path: paths.games.detail(':id').versions,
+    component: () => import('./pages/Games/Detail/Version.vue')
+  },
+  {
+    path: paths.games.detail(':id').images,
+    component: () => import('./pages/Games/Detail/Image.vue')
   },
   {
     path: paths.editions.index(),
     component: () => import('/@/pages/Editions/Index.vue')
   },
   {
-    path: paths.editions.detail(':id'),
+    path: paths.editions.detail(':id').index,
     component: () => import('/@/pages/Editions/Detail.vue')
   },
   { path: '/:path(.*)', component: () => import('./pages/NotFound.vue') }

@@ -4,7 +4,7 @@ import { NTimeline, NTimelineItem } from 'naive-ui'
 import { GameVersion } from '/@/lib/apis'
 
 const props = defineProps<{
-  versions: GameVersion[]
+  versions?: GameVersion[]
 }>()
 </script>
 <template>
