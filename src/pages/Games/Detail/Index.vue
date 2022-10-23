@@ -40,7 +40,6 @@ const handleCancelGame = () => {
 </script>
 <template>
   <NModal
-    content="Are you sure?"
     preset="card"
     :show="isShowPatchGameRoleModal"
     :style="{
@@ -56,7 +55,6 @@ const handleCancelGame = () => {
     />
   </NModal>
   <NModal
-    content="Are you sure?"
     preset="card"
     :show="isShowPatchGameModal"
     :style="{

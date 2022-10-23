@@ -34,10 +34,10 @@ const rules = {
 
 <template>
   <NForm ref="formRef" :model="formValue" :rules="rules">
-    <NFormItem label="名前" name="name">
+    <NFormItem label="名前" path="name">
       <NInput :value="formValue.name" />
     </NFormItem>
-    <NFormItem label="anke-to の URL" name="questionnaire">
+    <NFormItem label="anke-to の URL" path="questionnaire">
       <NInput :value="formValue.questionnaire" />
     </NFormItem>
     <NSpace>

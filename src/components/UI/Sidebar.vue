@@ -2,6 +2,7 @@
 import ImageRound from '@vicons/material/ImageRound'
 import InboxRound from '@vicons/material/InboxRound'
 import TimelineRound from '@vicons/material/TimelineRound'
+import VideoFileRound from '@vicons/material/VideoFileRound'
 import VideogameAssetRound from '@vicons/material/VideogameAssetRound'
 import { MenuOption, NMenu } from 'naive-ui'
 import { h } from 'vue'
@@ -55,6 +56,11 @@ const menuOptions = (path: string): MenuOption[] => {
           ImageRound,
           '画像一覧',
           paths.games.detail(getId(path) ?? '').images
+        ),
+        makeMenuOption(
+          VideoFileRound,
+          '動画一覧',
+          paths.games.detail(getId(path) ?? '').videos
         )
       ]
     case 'editions':

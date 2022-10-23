@@ -5,8 +5,10 @@ import { DataTableColumns, NButton, NDataTable, NSpace } from 'naive-ui'
 import { h } from 'vue'
 
 import { GameVideo } from '/@/lib/apis'
+import { apiPaths } from '/@/utils/apiPaths'
 
 const props = defineProps<{
+  gameId?: string
   videos?: GameVideo[]
 }>()
 
@@ -30,7 +32,7 @@ const columns: DataTableColumns<GameVideo> = [
   {
     title: '',
     key: 'action',
-    width: 100,
+    width: 80,
     render: row =>
       h(
         NSpace,
@@ -38,23 +40,29 @@ const columns: DataTableColumns<GameVideo> = [
         {
           default: () => [
             h(
-              NButton,
+              'a',
               {
-                strong: true,
-                tertiary: true,
-                size: 'small'
+                href: apiPaths.gameVideo(props.gameId ?? '', row.id)
               },
-              { icon: () => h(DownloadRound), default: () => 'ダウンロード' }
-            ),
-            h(
-              NButton,
               {
-                strong: true,
-                tertiary: true,
-                size: 'small',
-                type: 'error'
-              },
-              { icon: () => h(DeleteRound), default: () => '削除' }
+                default: () => [
+                  h(
+                    NButton,
+                    {
+                      strong: true,
+                      tertiary: true,
+                      size: 'small',
+                      onClick: () => {
+                        return
+                      }
+                    },
+                    {
+                      icon: () => h(DownloadRound),
+                      default: () => 'ダウンロード'
+                    }
+                  )
+                ]
+              }
             )
           ]
         }

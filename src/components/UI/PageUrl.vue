@@ -10,7 +10,7 @@ const props = defineProps<{
     name: string
     id: string
   }
-  section?: 'versions' | 'images'
+  section?: 'versions' | 'images' | 'videos'
 }>()
 
 const getRootText = (root: string) => {
@@ -28,6 +28,8 @@ const getSectionTest = (section: string) => {
       return 'バージョン一覧'
     case 'images':
       return '画像一覧'
+    case 'videos':
+      return '動画一覧'
   }
 }
 </script>

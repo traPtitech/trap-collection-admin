@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import ArrowBackRound from '@vicons/material/ArrowBackRound'
 import EditRound from '@vicons/material/EditRound'
+import SecurityRound from '@vicons/material/SecurityRound'
 import {
   NIcon,
   NThing,
@@ -58,7 +59,7 @@ const props = defineProps<{
         <NButton @click="props.onEditGameRole">
           <template #icon>
             <NIcon>
-              <EditRound />
+              <SecurityRound />
             </NIcon>
           </template>
           権限の変更

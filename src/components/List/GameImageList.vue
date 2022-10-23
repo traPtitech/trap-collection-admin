@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NImage, NImageGroup } from 'naive-ui'
+import { NImage, NImageGroup, NSpace } from 'naive-ui'
 
 import { GameImage } from '/@/lib/apis'
 import { apiPaths } from '/@/utils/apiPaths'
@@ -11,11 +11,13 @@ const props = defineProps<{
 </script>
 <template>
   <NImageGroup>
-    <NImage
-      v-for="image in props.images"
-      :key="image.id"
-      :src="apiPaths.gameImage(gameId ?? '', image.id)"
-      :width="200"
-    />
+    <NSpace>
+      <NImage
+        v-for="image in props.images"
+        :key="image.id"
+        :src="apiPaths.gameImage(gameId ?? '', image.id)"
+        :width="200"
+      />
+    </NSpace>
   </NImageGroup>
 </template>

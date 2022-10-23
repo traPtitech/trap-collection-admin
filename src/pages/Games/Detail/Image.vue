@@ -27,7 +27,7 @@ const handleCancelImage = () => {
 }
 const handleUploadImage = (data: File) => {
   ;(async () => {
-    postGameImage.refetch(String(gameId.value), data)
+    await postGameImage.refetch(String(gameId.value), data)
     isUploadImageModalOpen.value = false
     getGameImages.refetch(String(gameId.value))
   })()
@@ -35,13 +35,12 @@ const handleUploadImage = (data: File) => {
 </script>
 <template>
   <NModal
-    content="Are you sure?"
     preset="card"
     :show="isUploadImageModalOpen"
     :style="{
       width: '600px'
     }"
-    title="権限の変更"
+    title="画像のアップロード"
     @close="handleCancelImage"
     @maskClick="handleCancelImage"
   >

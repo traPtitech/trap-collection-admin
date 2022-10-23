@@ -43,7 +43,7 @@ const handleSubmit = () => {
 
 <template>
   <NForm ref="formRef" :model="formValue" :rules="rules">
-    <NFormItem label="名前" name="name">
+    <NFormItem label="名前" path="name">
       <NInput
         :value="formValue.name"
         @update:value="
@@ -53,7 +53,7 @@ const handleSubmit = () => {
         "
       />
     </NFormItem>
-    <NFormItem label="説明" name="description">
+    <NFormItem label="説明" path="description">
       <NInput
         multiline
         :value="formValue.description"

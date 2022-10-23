@@ -102,40 +102,40 @@ const rules = {
 
 <template>
   <NForm ref="formRef" :model="formValue" :rules="rules">
-    <NFormItem label="名前" name="name">
+    <NFormItem label="名前" path="name">
       <NInput :value="formValue.name" />
     </NFormItem>
-    <NFormItem label="説明" name="description">
+    <NFormItem label="説明" path="description">
       <NInput :value="formValue.description" />
     </NFormItem>
-    <NFormItem label="URL" name="url">
+    <NFormItem label="URL" path="url">
       <NInput :value="formValue.url" />
     </NFormItem>
-    <NFormItem label="Windows 用ファイル" name="win32">
+    <NFormItem label="Windows 用ファイル" path="win32">
       <NSelect
         multiple
         :options="gameFilesSelectOptions"
         :value="formValue.files?.win32"
       />
     </NFormItem>
-    <NFormItem label="Mac 用ファイル" name="darwin">
+    <NFormItem label="Mac 用ファイル" path="darwin">
       <NSelect
         multiple
         :options="gameFilesSelectOptions"
         :value="formValue.files?.darwin"
       />
     </NFormItem>
-    <NFormItem label="Jar ファイル" name="jar">
+    <NFormItem label="Jar ファイル" path="jar">
       <NSelect
         multiple
         :options="gameFilesSelectOptions"
         :value="formValue.files?.jar"
       />
     </NFormItem>
-    <NFormItem label="画像" name="imageId">
+    <NFormItem label="画像" path="imageId">
       <NSelect :options="gameImagesSelectOptions" :value="formValue.imageID" />
     </NFormItem>
-    <NFormItem label="動画" name="videoId">
+    <NFormItem label="動画" path="videoId">
       <NSelect :options="gameVideosSelectOptions" :value="formValue.videoID" />
     </NFormItem>
     <NSpace>
