@@ -8,8 +8,8 @@ import { apis, NewGameVersion } from '/@/lib/apis'
 const props = defineProps<{
   gameId: string
   defaultValue?: NewGameVersion
-  onSubmit: (value: NewGameVersion) => void
-  onCancel: () => void
+  onSubmit?: (value: NewGameVersion) => void
+  onCancel?: () => void
 }>()
 
 const formRef = ref<FormInst | null>(null)

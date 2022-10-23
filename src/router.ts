@@ -4,6 +4,7 @@ import { apis } from './lib/apis'
 import { useEditionsStore } from './stores/editions'
 import { useGamesStore } from './stores/games'
 import { useMeStore } from './stores/me'
+import { useUsersStore } from './stores/users'
 import { paths } from './utils/paths'
 
 export const routes: RouteRecordRaw[] = [
@@ -58,6 +59,9 @@ router.beforeEach(async to => {
 
   const editionStore = useEditionsStore()
   await editionStore.getEditions()
+
+  const usersStore = useUsersStore()
+  await usersStore.getUsers()
 })
 
 export default router

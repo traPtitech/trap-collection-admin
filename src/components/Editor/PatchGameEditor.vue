@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { NInput, NSpace, NForm, FormInst, NFormItem } from 'naive-ui'
-import { Ref, ref } from 'vue'
+import { NInput, NSpace, NForm, NFormItem, FormInst, NButton } from 'naive-ui'
+import { reactive, ref } from 'vue'
 
 import { PatchGame } from '/@/lib/apis'
 
@@ -8,11 +8,11 @@ const formRef = ref<FormInst | null>(null)
 
 const props = defineProps<{
   defaultValue?: PatchGame
-  onSubmit: (value: PatchGame) => void
-  onCancel: () => void
+  onSubmit?: (value: PatchGame) => void
+  onCancel?: () => void
 }>()
 
-const formValue: Ref<PatchGame> = ref(
+const formValue: PatchGame = reactive(
   props.defaultValue ?? {
     name: '',
     description: ''
@@ -31,18 +31,41 @@ const rules = {
     trigger: 'blur'
   }
 }
+
+const handleSubmit = () => {
+  formRef.value?.validate(errors => {
+    if (!errors) {
+      props.onSubmit?.(formValue)
+    }
+  })
+}
 </script>
 
 <template>
   <NForm ref="formRef" :model="formValue" :rules="rules">
     <NFormItem label="名前" name="name">
-      <NInput :value="formValue.name" />
+      <NInput
+        :value="formValue.name"
+        @update:value="
+          val => {
+            formValue.name = val
+          }
+        "
+      />
     </NFormItem>
     <NFormItem label="説明" name="description">
-      <NInput :value="formValue.description" />
+      <NInput
+        multiline
+        :value="formValue.description"
+        @update:value="
+          val => {
+            formValue.description = val
+          }
+        "
+      />
     </NFormItem>
     <NSpace>
-      <NButton type="primary" @click="props.onSubmit">作成</NButton>
+      <NButton type="primary" @click="handleSubmit">変更</NButton>
       <NButton @click="props.onCancel">キャンセル</NButton>
     </NSpace>
   </NForm>

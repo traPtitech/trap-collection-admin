@@ -8,8 +8,8 @@ const formRef = ref<FormInst | null>(null)
 
 const props = defineProps<{
   defaultValue?: PatchEdition
-  onSubmit: (value: PatchEdition) => void
-  onCancel: () => void
+  onSubmit?: (value: PatchEdition) => void
+  onCancel?: () => void
 }>()
 
 const formValue: Ref<PatchEdition> = ref(

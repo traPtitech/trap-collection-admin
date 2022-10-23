@@ -2,22 +2,27 @@
 import InfoRound from '@vicons/material/InfoRound'
 import { NIcon, NButton, NDataTable, DataTableColumns } from 'naive-ui'
 import { h } from 'vue'
+import { useRouter } from 'vue-router'
 
 import { GameInfo } from '/@/lib/apis'
+import { paths } from '/@/utils/paths'
 
 const props = defineProps<{
   games?: GameInfo[]
 }>()
 
+const router = useRouter()
+
 const columns: DataTableColumns<GameInfo> = [
   {
     title: '',
     key: 'info',
-    render: () =>
+    render: raw =>
       h(
         NButton,
         {
-          tertiary: true
+          tertiary: true,
+          onClick: () => router.push(paths.games.detail(raw.id))
         },
         {
           icon: () =>
@@ -58,5 +63,5 @@ const columns: DataTableColumns<GameInfo> = [
 </script>
 
 <template>
-  <NDataTable :columns="columns" :data="props.games" />
+  <NDataTable :columns="columns" :data="props.games" scroll-x="auto" />
 </template>

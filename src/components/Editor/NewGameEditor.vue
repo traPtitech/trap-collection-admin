@@ -9,8 +9,8 @@ const formRef = ref<FormInst | null>(null)
 
 const props = defineProps<{
   defaultValue?: NewGame
-  onSubmit: (value: NewGame) => void
-  onCancel: () => void
+  onSubmit?: (value: NewGame) => void
+  onCancel?: () => void
 }>()
 
 const formValue: Ref<NewGame> = ref(

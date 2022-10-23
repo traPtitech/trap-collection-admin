@@ -24,7 +24,7 @@ const getRootText = (root: string) => {
       <RouterLink :to="paths.index">ホーム</RouterLink></NBreadcrumbItem
     >
     <NBreadcrumbItem>
-      <RouterLink :to="paths[props.root].index">
+      <RouterLink :to="paths[props.root].index()">
         {{ getRootText(props.root) }}
       </RouterLink>
     </NBreadcrumbItem>

@@ -19,17 +19,19 @@ import { getIconSrc } from '/@/utils/getIconSrc'
 import { paths } from '/@/utils/paths'
 
 const props = defineProps<{
-  game: Game
+  game?: Game
+  onEditGame?: () => void
+  onEditGameRole?: () => void
 }>()
 </script>
 <template>
   <NPageHeader @back="() => {}">
-    <template #title>{{ props.game.name }}</template>
+    <template #title>{{ props.game?.name }}</template>
     <template #subtitle>
-      {{ props.game.id }}
+      {{ props.game?.id }}
     </template>
     <template #header>
-      <PageUrl :name="props.game.name" root="games" />
+      <PageUrl :name="props.game?.name" root="games" />
     </template>
     <template #back>
       <RouterLink class="flex" :to="paths.games.index()">
@@ -39,68 +41,66 @@ const props = defineProps<{
       </RouterLink>
     </template>
     <template #extra>
-      <NButton>
+      <NButton @click="props.onEditGame">
         <template #icon>
           <NIcon>
             <EditRound />
           </NIcon>
         </template>
-        編集
+        ゲーム情報の編集
       </NButton>
     </template>
-    {{ props.game.description }}
+    {{ props.game?.description }}
     <NDivider />
-    <NThing>
-      <template #header>所有者</template>
+    <NThing content-style="padding-left: 1rem">
+      <template #header>権限</template>
       <template #header-extra>
-        <NButton>
+        <NButton @click="props.onEditGameRole">
           <template #icon>
             <NIcon>
               <EditRound />
             </NIcon>
           </template>
-          編集
+          権限の変更
         </NButton>
       </template>
       <NList :show-divider="false">
-        <NListItem v-for="owner in props.game.owners" :key="owner">
-          <NSpace align="center">
-            <NAvatar
-              class="block mx-[1rem]"
-              size="medium"
-              :src="getIconSrc(owner)"
-            />
-            {{ owner }}
-          </NSpace>
+        <NListItem>
+          <NThing>
+            <template #header>所有者</template>
+            <NList :show-divider="false">
+              <NListItem v-for="owner in props.game?.owners" :key="owner">
+                <NSpace align="center">
+                  <NAvatar
+                    class="block mx-[1rem]"
+                    size="medium"
+                    :src="getIconSrc(owner)"
+                  />
+                  {{ owner }}
+                </NSpace>
+              </NListItem>
+            </NList>
+          </NThing>
         </NListItem>
-      </NList>
-    </NThing>
-    <NDivider />
-    <NThing>
-      <template #header>管理者</template>
-      <template #header-extra>
-        <NButton>
-          <template #icon>
-            <NIcon>
-              <EditRound />
-            </NIcon>
-          </template>
-          編集
-        </NButton>
-      </template>
-      <NList :show-divider="false">
-        <NListItem
-          v-for="maintainer in props.game.maintainers"
-          :key="maintainer"
-        >
-          <NSpace align="center">
-            <NAvatar
-              class="block mx-[1rem]"
-              size="medium"
-              :src="getIconSrc(maintainer)"
-            />
-            {{ maintainer }}
-          </NSpace>
+        <NListItem>
+          <NThing>
+            <template #header>管理者</template>
+            <NList :show-divider="false">
+              <NListItem
+                v-for="maintainer in props.game?.maintainers"
+                :key="maintainer"
+              >
+                <NSpace align="center">
+                  <NAvatar
+                    class="block mx-[1rem]"
+                    size="medium"
+                    :src="getIconSrc(maintainer)"
+                  />
+                  {{ maintainer }}
+                </NSpace>
+              </NListItem>
+            </NList>
+          </NThing>
         </NListItem>
       </NList>
     </NThing>

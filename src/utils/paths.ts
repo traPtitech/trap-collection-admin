@@ -1,6 +1,6 @@
 export const paths = {
   index: '/',
-  oauthEntrypointPath: '/api/oauth2/generate/code',
+  oauthEntrypointPath: '/api/oauth2/code',
   games: {
     index: (all = true, limit?: number, offset?: number) => {
       const query = new URLSearchParams()

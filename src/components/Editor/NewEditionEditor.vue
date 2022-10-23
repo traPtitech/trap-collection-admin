@@ -16,8 +16,8 @@ const formRef = ref<FormInst | null>(null)
 
 const props = defineProps<{
   defaultValue?: NewEdition
-  onSubmit: (value: NewEdition) => void
-  onCancel: () => void
+  onSubmit?: (value: NewEdition) => void
+  onCancel?: () => void
 }>()
 
 const formValue: Ref<NewEdition> = ref(

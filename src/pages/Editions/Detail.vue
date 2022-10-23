@@ -1,2 +1,4 @@
 <script lang="ts" setup></script>
-<template>content</template>
+<template>
+  <div></div>
+</template>
