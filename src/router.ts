@@ -33,6 +33,10 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('./pages/Games/Detail/Video.vue')
   },
   {
+    path: paths.games.detail(':id').files,
+    component: () => import('./pages/Games/Detail/File.vue')
+  },
+  {
     path: paths.editions.index(),
     component: () => import('/@/pages/Editions/Index.vue')
   },

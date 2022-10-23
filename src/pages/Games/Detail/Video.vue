@@ -3,7 +3,7 @@ import { NSpace, NModal } from 'naive-ui'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import UploadImageEditor from '/@/components/Editor/UploadImageEditor.vue'
+import UploadImageEditor from '../../../components/Editor/UploadFileEditor.vue'
 import GameVideoList from '/@/components/List/GameVideoList.vue'
 import GameVideoPageHeader from '/@/components/PageHeader/GameVideoPageHeader.vue'
 import { useApi } from '/@/hooks/useApi'
@@ -25,7 +25,8 @@ const isUploadVideoModalOpen = ref(false)
 const handleCancelVideo = () => {
   isUploadVideoModalOpen.value = false
 }
-const handleUploadVideo = (data: File) => {
+const handleUploadVideo = (data: File | null) => {
+  if (data === null) return
   ;(async () => {
     await postGameVideo.refetch(String(gameId.value), data)
     isUploadVideoModalOpen.value = false

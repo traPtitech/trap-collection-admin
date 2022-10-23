@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import FolderRound from '@vicons/material/FolderRound'
 import ImageRound from '@vicons/material/ImageRound'
 import InboxRound from '@vicons/material/InboxRound'
 import TimelineRound from '@vicons/material/TimelineRound'
@@ -61,6 +62,11 @@ const menuOptions = (path: string): MenuOption[] => {
           VideoFileRound,
           '動画一覧',
           paths.games.detail(getId(path) ?? '').videos
+        ),
+        makeMenuOption(
+          FolderRound,
+          'ファイル一覧',
+          paths.games.detail(getId(path) ?? '').files
         )
       ]
     case 'editions':

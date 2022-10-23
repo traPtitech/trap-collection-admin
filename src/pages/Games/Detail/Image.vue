@@ -3,7 +3,7 @@ import { NSpace, NModal } from 'naive-ui'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import UploadImageEditor from '/@/components/Editor/UploadImageEditor.vue'
+import UploadImageEditor from '../../../components/Editor/UploadFileEditor.vue'
 import GameImageList from '/@/components/List/GameImageList.vue'
 import GameImagePageHeader from '/@/components/PageHeader/GameImagePageHeader.vue'
 import { useApi } from '/@/hooks/useApi'
@@ -25,7 +25,8 @@ const isUploadImageModalOpen = ref(false)
 const handleCancelImage = () => {
   isUploadImageModalOpen.value = false
 }
-const handleUploadImage = (data: File) => {
+const handleUploadImage = (data: File | null) => {
+  if (data === null) return
   ;(async () => {
     await postGameImage.refetch(String(gameId.value), data)
     isUploadImageModalOpen.value = false
