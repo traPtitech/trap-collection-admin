@@ -1,6 +1,15 @@
 <script setup lang="ts">
-import { NInput, NSpace, NForm, FormInst, NFormItem, NSelect } from 'naive-ui'
-import { computed, Ref, ref } from 'vue'
+import {
+  NInput,
+  NSpace,
+  NForm,
+  FormInst,
+  NFormItem,
+  NSelect,
+  NButton,
+  FormItemRule
+} from 'naive-ui'
+import { computed, reactive, ref, watchEffect } from 'vue'
 
 import { useApi } from '/@/hooks/useApi'
 import { apis, NewGameVersion } from '/@/lib/apis'
@@ -51,10 +60,11 @@ const gameVideosSelectOptions = computed(() => {
   return []
 })
 
-const formValue: Ref<NewGameVersion> = ref(
+const formValue: NewGameVersion = reactive(
   props.defaultValue ?? {
     name: '',
     description: '',
+    files: {},
     imageID: '',
     videoID: ''
   }
@@ -75,71 +85,113 @@ const rules = {
     required: false,
     trigger: 'blur'
   },
-  win32: {
-    required: false,
-    trigger: 'blur'
+  files: {
+    win32: {
+      required: false,
+      trigger: 'blur'
+    },
+    darwin: {
+      required: false,
+      trigger: 'blur'
+    },
+    jar: {
+      required: false,
+      trigger: 'blur'
+    }
   },
-  darwin: {
-    required: false,
-    trigger: 'blur'
-  },
-  jar: {
-    required: false,
-    trigger: 'blur'
-  },
-  imageId: {
+  imageID: {
     required: true,
     message: '画像を選択してください',
     trigger: 'blur'
   },
-  videoId: {
+  videoID: {
     required: true,
     message: '動画を選択してください',
     trigger: 'blur'
   }
+}
+
+const handleSubmit = () => {
+  formRef.value?.validate(errors => {
+    if (!errors) {
+      props.onSubmit?.(formValue)
+    }
+  })
 }
 </script>
 
 <template>
   <NForm ref="formRef" :model="formValue" :rules="rules">
     <NFormItem label="名前" path="name">
-      <NInput :value="formValue.name" />
+      <NInput
+        :value="formValue.name"
+        @update:value="val => (formValue.name = val)"
+      />
     </NFormItem>
     <NFormItem label="説明" path="description">
-      <NInput :value="formValue.description" />
+      <NInput
+        :value="formValue.description"
+        @update:value="val => (formValue.description = val)"
+      />
     </NFormItem>
     <NFormItem label="URL" path="url">
-      <NInput :value="formValue.url" />
+      <NInput
+        :value="formValue.url"
+        @update:value="val => (formValue.url = val)"
+      />
     </NFormItem>
-    <NFormItem label="Windows 用ファイル" path="win32">
+    <NFormItem label="Windows 用ファイル" path="files.win32">
       <NSelect
-        multiple
+        clearable
         :options="gameFilesSelectOptions"
         :value="formValue.files?.win32"
+        @update:value="
+          val => {
+            formValue.files && (formValue.files.win32 = val)
+          }
+        "
       />
     </NFormItem>
-    <NFormItem label="Mac 用ファイル" path="darwin">
+    <NFormItem label="Mac 用ファイル" path="files.darwin">
       <NSelect
-        multiple
+        clearable
         :options="gameFilesSelectOptions"
         :value="formValue.files?.darwin"
+        @update:value="
+          val => {
+            formValue.files && (formValue.files.darwin = val)
+          }
+        "
       />
     </NFormItem>
-    <NFormItem label="Jar ファイル" path="jar">
+    <NFormItem label="Jar ファイル" path="files.jar">
       <NSelect
-        multiple
+        clearable
         :options="gameFilesSelectOptions"
         :value="formValue.files?.jar"
+        @update:value="
+          val => {
+            formValue.files && (formValue.files.jar = val)
+          }
+        "
       />
     </NFormItem>
-    <NFormItem label="画像" path="imageId">
-      <NSelect :options="gameImagesSelectOptions" :value="formValue.imageID" />
+    <NFormItem label="画像" path="imageID">
+      <NSelect
+        :options="gameImagesSelectOptions"
+        :value="formValue.imageID"
+        @update:value="val => (formValue.imageID = val)"
+      />
     </NFormItem>
-    <NFormItem label="動画" path="videoId">
-      <NSelect :options="gameVideosSelectOptions" :value="formValue.videoID" />
+    <NFormItem label="動画" path="videoID">
+      <NSelect
+        :options="gameVideosSelectOptions"
+        :value="formValue.videoID"
+        @update:value="val => (formValue.videoID = val)"
+      />
     </NFormItem>
     <NSpace>
-      <NButton type="primary" @click="props.onSubmit">作成</NButton>
+      <NButton type="primary" @click="handleSubmit">作成</NButton>
       <NButton @click="props.onCancel">キャンセル</NButton>
     </NSpace>
   </NForm>
