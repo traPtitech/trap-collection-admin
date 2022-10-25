@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import AddRound from '@vicons/material/AddRound'
 import ArrowBackRound from '@vicons/material/ArrowBackRound'
-import EditRound from '@vicons/material/EditRound'
-import { NIcon, NThing, NPageHeader, NButton } from 'naive-ui'
+import { NIcon, NPageHeader, NButton } from 'naive-ui'
 
 import PageUrl from '/@/components/UI/PageUrl.vue'
 import { Edition } from '/@/lib/apis'
@@ -9,14 +9,17 @@ import { paths } from '/@/utils/paths'
 
 const props = defineProps<{
   edition?: Edition
-  onEditEdition?: () => void
+  onAddProductKey?: () => void
 }>()
 </script>
 <template>
   <NPageHeader @back="() => {}">
-    <template #title>{{ props.edition?.name }}</template>
+    <template #title>プロダクトキー一覧</template>
     <template #back>
-      <RouterLink class="flex" :to="paths.editions.index()">
+      <RouterLink
+        class="flex"
+        :to="paths.editions.detail(edition?.id ?? '').index"
+      >
         <NIcon>
           <ArrowBackRound />
         </NIcon>
@@ -28,21 +31,18 @@ const props = defineProps<{
           props.edition && { name: props.edition.name, id: props.edition.id }
         "
         root="editions"
+        section="productKey"
       />
     </template>
     <template #extra>
-      <NButton @click="props.onEditEdition">
+      <NButton @click="props.onAddProductKey">
         <template #icon>
           <NIcon>
-            <EditRound />
+            <AddRound />
           </NIcon>
         </template>
-        エディション情報の編集
+        プロダクトキーの追加
       </NButton>
     </template>
-    <NThing content-style="padding-left: 1rem">
-      <template #header>アンケート URL</template>
-      {{ props.edition?.questionnaire }}
-    </NThing>
   </NPageHeader>
 </template>

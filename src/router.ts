@@ -44,6 +44,10 @@ export const routes: RouteRecordRaw[] = [
     path: paths.editions.detail(':id').index,
     component: () => import('/@/pages/Editions/Detail/Index.vue')
   },
+  {
+    path: paths.editions.detail(':id').productKeys,
+    component: () => import('/@/pages/Editions/Detail/ProductKey.vue')
+  },
   { path: '/:path(.*)', component: () => import('./pages/NotFound.vue') }
 ]
 
