@@ -1,5 +1,5 @@
 import { TreeSelectOption } from 'naive-ui'
-import { computed, ComputedRef } from 'vue'
+import { computed, ComputedRef, reactive } from 'vue'
 
 import { apis } from '../lib/apis'
 import { useGamesStore } from '../stores/games'
@@ -13,12 +13,15 @@ export const useGameVersionTreeSelectProps = (): {
   const options = computed(() => {
     const entries = gamesStore.games?.entries()
     if (entries === undefined) return []
-    return Array.from(entries).map(([, game]) => ({
-      label: game.name,
-      key: game.id,
-      depth: 1,
-      isLeaf: false
-    }))
+    return Array.from(entries).map(([, game]) =>
+      reactive({
+        disabled: true,
+        label: game.name,
+        key: game.id,
+        depth: 1,
+        isLeaf: false
+      })
+    )
   })
   const handleLoad = async (option: TreeSelectOption): Promise<void> => {
     const getGameVersion = useApi(apis.getGameVersion)

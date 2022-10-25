@@ -1,12 +1,13 @@
 <script lang="ts" setup>
-import DeleteRound from '@vicons/material/DeleteRound'
 import DownloadRound from '@vicons/material/DownloadRound'
 import { DataTableColumns, NButton, NDataTable, NSpace } from 'naive-ui'
 import { h } from 'vue'
 
 import { GameFile } from '/@/lib/apis'
+import { apiPaths } from '/@/utils/apiPaths'
 
 const props = defineProps<{
+  gameId?: string
   files?: GameFile[]
 }>()
 
@@ -43,13 +44,26 @@ const columns: DataTableColumns<GameFile> = [
         {
           default: () => [
             h(
-              NButton,
+              'a',
               {
-                strong: true,
-                tertiary: true,
-                size: 'small'
+                href: apiPaths.gameFile(props.gameId ?? '', row.id)
               },
-              { icon: () => h(DownloadRound), default: () => 'ダウンロード' }
+              {
+                default: () => [
+                  h(
+                    NButton,
+                    {
+                      strong: true,
+                      tertiary: true,
+                      size: 'small'
+                    },
+                    {
+                      icon: () => h(DownloadRound),
+                      default: () => 'ダウンロード'
+                    }
+                  )
+                ]
+              }
             )
           ]
         }

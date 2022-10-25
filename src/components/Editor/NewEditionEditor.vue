@@ -5,9 +5,10 @@ import {
   NForm,
   FormInst,
   NFormItem,
+  NButton,
   NTreeSelect
 } from 'naive-ui'
-import { Ref, ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 import { useGameVersionTreeSelectProps } from '/@/hooks/useGameVersionTreeSelectProps'
 import { NewEdition } from '/@/lib/apis'
@@ -20,7 +21,7 @@ const props = defineProps<{
   onCancel?: () => void
 }>()
 
-const formValue: Ref<NewEdition> = ref(
+const formValue: NewEdition = reactive(
   props.defaultValue ?? {
     name: '',
     gameVersions: []
@@ -41,24 +42,46 @@ const rules = {
   },
   gameVersions: {
     required: false,
+    type: 'array' as const,
     trigger: 'blur'
   }
+}
+
+const handleSubmit = () => {
+  formRef.value?.validate(errors => {
+    if (!errors) {
+      props.onSubmit?.(formValue)
+    }
+  })
 }
 </script>
 
 <template>
   <NForm ref="formRef" :model="formValue" :rules="rules">
     <NFormItem label="名前" path="name">
-      <NInput :value="formValue.name" />
+      <NInput
+        :value="formValue.name"
+        @update:value="val => (formValue.name = val)"
+      />
     </NFormItem>
     <NFormItem label="anke-to の URL" path="questionnaire">
-      <NInput :value="formValue.questionnaire" />
+      <NInput
+        :value="formValue.questionnaire"
+        @update:value="val => (formValue.questionnaire = val)"
+      />
     </NFormItem>
     <NFormItem label="追加するゲーム" path="gameVersions">
-      <NTreeSelect :on-load="handleLoad" :options="options" />
+      <NTreeSelect
+        multiple
+        :on-load="handleLoad"
+        :options="options"
+        :show-path="true"
+        :value="formValue.gameVersions"
+        @update:value="val => (formValue.gameVersions = val)"
+      />
     </NFormItem>
     <NSpace>
-      <NButton type="primary" @click="props.onSubmit">作成</NButton>
+      <NButton type="primary" @click="handleSubmit">作成</NButton>
       <NButton @click="props.onCancel">キャンセル</NButton>
     </NSpace>
   </NForm>

@@ -6,10 +6,9 @@ import {
   FormInst,
   NFormItem,
   NSelect,
-  NButton,
-  FormItemRule
+  NButton
 } from 'naive-ui'
-import { computed, reactive, ref, watchEffect } from 'vue'
+import { computed, reactive, ref } from 'vue'
 
 import { useApi } from '/@/hooks/useApi'
 import { apis, NewGameVersion } from '/@/lib/apis'

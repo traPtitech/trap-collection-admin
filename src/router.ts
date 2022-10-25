@@ -42,7 +42,7 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     path: paths.editions.detail(':id').index,
-    component: () => import('/@/pages/Editions/Detail.vue')
+    component: () => import('/@/pages/Editions/Detail/Index.vue')
   },
   { path: '/:path(.*)', component: () => import('./pages/NotFound.vue') }
 ]

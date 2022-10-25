@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import DeleteRound from '@vicons/material/DeleteRound'
 import DownloadRound from '@vicons/material/DownloadRound'
 import { DataTableColumns, NButton, NDataTable, NSpace } from 'naive-ui'
 import { h } from 'vue'

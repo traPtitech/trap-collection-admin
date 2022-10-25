@@ -40,7 +40,7 @@ const handleUploadFile = (type: string, entryPoint: string, content: File) => {
     :style="{
       width: '600px'
     }"
-    title="動画のアップロード"
+    title="ファイルのアップロード"
     @close="handleCancelFile"
     @maskClick="handleCancelFile"
   >
@@ -60,6 +60,7 @@ const handleUploadFile = (type: string, entryPoint: string, content: File) => {
           ? getGameFiles.data.value.data
           : undefined
       "
+      :gameId="String(gameId)"
     />
   </NSpace>
 </template>
