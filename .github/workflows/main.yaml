@@ -22,19 +22,10 @@ jobs:
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-
-      - name: Cache generated api
-        id: cache-apis
-        uses: actions/cache@v3
-        with:
-          path: src/lib/apis/generated
-          key: ${{ runner.os }}-apis-${{ hashFiles('https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/openapi/v2.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-apis-
       - name: Install npm packages
         if: steps.cache-npm.outputs.cache-hit != 'true'
         run: npm ci
       - name: Generate api
-        if: steps.cache-apis.outputs.cache-hit != 'true'
         run: npm run gen-api
   build:
     name: Client Build
@@ -56,15 +47,9 @@ jobs:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node_modules-
-      - name: Cache generated api
-        id: cache-apis
-        uses: actions/cache@v3
-        with:
-          path: src/lib/apis/generated
-          key: ${{ runner.os }}-apis-${{ hashFiles('https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/openapi/v2.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-apis-
+            ${{ runner.os }}-node_modules-\
+      - name: Generate api
+        run: npm run gen-api
       - name: build
         run: npm run build
   lint:
@@ -87,12 +72,6 @@ jobs:
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node_modules-
-      - name: Cache generated api
-        id: cache-apis
-        uses: actions/cache@v3
-        with:
-          path: src/lib/apis/generated
-          key: ${{ runner.os }}-apis-${{ hashFiles('https://raw.githubusercontent.com/traPtitech/trap-collection-server/main/docs/openapi/v2.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-apis-
+      - name: Generate api
+        run: npm run gen-api
       - run: npm run lint
