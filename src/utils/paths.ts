@@ -26,7 +26,8 @@ export const paths = {
   editions: {
     index: () => `/editions`,
     detail: (id: string) => ({
-      index: `/editions/${id}`
+      index: `/editions/${id}`,
+      productKeys: `/editions/${id}/productKeys`
     })
   },
   logout: '/logout',

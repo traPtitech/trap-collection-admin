@@ -2,6 +2,8 @@
 import FolderRound from '@vicons/material/FolderRound'
 import ImageRound from '@vicons/material/ImageRound'
 import InboxRound from '@vicons/material/InboxRound'
+import InfoRound from '@vicons/material/InfoRound'
+import KeyRound from '@vicons/material/KeyRound'
 import TimelineRound from '@vicons/material/TimelineRound'
 import VideoFileRound from '@vicons/material/VideoFileRound'
 import VideogameAssetRound from '@vicons/material/VideogameAssetRound'
@@ -49,6 +51,11 @@ const menuOptions = (path: string): MenuOption[] => {
     case 'games':
       return [
         makeMenuOption(
+          InfoRound,
+          '基本情報',
+          paths.games.detail(getId(path) ?? '').index
+        ),
+        makeMenuOption(
           TimelineRound,
           'バージョン一覧',
           paths.games.detail(getId(path) ?? '').versions
@@ -71,8 +78,16 @@ const menuOptions = (path: string): MenuOption[] => {
       ]
     case 'editions':
       return [
-        makeMenuOption(VideogameAssetRound, 'ゲーム一覧', paths.games.index()),
-        makeMenuOption(InboxRound, 'エディション一覧', paths.editions.index())
+        makeMenuOption(
+          InfoRound,
+          '基本情報',
+          paths.editions.detail(getId(path) ?? '').index
+        ),
+        makeMenuOption(
+          KeyRound,
+          'プロダクトキー',
+          paths.editions.detail(getId(path) ?? '').productKeys
+        )
       ]
   }
   return []
