@@ -6,7 +6,7 @@ import { defineConfig } from 'vite'
 import WindiCSS from 'vite-plugin-windicss'
 
 const keepAliveAgent = new https.Agent({ keepAlive: true })
-const DEV_SERVER_PROXY_HOST = 'https://collection-dev.trapti.tech/api/v2'
+const DEV_SERVER_PROXY_HOST = 'https://collection-dev.trapti.tech/'
 
 export default defineConfig({
   plugins: [vue(), brotli(), WindiCSS()],
@@ -21,8 +21,7 @@ export default defineConfig({
       '/api': {
         target: DEV_SERVER_PROXY_HOST,
         changeOrigin: true,
-        agent: keepAliveAgent,
-        rewrite: path => path.replace(/^\/api/, '')
+        agent: keepAliveAgent
       }
     }
   }
