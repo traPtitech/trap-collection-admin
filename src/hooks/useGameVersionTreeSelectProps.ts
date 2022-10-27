@@ -11,7 +11,7 @@ export const useGameVersionTreeSelectProps = (): {
 } => {
   const gamesStore = useGamesStore()
   const options = computed(() => {
-    const entries = gamesStore.games?.entries()
+    const entries = gamesStore.allGames?.entries()
     if (entries === undefined) return []
     return Array.from(entries).map(([, game]) =>
       reactive({

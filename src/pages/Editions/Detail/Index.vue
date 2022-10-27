@@ -75,17 +75,21 @@ const handleCancelAddGame = () => {
     :style="{
       width: '600px'
     }"
-    title="ゲームの追加"
+    title="ゲームセットの編集"
     @close="handleCancelAddGame"
     @maskClick="handleCancelAddGame"
   >
     <PatchEditionGameEditor
-      :defaultValue="{
-        gameVersionIDs:
-          getEditionGames.data.value?.type === 'success'
-            ? getEditionGames.data.value.data.map(({ version: { id } }) => id)
-            : []
-      }"
+      :defaultValue="
+        getEditionGames.data.value?.type === 'success'
+          ? getEditionGames.data.value.data.map(
+              ({ id: gameId, version: { id: gameVersionId } }) => ({
+                gameId,
+                gameVersionId
+              })
+            )
+          : []
+      "
       :onCancel="handleCancelAddGame"
       :onSubmit="handleAddGame"
     />

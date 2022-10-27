@@ -15,16 +15,15 @@ import { PatchEditionGameRequest } from '/@/lib/apis'
 const formRef = ref<FormInst | null>(null)
 
 const props = defineProps<{
-  defaultValue?: PatchEditionGameRequest
+  defaultValue?: { gameVersionId: string; gameId: string }[]
   onSubmit?: (value: PatchEditionGameRequest) => void
   onCancel?: () => void
 }>()
 
-const formValue: PatchEditionGameRequest = reactive(
-  props.defaultValue ?? {
-    gameVersionIDs: []
-  }
-)
+const formValue: PatchEditionGameRequest = reactive({
+  gameVersionIDs:
+    props.defaultValue?.map(({ gameVersionId }) => gameVersionId) ?? []
+})
 
 const { options, handleLoad } = useGameVersionTreeSelectProps()
 
@@ -47,8 +46,11 @@ const handleSubmit = () => {
 
 <template>
   <NForm ref="formRef" :model="formValue" :rules="rules">
-    <NFormItem label="追加するゲーム" path="gameVersionIDs">
+    <NFormItem label="ゲームセット" path="gameVersionIDs">
       <NTreeSelect
+        :default-expanded-keys="
+          props.defaultValue?.map(({ gameId }) => gameId) ?? []
+        "
         multiple
         :on-load="handleLoad"
         :options="options"
