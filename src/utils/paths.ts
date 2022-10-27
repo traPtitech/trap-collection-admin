@@ -30,6 +30,12 @@ export const paths = {
       productKeys: `/editions/${id}/productKeys`
     })
   },
+  seats: {
+    index: () => `/seats`,
+    detail: (id: string) => ({
+      index: `/editions/${id}`
+    })
+  },
   logout: '/logout',
   callback: '/callback'
 }

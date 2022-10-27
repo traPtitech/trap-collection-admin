@@ -5,7 +5,7 @@ import { defineProps } from 'vue'
 import { paths } from '/@/utils/paths'
 
 const props = defineProps<{
-  root: 'games' | 'editions'
+  root: 'games' | 'editions' | 'seats'
   first?: {
     name: string
     id: string
@@ -19,6 +19,7 @@ const getRootText = (root: string) => {
       return 'ゲーム一覧'
     case 'editions':
       return 'エディション一覧'
+    case 'seats':
   }
 }
 

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import ChairRound from '@vicons/material/ChairRound'
 import FolderRound from '@vicons/material/FolderRound'
 import ImageRound from '@vicons/material/ImageRound'
 import InboxRound from '@vicons/material/InboxRound'
@@ -46,7 +47,8 @@ const menuOptions = (path: string): MenuOption[] => {
     case 'index':
       return [
         makeMenuOption(VideogameAssetRound, 'ゲーム一覧', paths.games.index()),
-        makeMenuOption(InboxRound, 'エディション一覧', paths.editions.index())
+        makeMenuOption(InboxRound, 'エディション一覧', paths.editions.index()),
+        makeMenuOption(ChairRound, '座席管理', paths.seats.index())
       ]
     case 'games':
       return [
