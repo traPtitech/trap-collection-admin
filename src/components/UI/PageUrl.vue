@@ -20,6 +20,7 @@ const getRootText = (root: string) => {
     case 'editions':
       return 'エディション一覧'
     case 'seats':
+      return '座席管理'
   }
 }
 

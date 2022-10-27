@@ -150,12 +150,12 @@ const columns: DataTableColumns<Seat> = [
     :style="{
       width: '600px'
     }"
-    title="エディション情報の変更"
+    title="席数の変更"
     @close="handleCancelSeat"
     @maskClick="handleCancelSeat"
   >
     <NForm ref="formRef" :model="formValue">
-      <NFormItem label="発行する個数">
+      <NFormItem label="席数">
         <NInputNumber
           :validator="validator"
           :value="formValue.num"
@@ -182,7 +182,7 @@ const columns: DataTableColumns<Seat> = [
         </NButton>
       </template>
       <template #header>
-        <PageUrl root="editions" />
+        <PageUrl root="seats" />
       </template>
       <template #avatar>
         <NAvatar>
