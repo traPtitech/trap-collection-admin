@@ -9,9 +9,6 @@ type DataState<T> =
   | {
       type: 'notRequested'
     }
-  | {
-      type: 'loading'
-    }
   | ({
       type: 'success'
     } & AxiosResponse<T>)
@@ -29,7 +26,6 @@ export const useApi = <P extends unknown[], T>(
 
   const refetch = async (...args: P) => {
     try {
-      data.value = { type: 'loading' }
       const res: AxiosResponse<T> = await fn.bind(apis)(...args)
       const newDataState: DataState<T> = { type: 'success', ...res }
       data.value = newDataState

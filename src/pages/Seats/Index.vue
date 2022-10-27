@@ -22,7 +22,7 @@ import {
   NCard,
   NText
 } from 'naive-ui'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { h, onBeforeUnmount, reactive, ref } from 'vue'
 
 import PageUrl from '/@/components/UI/PageUrl.vue'
@@ -36,9 +36,15 @@ type NewSeat = {
 
 const getSearsApi = useApi(apis.getSeats)
 getSearsApi.refetch()
-const data = computed(() =>
-  getSearsApi.data.value?.type === 'success' ? getSearsApi.data.value.data : []
-)
+
+const data = ref<Seat[]>([])
+watch(getSearsApi.data, () => {
+  data.value =
+    getSearsApi.data.value?.type === 'success'
+      ? getSearsApi.data.value.data
+      : []
+})
+
 const intervalId = setInterval(() => {
   getSearsApi.refetch()
 }, 5000)
@@ -107,7 +113,9 @@ const columns: DataTableColumns<Seat> = [
                   await patchSeatStatusApi.refetch(row.id, {
                     status: SeatStatus.InUse
                   })
-                  getSearsApi.refetch()
+                  data.value = data.value.map(x =>
+                    x.id === row.id ? { ...x, status: SeatStatus.InUse } : x
+                  )
                 },
                 disabled: row.status === SeatStatus.InUse,
                 type: 'error'
@@ -127,7 +135,9 @@ const columns: DataTableColumns<Seat> = [
                   await patchSeatStatusApi.refetch(row.id, {
                     status: SeatStatus.Empty
                   })
-                  getSearsApi.refetch()
+                  data.value = data.value.map(x =>
+                    x.id === row.id ? { ...x, status: SeatStatus.Empty } : x
+                  )
                 },
                 disabled: row.status === SeatStatus.Empty,
                 type: 'success'
