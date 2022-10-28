@@ -42,10 +42,12 @@ const rules = {
     trigger: 'blur'
   },
   maintainers: {
+    type: 'array' as const,
     required: false,
     trigger: 'blur'
   },
   owners: {
+    type: 'array' as const,
     required: false,
     trigger: 'blur'
   }
