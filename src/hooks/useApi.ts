@@ -33,7 +33,7 @@ export const useApi = <P extends unknown[], T>(
     } catch (e: unknown) {
       const status = (e as AxiosError).response?.status
       // 401 ならログイン画面に飛ばす
-      if (status === 401) {
+      if (status === 401 || status === 403) {
         sessionStorage.setItem('redirect', window.location.href)
         window.location.href = paths.oauthEntrypointPath
         return
