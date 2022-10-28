@@ -74,6 +74,7 @@ const handleSubmit = () => {
     <NFormItem label="説明" path="description">
       <NInput
         :value="formValue.description"
+        type="textarea"
         @update:value="
           val => {
             formValue.description = val

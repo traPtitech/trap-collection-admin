@@ -55,7 +55,7 @@ const handleSubmit = () => {
     </NFormItem>
     <NFormItem label="説明" path="description">
       <NInput
-        multiline
+        type="textarea"
         :value="formValue.description"
         @update:value="
           val => {
