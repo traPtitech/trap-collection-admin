@@ -43,7 +43,7 @@ const handleUploadVersion = (data: NewGameVersion | null) => {
     :style="{
       width: '600px'
     }"
-    title="動画のアップロード"
+    title="バージョンの追加"
     @close="handleCancelVersion"
     @maskClick="handleCancelVersion"
   >
