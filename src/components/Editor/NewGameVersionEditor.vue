@@ -6,7 +6,8 @@ import {
   FormInst,
   NFormItem,
   NSelect,
-  NButton
+  NButton,
+  FormRules
 } from 'naive-ui'
 import { computed, reactive, ref } from 'vue'
 
@@ -69,12 +70,30 @@ const formValue: NewGameVersion = reactive(
   }
 )
 
-const rules = {
-  name: {
-    required: true,
-    message: '名前を入力してください',
-    trigger: 'blur'
-  },
+const validateVersion = (): boolean => {
+  // https://pkg.go.dev/golang.org/x/mod/semver#pkg-overview
+  // vMAJOR[.MINOR[.PATCH[-PRERELEASE][+BUILD]]]
+  return formValue.name.match(
+    /^v(0|([1-9][0-9]*))(\.(0|([1-9][0-9]*))(\.(0|([1-9][0-9]*))(-(\w|\.|-)+)?(\+(\w|\.|-)+)?)?)?$/gm
+  )
+    ? true
+    : false
+}
+
+const rules: FormRules = {
+  name: [
+    {
+      required: true,
+      message: 'バージョン名を入力してください',
+      trigger: 'blur'
+    },
+    {
+      validator: validateVersion,
+      trigger: ['input', 'blur'],
+      message:
+        'バージョン名が正しくありません。v*.*.*のような形式で入力してください。'
+    }
+  ],
   description: {
     required: true,
     message: '説明を入力してください',
@@ -121,8 +140,9 @@ const handleSubmit = () => {
 
 <template>
   <NForm ref="formRef" :model="formValue" :rules="rules">
-    <NFormItem label="名前" path="name">
+    <NFormItem label="バージョン名" path="name">
       <NInput
+        :placeholder="'v0.0.0'"
         :value="formValue.name"
         @update:value="val => (formValue.name = val)"
       />
