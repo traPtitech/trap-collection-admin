@@ -27,7 +27,21 @@ const handleCancelFile = () => {
 }
 const handleUploadFile = (type: string, entryPoint: string, content: File) => {
   ;(async () => {
-    await postGameFile.refetch(String(gameId.value), type, entryPoint, content)
+    const res = await postGameFile.refetch(
+      String(gameId.value),
+      type,
+      entryPoint,
+      content
+    )
+    if (res && res.type === 'error') {
+      res.error.response?.status === 400
+        ? alert(
+            `ファイルのアップロードに失敗しました。入力を確認してください。
+メッセージ: ${res.error.response.data.message}` //TODO: ちゃんとしたアラートの何かを出す
+          )
+        : alert('エラーが発生しました')
+      return
+    }
     isUploadFileModalOpen.value = false
     getGameFiles.refetch(String(gameId.value))
   })()
