@@ -9,7 +9,7 @@ import {
   NInput,
   FormItemRule
 } from 'naive-ui'
-import { reactive, ref } from 'vue'
+import { nextTick, reactive, ref } from 'vue'
 
 import UploadFileEditor from './UploadFileEditor.vue'
 
@@ -20,13 +20,14 @@ const props = defineProps<{
     type: 'win32' | 'darwin' | 'jar',
     entryPoint: string,
     content: File
-  ) => void
+  ) => Promise<void>
   onCancel?: () => void
 }>()
 
 const typeValue = ref<'win32' | 'darwin' | 'jar'>('win32')
 const entryPointValue = ref('')
 const contentValue = ref<File | null>(null)
+const submitProcessing = ref(false)
 
 const typeOptions = [
   {
@@ -72,14 +73,17 @@ const model = reactive({
   contentValue
 })
 
-const handleSubmit = () => {
-  formRef.value?.validate(errors => {
+const handleSubmit = async () => {
+  submitProcessing.value = true
+  await nextTick()
+  await formRef.value?.validate(async errors => {
     if (!errors && contentValue.value !== null) {
-      props.onSubmit?.(
+      await props.onSubmit?.(
         typeValue.value,
         entryPointValue.value,
         contentValue.value
       )
+      submitProcessing.value = false
     }
   })
 }
@@ -114,7 +118,9 @@ const handleSubmit = () => {
       />
     </NFormItem>
     <NSpace>
-      <NButton type="primary" @click="handleSubmit">変更</NButton>
+      <NButton :loading="submitProcessing" type="primary" @click="handleSubmit">
+        アップロード</NButton
+      >
       <NButton @click="props.onCancel">キャンセル</NButton>
     </NSpace>
   </NForm>

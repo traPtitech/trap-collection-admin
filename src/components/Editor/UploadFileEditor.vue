@@ -28,6 +28,7 @@ const onRemove = async () => {
 <template>
   <NUpload
     ref="uploadRef"
+    accept=".zip"
     directory-dnd
     :max="1"
     :multiple="false"
