@@ -1,8 +1,9 @@
-FROM node:16-alpine as builder
+FROM node:18.4-alpine as builder
 WORKDIR /app
 
 COPY package*.json ./
-RUN apk add --update --no-cache openjdk8-jre-base
+RUN apk add --update --no-cache openjdk11-jre-headless
+# RUN apt-get update && apt-get install -y default-jre
 COPY ./scripts ./scripts
 RUN npm ci
 COPY . .
