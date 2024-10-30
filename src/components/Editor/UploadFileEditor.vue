@@ -11,6 +11,7 @@ import { ref } from 'vue'
 
 const props = defineProps<{
   onUpload?: (file: File | null) => void
+  accept?: string
 }>()
 
 const uploadRef = ref<UploadInst | null>(null)
@@ -28,7 +29,7 @@ const onRemove = async () => {
 <template>
   <NUpload
     ref="uploadRef"
-    accept=".zip"
+    :accept="accept"
     directory-dnd
     :max="1"
     :multiple="false"

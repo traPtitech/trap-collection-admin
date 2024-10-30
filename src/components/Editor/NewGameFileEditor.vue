@@ -114,6 +114,7 @@ const handleSubmit = async () => {
     </NFormItem>
     <NFormItem label="zip ファイル" path="contentValue">
       <UploadFileEditor
+        accept=".zip"
         :onUpload="(file: File | null) => { contentValue = file }"
       />
     </NFormItem>

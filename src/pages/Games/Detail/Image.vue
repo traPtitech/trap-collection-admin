@@ -45,7 +45,10 @@ const handleUploadImage = (data: File | null) => {
     @close="handleCancelImage"
     @maskClick="handleCancelImage"
   >
-    <UploadImageEditor :onUpload="handleUploadImage" />
+    <UploadImageEditor
+      accept=".png,.jpeg,.jpg,.gif"
+      :onUpload="handleUploadImage"
+    />
   </NModal>
   <NSpace class="py-10 px-12 gap-10" vertical>
     <GameImagePageHeader

@@ -45,7 +45,7 @@ const handleUploadVideo = (data: File | null) => {
     @close="handleCancelVideo"
     @maskClick="handleCancelVideo"
   >
-    <UploadImageEditor :onUpload="handleUploadVideo" />
+    <UploadImageEditor accept=".mp4" :onUpload="handleUploadVideo" />
   </NModal>
   <NSpace class="py-10 px-12 gap-10" vertical>
     <GameVideoPageHeader
