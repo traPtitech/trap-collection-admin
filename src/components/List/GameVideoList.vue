@@ -19,7 +19,7 @@ const columns: DataTableColumns<GameVideo> = [
   },
   {
     title: 'タイプ',
-    key: 'type',
+    key: 'mime',
     width: 100
   },
   {
