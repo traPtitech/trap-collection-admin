@@ -11,7 +11,7 @@ export const useUsersStore = defineStore('users', () => {
 
   // Users を取得する
   const refetch = async () => {
-    const res = await getUsersApi.refetch()
+    const res = await getUsersApi.refetch(false)
     if (res?.type === 'success') {
       users.value = new Map(res.data.map(u => [u.id, u]))
     }
