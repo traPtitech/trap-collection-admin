@@ -19,7 +19,7 @@ const patchEdition = useApi(apis.patchEdition)
 getEdition.refetch(String(editionId.value))
 
 const getEditionGames = useApi(apis.getEditionGames)
-const postEditionGame = useApi(apis.postEditionGame)
+const patchEditionGame = useApi(apis.patchEditionGame)
 getEditionGames.refetch(String(editionId.value))
 
 const isShowPatchEditionModal = ref(false)
@@ -35,7 +35,7 @@ const handleCancelEdition = () => {
 }
 
 const handleAddGame = async (data: PatchEditionGameRequest) => {
-  await postEditionGame.refetch(String(editionId.value), data)
+  await patchEditionGame.refetch(String(editionId.value), data)
   isShowAddGameModal.value = false
   getEditionGames.refetch(String(editionId.value))
 }
