@@ -9,14 +9,14 @@ jobs:
     env:
       CI: true
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610 # v3.9.1
         with:
           node-version: 18
       - name: Cache node modules
         id: cache-npm
-        uses: actions/cache@v3
+        uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c # v3.5.0
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
@@ -35,14 +35,14 @@ jobs:
       CI: true
       NODE_ENV: production
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610 # v3.9.1
         with:
           node-version: 18
       - name: Cache node modules
         id: cache-npm
-        uses: actions/cache@v3
+        uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c # v3.5.0
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
@@ -60,13 +60,13 @@ jobs:
       CI: true
       NODE_ENV: production
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610 # v3.9.1
         with:
           node-version: 18
       - name: Cache node modules
         id: cache-npm
-        uses: actions/cache@v3
+        uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c # v3.5.0
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
